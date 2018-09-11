@@ -1,0 +1,53 @@
+{% extends "base.html"  %}
+
+{% block content %}
+<div class="col-sm-8  col-xs-10 col-sm-offset-2">
+    <h5>关键字：{{keywords}}</h5>
+
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#search_normal" role="tab" data-toggle="tab">通常</a></li>
+        <li role="presentation"><a href="#search_special" role="tab" data-toggle="tab">特殊</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="search_normal">
+            {% for item in page_info.rows %}
+
+            <div>
+                <h5><a href="">{{item.title}}</a></h5>
+                <div>
+                    <small><small>{{item.summary}}</small></small>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            <script src="static/js/jquery.twbsPagination.js"></script>
+
+            <ul id="pagination" class="pagination-sm"></ul>
+
+            <script >
+                 $(pagination).twbsPagination({
+                    first: "首页",
+                    prev: "前一页",
+                    next: "后一页",
+                    last: "尾页",
+                    totalPages: {{page_info.total_page}},
+                    visiblePages: 5,
+                    startPage: {{page_info.curr_index}},
+                    onPageClick: function (event, page) {
+                        location.href="/search_normal?keywords={{keywords}}&&page="+page;
+                    }
+                });
+            </script>
+
+        </div>
+
+        <div role="2tabpanel" class="tab-pane" id="search_special">
+            <h5>search_special</h5>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

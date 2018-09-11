@@ -1,0 +1,14 @@
+2018-09-11T22:45:59.297+0800 I CONTROL  [initandlisten] MongoDB starting : pid=10233 port=27017 dbpath=/root/Kdb/flask/datas/data/db 64-bit host=centos
+2018-09-11T22:45:59.297+0800 I CONTROL  [initandlisten] db version v4.0.2
+2018-09-11T22:45:59.297+0800 I CONTROL  [initandlisten] git version: fc1573ba18aee42f97a3bb13b67af7d837826b47
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1e-fips 11 Feb 2013
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten] modules: none
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten] build environment:
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten]     distmod: rhel70
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-09-11T22:45:59.298+0800 I CONTROL  [initandlisten] options: { storage: { dbPath: "/root/Kdb/flask/datas/data/db" }, systemLog: { destination: "file", path: "/root/Kdb/flask/datas/mongodbd.log" } }
+2018-09-11T22:45:59.299+0800 I STORAGE  [initandlisten] exception in initAndListen: NonExistentPath: Data directory /root/Kdb/flask/datas/data/db not found., terminating
+2018-09-11T22:45:59.299+0800 I CONTROL  [initandlisten] now exiting
+2018-09-11T22:45:59.299+0800 I CONTROL  [initandlisten] shutting down with code:100

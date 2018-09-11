@@ -1,0 +1,43 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - Kdb</title>
+    {% else %}
+    <title>Kdb</title>
+    {% endif %}
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap-theme.min.css">
+    <script src="static/js/jquery-1.11.3.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="col-sm-8  col-xs-12 col-sm-offset-2">
+    <div>
+        <a href="/index">知识库搜索</a>
+        <small><small>文章数：{{total_articles}}</small></small></href>
+    </div>
+
+
+
+
+    <form class="form-horizontal" action="/search_normal" method="get" name="login">
+        <div class="input-group">
+            <input type="text" id="keywords" name="keywords" placeholder="输入搜索关键词……">
+             <span class="input-group-btn">
+             <button class="btn btn-default btn-primary" type="submit"><span class="glyphicon glyphicon-search"></button>
+             </span>
+        </div>
+    </form>
+    </div>
+
+
+
+    {% block content %}
+
+
+    {% endblock %}
+  </body>
+</html>
