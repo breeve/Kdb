@@ -1,0 +1,3046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/wh211212/article/details/79797705"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>CentOS 6 上mongodb安装与使用 -         静静是我女朋友 - CSDN博客</title>
+
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-03af431609.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-9b39979775.min.css">
+
+    <script type="text/javascript">
+        var username = "wh211212";
+        var blog_address = "https://blog.csdn.net/wh211212";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "";
+        var isShowAds = false;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/wh211212/article/details/79797705"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin3-template";
+        // 第四范式所需数据
+        var articleTitles = "CentOS 6 上mongodb安装与使用 -         静静是我女朋友";
+        var articleID = "79797705";
+
+        var nickName = "shaonbean";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <!-- 新版上报 -->
+    <script src="//g.csdnimg.cn/track/1.1.1/track.js" type="text/javascript"></script>
+    <!-- 新版上报end -->
+            <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata"> 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+
+
+
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+		<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-1 float-left">原</span>				<h1 class="title-article">CentOS 6 上mongodb安装与使用</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																				<span class="time">2018年04月03日 08:10:09</span>
+					<a class="follow-nickName" href="https://me.csdn.net/wh211212" target="_blank">shaonbean</a>
+						<span class="read-count">阅读数：796</span>
+						
+														<span class="tags-box artic-tag-box">
+								<span class="label">标签：</span>
+																<a data-track-click='{"mod":"popu_626","con":"MongoDB"}' data-track-view='{"mod":"popu_626","con":"MongoDB"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=MongoDB&t=blog" target="_blank">MongoDB																<a data-track-click='{"mod":"popu_626","con":"nosql"}' data-track-view='{"mod":"popu_626","con":"nosql"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=nosql&t=blog" target="_blank">nosql																</a>
+							</span>
+																					<div class="tags-box space">
+								<span class="label">个人分类：</span>
+																<a class="tag-link" href="https://blog.csdn.net/wh211212/article/category/6443683"  target="_blank">【Database】																<a class="tag-link" href="https://blog.csdn.net/wh211212/article/category/6443643"  target="_blank">【CentOS6】																</a>
+							</div>
+																								</div>
+				<div class="operating">
+														</div>
+			</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								<div class="article-copyright">
+					版权声明：本文为木偶人shaon原创文章，转载请注明原文地址，非常感谢。					https://blog.csdn.net/wh211212/article/details/79797705				</div>
+								            <div class="markdown_views prism-atom-one-dark">
+							<!-- flowchart 箭头图标 勿删 -->
+							<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg>
+							<h1 id="centos-6-安装mongodb">CentOS 6 安装mongodb</h1>
+
+<ul>
+<li><a href="https://docs.mongodb.com/manual/installation/#tutorial-installation" rel="nofollow">https://docs.mongodb.com/manual/installation/#tutorial-installation</a></li>
+</ul>
+
+
+
+<h2 id="安装mongodb专业版">安装MongoDB专业版</h2>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs "><span class="hljs-comment"># 创建 /etc/yum.repos.d/mongodb-enterprise.repo</span>
+[mongodb-enterprise]
+name=MongoDB Enterprise Repository
+baseurl=https://repo.mongodb.com/yum/redhat/<span class="hljs-variable">$releasever</span>/mongodb-enterprise/<span class="hljs-number">3.4</span>/<span class="hljs-variable">$basearch</span>/
+gpgcheck=<span class="hljs-number">1</span>
+enabled=<span class="hljs-number">1</span>
+gpgkey=https://www.mongodb.org/static/pgp/server-<span class="hljs-number">3.4</span>.asc
+
+<span class="hljs-built_in">sudo</span> yum install -y mongodb-enterprise
+
+<span class="hljs-built_in">sudo</span> service mongod start
+
+<span class="hljs-built_in">sudo</span> chkconfig mongod on 
+
+<span class="hljs-built_in">sudo</span> yum erase $(rpm -qa | grep mongodb-enterprise) <span class="hljs-comment"># 卸载</span></code></pre>
+
+
+
+<h2 id="安装mongodb社区版">安装mongodb社区版</h2>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm"><span class="hljs-preprocessor">#配置包管理系统</span>
+
+创建 /etc/yum<span class="hljs-preprocessor">.repos</span><span class="hljs-preprocessor">.d</span>/mongodb-org-<span class="hljs-number">3.6</span><span class="hljs-preprocessor">.repo</span> 
+
+[mongodb-org-<span class="hljs-number">3.6</span>]
+name=MongoDB Repository
+baseurl=https://repo<span class="hljs-preprocessor">.mongodb</span><span class="hljs-preprocessor">.org</span>/yum/redhat/$releasever/mongodb-org/<span class="hljs-number">3.6</span>/x86_64/
+gpgcheck=<span class="hljs-number">1</span>
+enabled=<span class="hljs-number">1</span>
+gpgkey=https://www<span class="hljs-preprocessor">.mongodb</span><span class="hljs-preprocessor">.org</span>/static/pgp/server-<span class="hljs-number">3.6</span><span class="hljs-preprocessor">.asc</span></code></pre>
+
+<ul>
+<li>安装MongoDB</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">sudo</span> yum install -y mongodb-org
+<span class="hljs-comment">#</span>
+<span class="hljs-built_in">sudo</span> yum install -y mongodb-org-<span class="hljs-number">3.6</span>.<span class="hljs-number">3</span> mongodb-org-server-<span class="hljs-number">3.6</span>.<span class="hljs-number">3</span> mongodb-org-shell-<span class="hljs-number">3.6</span>.<span class="hljs-number">3</span> mongodb-org-mongos-<span class="hljs-number">3.6</span>.<span class="hljs-number">3</span> mongodb-org-tools-<span class="hljs-number">3.6</span>.<span class="hljs-number">3</span></code></pre>
+
+<ul>
+<li>启动MongoDB</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-built_in">sudo</span> service mongod start
+<span class="hljs-built_in">sudo</span> chkconfig mongod on
+<span class="hljs-built_in">sudo</span> service mongod stop</code></pre>
+
+<ul>
+<li>使用MongoDB</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">mongo --host <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">27017</span></code></pre>
+
+<ul>
+<li>卸载删除MongoDB</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs "><span class="hljs-built_in">sudo</span> service mongod stop
+<span class="hljs-built_in">sudo</span> yum erase $(rpm -qa | grep mongodb-org)
+<span class="hljs-built_in">sudo</span> rm -r /var/log/mongodb
+<span class="hljs-built_in">sudo</span> rm -r /var/lib/mongo</code></pre>
+
+
+
+<h1 id="mongodb创建用户使用">MongoDB创建用户使用</h1>
+
+<p><a href="https://www.mongodb.com/" rel="nofollow">https://www.mongodb.com/</a> <br>
+<a href="https://www.mongodb.com/download-center#community" rel="nofollow">https://www.mongodb.com/download-center#community</a></p>
+
+
+
+<h1 id="mongodb-loginin">mongodb loginin</h1>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">mongo --port <span class="hljs-number">27017</span>
+
+<span class="hljs-built_in">help</span> <span class="hljs-comment"># 查看帮助</span>
+
+use admin <span class="hljs-comment"># 切换到管理员</span>
+
+db.createUser(
+  {
+    user: <span class="hljs-string">"Aniumongodb"</span>,
+    <span class="hljs-built_in">pwd</span>: <span class="hljs-string">"Aniumongodb123."</span>,
+    roles: [ { role: <span class="hljs-string">"userAdminAnyDatabase"</span>, db: <span class="hljs-string">"admin"</span> } ]
+  }
+)
+<span class="hljs-comment"># </span>
+[root@mongodb ~]<span class="hljs-comment"># mongo --port 27017</span>
+MongoDB shell version v3.<span class="hljs-number">6.3</span>
+connecting to: mongodb://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">27017</span>/
+MongoDB server version: <span class="hljs-number">3.6</span>.<span class="hljs-number">3</span>
+Server has startup warnings: 
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">06.214</span>+<span class="hljs-number">0800</span> I STORAGE  [initandlisten] 
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">06.214</span>+<span class="hljs-number">0800</span> I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">06.214</span>+<span class="hljs-number">0800</span> I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">07.413</span>+<span class="hljs-number">0800</span> I CONTROL  [initandlisten] 
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">07.413</span>+<span class="hljs-number">0800</span> I CONTROL  [initandlisten] ** WARNING: Access control is not enabled <span class="hljs-keyword">for</span> the database.
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">07.413</span>+<span class="hljs-number">0800</span> I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+<span class="hljs-number">2018</span>-<span class="hljs-number">04</span>-<span class="hljs-number">02</span>T17:<span class="hljs-number">12</span>:<span class="hljs-number">07.414</span>+<span class="hljs-number">0800</span> I CONTROL  [initandlisten] 
+MongoDB Enterprise &gt; use admin
+switched to db admin
+MongoDB Enterprise &gt; db.createUser(
+...   {
+...     user: <span class="hljs-string">"Aniumongodb"</span>,
+...     <span class="hljs-built_in">pwd</span>: <span class="hljs-string">"Aniumongodb123."</span>,
+...     roles: [ { role: <span class="hljs-string">"userAdminAnyDatabase"</span>, db: <span class="hljs-string">"admin"</span> } ]
+...   }
+... )
+Successfully added user: {
+        <span class="hljs-string">"user"</span> : <span class="hljs-string">"Aniumongodb"</span>,
+        <span class="hljs-string">"roles"</span> : [
+                {
+                        <span class="hljs-string">"role"</span> : <span class="hljs-string">"userAdminAnyDatabase"</span>,
+                        <span class="hljs-string">"db"</span> : <span class="hljs-string">"admin"</span>
+                }
+        ]
+}
+MongoDB Enterprise &gt; <span class="hljs-keyword">exit</span>
+bye</code></pre>
+
+
+
+<h2 id="mongodb用户简介">MongoDB用户简介</h2>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">Built-In Roles（内置角色）：
+    <span class="hljs-number">1</span>. 数据库用户角色：<span class="hljs-built_in">read</span>、<span class="hljs-built_in">read</span>Write;
+    <span class="hljs-number">2</span>. 数据库管理角色：dbAdmin、dbOwner、userAdmin；
+    <span class="hljs-number">3</span>. 集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManager；
+    <span class="hljs-number">4</span>. 备份恢复角色：backup、restore；
+    <span class="hljs-number">5</span>. 所有数据库角色：<span class="hljs-built_in">read</span>AnyDatabase、<span class="hljs-built_in">read</span>WriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase
+    <span class="hljs-number">6</span>. 超级用户角色：root  
+    // 这里还有几个角色间接或直接提供了系统超级用户的访问（dbOwner 、userAdmin、userAdminAnyDatabase）
+    <span class="hljs-number">7</span>. 内部角色：__system
+
+<span class="hljs-comment"># 用户角色权限</span>
+Read：允许用户读取指定数据库
+<span class="hljs-built_in">read</span>Write：允许用户读写指定数据库
+dbAdmin：允许用户在指定数据库中执行管理函数，如索引创建、删除，查看统计或访问system.profile
+userAdmin：允许用户向system.users集合写入，可以找指定数据库里创建、删除和管理用户
+clusterAdmin：只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管理权限。
+<span class="hljs-built_in">read</span>AnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读权限
+<span class="hljs-built_in">read</span>WriteAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读写权限
+userAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的userAdmin权限
+dbAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的dbAdmin权限。
+root：只在admin数据库中可用。超级账号，超级权限    </code></pre>
+
+<ul>
+<li>创建超级管理员账户</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">db.createUser(
+...  {
+...    user: <span class="hljs-string">"Aniudba"</span>,
+...    <span class="hljs-built_in">pwd</span>: <span class="hljs-string">"Aniudba123."</span>,
+...    roles: [
+...       { role: <span class="hljs-string">"root"</span>, db: <span class="hljs-string">"admin"</span> }
+...    ]
+...  }
+... )
+Successfully added user: {
+        <span class="hljs-string">"user"</span> : <span class="hljs-string">"Aniudba"</span>,
+        <span class="hljs-string">"roles"</span> : [
+                {
+                        <span class="hljs-string">"role"</span> : <span class="hljs-string">"root"</span>,
+                        <span class="hljs-string">"db"</span> : <span class="hljs-string">"admin"</span>
+                }
+        ]
+}</code></pre>
+
+
+
+<h2 id="mongodb启动错误">MongoDB启动错误</h2>
+
+<ul>
+<li>WARNING: soft rlimits too low. rlimits set to 1024 processes, 16392 files. Number of processes should be at least 8196 </li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-bash hljs ">修改 /etc/security/limits.d/<span class="hljs-number">90</span>-nproc.conf
+
+*          soft    nproc     <span class="hljs-number">16392</span> <span class="hljs-comment"># 1024改为16392</span>
+root       soft    nproc     unlimited
+
+重启MongoDB服务  /etc/init.d/mongod restart</code></pre>
+
+<ul>
+<li><p>MongoDB 连接工具</p></li>
+<li><p>WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine</p></li>
+<li><p>WARNING: Access control is not enabled for the database.Read and write access to data and configuration is unrestricted.</p></li>
+<li><p>参考：<a href="http://www.cnblogs.com/zhoujinyi/p/4610050.html" rel="nofollow">http://www.cnblogs.com/zhoujinyi/p/4610050.html</a></p></li>
+</ul>            </div>
+						<link href="https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-7f770a53f2.css" rel="stylesheet">
+                </div>
+									<div class="hide-article-box text-center">
+						<a class="btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/wh211212/article/details/79797705,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/wh211212/article/details/79797705,"}'>阅读更多</a>
+					</div>
+					<script>
+						(function(){
+							function setArticleH(btnReadmore,posi){
+								var winH = $(window).height();
+								var articleBox = $("div.article_content");
+								var artH = articleBox.height();
+								if(artH > winH*posi){
+									articleBox.css({
+										'height':winH*posi+'px',
+										'overflow':'hidden'
+									})
+									btnReadmore.click(function(){
+										articleBox.removeAttr("style");
+										$(this).parent().remove();
+									})
+								}else{
+									btnReadmore.parent().remove();
+								}
+							}
+							var btnReadmore = $("#btn-readmore");
+							if(btnReadmore.length>0){
+								if(currentUserName){
+									setArticleH(btnReadmore,3);
+								}else{
+									setArticleH(btnReadmore,1.2);
+								}
+							}
+						})()
+					</script>
+					</article>
+	
+</div>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+                <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="unlogin-box text-center">
+		想对作者说点什么？
+		<!-- $curl 当前地址 -->
+		<button id="btnCommentUnlogin" class="btn btn-sm btn-red">我来说一句</button>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/MarkBoo/article/details/51153583,BlogCommendFromBaidu_0"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/MarkBoo/article/details/51153583,BlogCommendFromBaidu_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/MarkBoo/article/details/51153583" target="_blank" title="安装MongoDB到CentOS 6">
+				<h4 class="text-truncate oneline">
+						安装MongoDB到<em>CentOS</em> 6				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/5/8/3_markboo.jpg" alt="MarkBoo" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">MarkBoo</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-14</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1442</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/MarkBoo/article/details/51153583" target="_blank" title="安装MongoDB到CentOS 6">
+							<span class="desc oneline">MongoDB是一个面向海量文档存数据动态存储的NoSQL型数据库。是一个除了用于关系型数据库如MySQL，PostgreSQL数据库表格的格式，和微软SQL以外的一种数据模型存储形式。他的功能包括了...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/MarkBoo">来自：	<span class="blog_title"> MarkBoo的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_20597479/article/details/59482935,BlogCommendFromBaidu_1"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_20597479/article/details/59482935,BlogCommendFromBaidu_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_20597479/article/details/59482935" target="_blank" title="Centos6.8安装MongoDB">
+				<h4 class="text-truncate oneline">
+						<em>Centos</em>6.8安装MongoDB				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/6/6/3_qq_20597479.jpg" alt="qq_20597479" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_20597479</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2094</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_20597479/article/details/59482935" target="_blank" title="Centos6.8安装MongoDB">
+							<span class="desc oneline">1.解压wget  https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.4.0.tgztar zxvf mongodb-lin...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_20597479">来自：	<span class="blog_title"> 亦轩丶Javer的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_16272049/article/details/69218983,BlogCommendFromBaidu_2"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_16272049/article/details/69218983,BlogCommendFromBaidu_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_16272049/article/details/69218983" target="_blank" title="centos6.8 安装mongodb">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>6.8 安装mongodb				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/1/2/3_qq_16272049.jpg" alt="qq_16272049" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_16272049</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-05</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3184</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_16272049/article/details/69218983" target="_blank" title="centos6.8 安装mongodb">
+							<span class="desc oneline">好记性，不如烂笔头  
+1.去官网下载安装包
+https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.4.3.tgz
+
+2...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_16272049">来自：	<span class="blog_title"> 周振伟的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/rzrenyu/article/details/79472508,BlogCommendFromBaidu_3"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/rzrenyu/article/details/79472508,BlogCommendFromBaidu_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/rzrenyu/article/details/79472508" target="_blank" title="centos7下mongodb安装和配置">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>7下<em>mongodb安装</em>和配置				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/6/F/3_rzrenyu.jpg" alt="rzrenyu" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">rzrenyu</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							9791</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/rzrenyu/article/details/79472508" target="_blank" title="centos7下mongodb安装和配置">
+							<span class="desc oneline">1、下载安装包curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.12.tgz2、解压tar -zxvf mongodb...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/rzrenyu">来自：	<span class="blog_title"> rzrenyu的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/junshangshui/article/details/79371316,BlogCommendFromBaidu_4"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/junshangshui/article/details/79371316,BlogCommendFromBaidu_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/junshangshui/article/details/79371316" target="_blank" title="CentOS7.2中安装MongoDB">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em>7.2中安装MongoDB				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/5/C/3_junshangshui.jpg" alt="junshangshui" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">junshangshui</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6440</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/junshangshui/article/details/79371316" target="_blank" title="CentOS7.2中安装MongoDB">
+							<span class="desc oneline">MongoDB是由C++编写的NoSQL的分布式文件数据库，用的json格式的k-value存储方式。MongoDB官网 https://www.mongodb.com一、下载和安装下载完后文件为mo...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/junshangshui">来自：	<span class="blog_title"> junshangshui的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_34024041/article/details/79711318,BlogCommendFromBaidu_5"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_34024041/article/details/79711318,BlogCommendFromBaidu_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_34024041/article/details/79711318" target="_blank" title="CentOS 安装 MongoDB">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em> 安装 MongoDB				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/B/5/3_weixin_34024041.jpg" alt="weixin_34024041" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">weixin_34024041</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							266</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_34024041/article/details/79711318" target="_blank" title="CentOS 安装 MongoDB">
+							<span class="desc oneline">本文根据 MongoDB 的官方网站上的安装说明 而写Install MongoDB Community Edition on Red Hat Enterprise or CentOS Linux翻译...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/weixin_34024041">来自：	<span class="blog_title"> weixin_34024041的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wangzuokun/article/details/70799976,BlogCommendFromBaidu_6"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wangzuokun/article/details/70799976,BlogCommendFromBaidu_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangzuokun/article/details/70799976" target="_blank" title="centos7 安装mongodb">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>7 安装mongodb				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/7/B/3_wangzuokun.jpg" alt="wangzuokun" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wangzuokun</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3710</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangzuokun/article/details/70799976" target="_blank" title="centos7 安装mongodb">
+							<span class="desc oneline">1、下载mongoDB的安装包：mongodb-linux-x86_64-rhel70-3.4.4；
+2、上传安装包到服务器/data目录下；
+3、解压安装包
+tar -zvxf mongodb...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wangzuokun">来自：	<span class="blog_title"> wangzuokun的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/tomspcc/article/details/71107569,BlogCommendFromBaidu_7"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/tomspcc/article/details/71107569,BlogCommendFromBaidu_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/tomspcc/article/details/71107569" target="_blank" title="centos 6.7安装mongodb">
+				<h4 class="text-truncate oneline">
+						<em>centos</em> 6.7安装mongodb				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/D/1/3_tomspcc.jpg" alt="tomspcc" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">tomspcc</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-03</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1446</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/tomspcc/article/details/71107569" target="_blank" title="centos 6.7安装mongodb">
+							<span class="desc oneline">一. 下载地址：http://www.MongoDB.org/downloads
+
+
+二.位置
+软件安装位置：/apps/svr/mongodb
+数据存放位置：/data/mongodb/db
+日志存...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/tomspcc">来自：	<span class="blog_title"> tomspcc的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/ligaofeng/article/details/44416765,BlogCommendFromBaidu_8"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ligaofeng/article/details/44416765,BlogCommendFromBaidu_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ligaofeng/article/details/44416765" target="_blank" title="centos6.6下安装MongoDB3.0.1">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>6.6下安装MongoDB3.0.1				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/9/7/3_ligaofeng.jpg" alt="ligaofeng" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">ligaofeng</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ligaofeng/article/details/44416765" target="_blank" title="centos6.6下安装MongoDB3.0.1">
+							<span class="desc oneline">centos6.6下安装mongodb3.0.1</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/ligaofeng">来自：	<span class="blog_title"> 李高峰的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+			<div class="recommend-item-box type_hot_word">
+						<div class="content clearfix oneline">
+				<h5 class="float-left">文章热词</h5>
+				<div class="word float-left">
+													<span>
+						<a href="https://www.csdn.net/gather_28/MtTaMgzsNjM4My1ibG9n.html " target="_blank">
+						nosql 数据库存储原理					</a></span>
+																	<span>
+						<a href="https://www.csdn.net/gather_2a/MtTaMgzsNjU3NS1ibG9n.html " target="_blank">
+						nosql sql盲注					</a></span>
+																	<span>
+						<a href="https://www.csdn.net/gather_29/MtTaMgzsNjYxNi1ibG9n.html " target="_blank">
+						nosql数据库三个特性					</a></span>
+																	<span>
+						<a href="https://www.csdn.net/gather_29/MtTaMgzsNjYyMS1ibG9n.html " target="_blank">
+						nosql使用实例					</a></span>
+																	<span>
+						<a href="https://www.csdn.net/gather_29/MtTaMgzsNjY2NC1ibG9n.html " target="_blank">
+						nosql数据库适用场景					</a></span>
+																																																				</div>
+			</div>
+									<div class="content clearfix oneline">
+				<h5 class="float-left">相关热词</h5>
+				<div class="float-left">
+									<span>
+						<a href="https://blog.csdn.net/chen861201/article/details/7590156" target="_blank">
+						centos到</a>
+					</span>
+									<span>
+						<a href="https://blog.csdn.net/mayifan0/article/details/79096148" target="_blank">
+						centos的</a>
+					</span>
+									<span>
+						<a href="https://blog.csdn.net/ronmy/article/details/66475039" target="_blank">
+						centos和</a>
+					</span>
+									<span>
+						<a href="https://blog.csdn.net/u010594850/article/details/41386999" target="_blank">
+						centos暗色</a>
+					</span>
+									<span>
+						<a href="https://blog.csdn.net/u012724167/article/details/53510589" target="_blank">
+						centos楷体</a>
+					</span>
+								</div>
+			</div>
+					</div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wangpei0000/article/details/76147119,BlogCommendFromBaidu_9"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wangpei0000/article/details/76147119,BlogCommendFromBaidu_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangpei0000/article/details/76147119" target="_blank" title="CentOS6.5安装MongoDB详解">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em>6.5安装MongoDB详解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/C/B/3_wangpei0000.jpg" alt="wangpei0000" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wangpei0000</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							873</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangpei0000/article/details/76147119" target="_blank" title="CentOS6.5安装MongoDB详解">
+							<span class="desc oneline">fawefwffffffffffffffffffff
+东莞</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wangpei0000">来自：	<span class="blog_title"> 大王的博客专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+            <div class="recommend-item-box blog-expert-recommend-box">
+            <h4 class="text-truncate">博主推荐
+            </h4>
+            <div class="blog-expert-recommend">
+                <div class="blog-expert-load-new" data-index="3">
+                    <svg version="1.1" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+					<path d="M142.5,57.5c-1.3-1.2-2.1-3.3-2.1-5.4c0-4.2,3.3-7.5,7.5-7.5h19.6c4.2,0,7.5,3.3,7.5,7.5s-3.3,7.5-7.5,7.5h-4.2
+					 C170.8,71.2,175,85,175,100c0,41.7-33.8,75-75,75c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5c33.3,0,60-27.1,60-60
+					 C160,83.7,153.8,68.7,142.5,57.5L142.5,57.5z M57.5,142.5c1.2,1.2,2.1,3.3,2.1,5.4c0,4.2-3.3,7.5-7.5,7.5H32.5
+					 c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5h4.2C29.2,128.8,25,115,25,100c0-41.7,33.7-75,75-75c4.2,0,7.5,3.3,7.5,7.5
+					 S104.2,40,100,40c-33.3,0-60,27.1-60,60C40,116.2,46.2,131.2,57.5,142.5z"/>
+					</svg>
+                    <span>换一批</span>
+                </div>
+                <div class="blog-expert">
+                </div>
+            </div>
+        </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/mawenwu1983/article/details/78139772,BlogCommendFromCidStrategy_10"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/mawenwu1983/article/details/78139772,BlogCommendFromCidStrategy_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/mawenwu1983/article/details/78139772" target="_blank" title="CentOS 7.3下MongoDB 3.4.9安装配置和基本操作">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em> 7.3下MongoDB 3.4.9安装配置和基本操作				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/6/D/3_mawenwu1983.jpg" alt="mawenwu1983" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">mawenwu1983</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							567</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/mawenwu1983/article/details/78139772" target="_blank" title="CentOS 7.3下MongoDB 3.4.9安装配置和基本操作">
+							<span class="desc oneline">安装及配置
+
+
+1.官网下载MongoDB，版本选择RHEL7 Linux 64-bit x64
+https://www.mongodb.com/download-center?ct=false#co...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/mawenwu1983">来自：	<span class="blog_title"> 顺宝小武的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/luyaran/article/details/79641469,BlogCommendFromCidStrategy_11"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/luyaran/article/details/79641469,BlogCommendFromCidStrategy_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/luyaran/article/details/79641469" target="_blank" title="CentOS 6安装MongoDB">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em> 6安装MongoDB				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/7/2/3_luyaran.jpg" alt="luyaran" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">luyaran</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							196</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/luyaran/article/details/79641469" target="_blank" title="CentOS 6安装MongoDB">
+							<span class="desc oneline">MongoDB是一个面向海量文档存数据动态存储的NoSQL型数据库。是一个除了用于关系型数据库如MySQL，PostgreSQL数据库表格的格式，和微软SQL以外的一种数据模型存储形式。他的功能包括了...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/luyaran">来自：	<span class="blog_title"> luyaran的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/kinsxkins/article/details/77014649,BlogCommendFromCidStrategy_12"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/kinsxkins/article/details/77014649,BlogCommendFromCidStrategy_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/kinsxkins/article/details/77014649" target="_blank" title="CentOS MongoDB安装与使用">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em> <em>MongoDB安装</em>与<em>使用</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/5/5/A/3_kinsxkins.jpg" alt="kinsxkins" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">kinsxkins</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							123</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/kinsxkins/article/details/77014649" target="_blank" title="CentOS MongoDB安装与使用">
+							<span class="desc oneline">配置MongoDB yum 源vim /etc/yum.repos.d/mongodb.repo[mongodb-org-3.4]
+name=MongoDB Repository
+baseurl=ht...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/kinsxkins">来自：	<span class="blog_title"> 佛系编程</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/testcs_dn/article/details/50698572,BlogCommendFromCidStrategy_13"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/testcs_dn/article/details/50698572,BlogCommendFromCidStrategy_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/testcs_dn/article/details/50698572" target="_blank" title="CentOS 6.5下通过yum安装MongoDB记录">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em> 6.5下通过yum安装MongoDB记录				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/1/B/3_testcs_dn.jpg" alt="testcs_dn" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">testcs_dn</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							8026</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/testcs_dn/article/details/50698572" target="_blank" title="CentOS 6.5下通过yum安装MongoDB记录">
+							<span class="desc oneline">最近想尝试一下英特尔的基于WebRTC协同通信开发套件，其中的CS_WebRTC_Conference_Server_MCU依赖MongoDB。MongoDB是什么？MongoDB 是一个基于分布式文...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/testcs_dn">来自：	<span class="blog_title"> 无知人生，记录点滴</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/sjhuangx/article/details/79689949,BlogCommendFromCidStrategy_14"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/sjhuangx/article/details/79689949,BlogCommendFromCidStrategy_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sjhuangx/article/details/79689949" target="_blank" title="centos7下手动安装mongodb3.6.3">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>7下手动安装mongodb3.6.3				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/D/0/3_sjhuangx.jpg" alt="sjhuangx" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sjhuangx</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							632</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sjhuangx/article/details/79689949" target="_blank" title="centos7下手动安装mongodb3.6.3">
+							<span class="desc oneline">参考: https://www.jianshu.com/p/ccdd3e884b861.下载mongodb community版本，下载地址为: https://www.mongodb.com/dow...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sjhuangx">来自：	<span class="blog_title"> sjhuangx的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/robinson_0612/article/details/53171375,BlogCommendFromBaidu_15"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/robinson_0612/article/details/53171375,BlogCommendFromBaidu_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/robinson_0612/article/details/53171375" target="_blank" title="CentOS 7 yum方式快速安装MongoDB">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em> 7 yum方式快速安装MongoDB				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/F/C/3_robinson_0612.jpg" alt="robinson_0612" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">robinson_0612</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-15</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.6万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/robinson_0612/article/details/53171375" target="_blank" title="CentOS 7 yum方式快速安装MongoDB">
+							<span class="desc oneline">MongoDB是深受广大开源爱好者支持和研究的NoSQL数据库之一，它基于灵活的JSON文档方式，非常适合敏捷开发，其高可用功能强大，支持水平扩展等众多关键特性。一如其简约而不简单的MySQL一样，安...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/robinson_0612">来自：	<span class="blog_title"> 乐沙弥的世界</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/liuweibin66/10185440,searchFromBaidu_16"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/liuweibin66/10185440,searchFromBaidu_16"}'>
+		<a href="https://download.csdn.net/download/liuweibin66/10185440" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>CentOS</em> 安装mongoDb-liuweibin66			</h4>
+			<div class="info-box d-flex align-content-center">
+				<p>
+									<span class="read-num">下载</span>
+								</p>
+				<p>
+					<span class="date">10-23</span>
+				</p>
+			</div>
+			<p class="content oneline">
+					CentOS 安装mongoDb,1.下载&amp;amp;安装说明2.MongoDB CRUD简单说明... CentOS7安装MongoDB及基础操作 8028 2018-04-09 ctwy291314  CentOS 6 上mongodb安装与使用 731...			</p>
+		</a>
+
+	</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_31279347/article/details/82669882,searchFromBaidu_17"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_31279347/article/details/82669882,searchFromBaidu_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_31279347/article/details/82669882" target="_blank" title="Centos6.5安装配置MongoDB数据库">
+				<h4 class="text-truncate oneline">
+						<em>Centos</em>6.5安装配置MongoDB数据库				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/F/E/6/3_qq_31279347.jpg" alt="qq_31279347" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_31279347</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							232</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_31279347/article/details/82669882" target="_blank" title="Centos6.5安装配置MongoDB数据库">
+							<span class="desc oneline">概要：安装MongoDB数据库分为以下几步
+
+
+配置MongoDB官方源
+安装MongoDB数据库并启动
+简单使用MongoDB数据库 
+
+
+
+
+一:配置MongoDB官方源
+
+新建一个文件 
+
+/e...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_31279347">来自：	<span class="blog_title"> 立志的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738683,BlogCommendFromQuerySearch_18"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738683,BlogCommendFromQuerySearch_18"}'>
+			<a href="https://download.csdn.net/download/weixin_43495016/10738683" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							nginx-1.14.0-1.el6.ngx.x86_64.rpm-weixin_43495016						</h4>
+						<span class="data float-right">10-23</span>
+					</div>
+					<div class="desc oneline">
+							系统版本为CentOS 6上使用。nginx-1.14.0-1.el6.ngx.x86_64.rpm					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738669,BlogCommendFromQuerySearch_19"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738669,BlogCommendFromQuerySearch_19"}'>
+			<a href="https://download.csdn.net/download/weixin_43495016/10738669" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							ntp-4.2.8p12-1.x86_64.rpm-weixin_43495016						</h4>
+						<span class="data float-right">10-23</span>
+					</div>
+					<div class="desc oneline">
+							系统版本为CentOS 6上使用。ntp-4.2.8p12-1.x86_64.rpm					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738674,BlogCommendFromQuerySearch_20"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738674,BlogCommendFromQuerySearch_20"}'>
+			<a href="https://download.csdn.net/download/weixin_43495016/10738674" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							ntpdate-4.2.8p12-1.x86_64.rpm-weixin_43495016						</h4>
+						<span class="data float-right">10-23</span>
+					</div>
+					<div class="desc oneline">
+							系统版本为CentOS 6上使用。ntpdate-4.2.8p12-1.x86_64.rpm					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738678,BlogCommendFromQuerySearch_21"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738678,BlogCommendFromQuerySearch_21"}'>
+			<a href="https://download.csdn.net/download/weixin_43495016/10738678" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							vsftpd-3.0.3-14.el6.1.x86_64.rpm-weixin_43495016						</h4>
+						<span class="data float-right">10-23</span>
+					</div>
+					<div class="desc oneline">
+							系统版本为CentOS 6上使用。vsftpd-3.0.3-14.el6.1.x86_64.rpm					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738995,BlogCommendFromQuerySearch_22"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738995,BlogCommendFromQuerySearch_22"}'>
+			<a href="https://download.csdn.net/download/weixin_43495016/10738995" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							OpenSSH_7.9p1-weixin_43495016						</h4>
+						<span class="data float-right">10-23</span>
+					</div>
+					<div class="desc oneline">
+							系统版本为CentOS 6上使用。openssh-7.9p1-1.el6.x86_64.rpm、openssh-clients-7.9p1-1.el6.x86_64.rpm、openssh-server-7.9p1-1.el6.x86_6...					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/sikichan/article/details/53738449,BlogCommendFromBaidu_23"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/sikichan/article/details/53738449,BlogCommendFromBaidu_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sikichan/article/details/53738449" target="_blank" title="Centos6.5安装配置mongodb3.4">
+				<h4 class="text-truncate oneline">
+						<em>Centos</em>6.5安装配置mongodb3.4				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/7/4/3_sikichan.jpg" alt="sikichan" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sikichan</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5193</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sikichan/article/details/53738449" target="_blank" title="Centos6.5安装配置mongodb3.4">
+							<span class="desc oneline">1. 下载安装包官网下载并放到服务器上：https://www.mongodb.com/download-center#production或者直接命令下载：wget https://fastdl.m...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sikichan">来自：	<span class="blog_title"> 陈琪琪的技术博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/u014517002/article/details/48998079,BlogCommendFromBaidu_24"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u014517002/article/details/48998079,BlogCommendFromBaidu_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u014517002/article/details/48998079" target="_blank" title="centOS6.5上安装mongodb3.0.6">
+				<h4 class="text-truncate oneline">
+						<em>centOS</em>6.5上安装mongodb3.0.6				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/1/6/3_u014517002.jpg" alt="u014517002" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u014517002</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1488</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u014517002/article/details/48998079" target="_blank" title="centOS6.5上安装mongodb3.0.6">
+							<span class="desc oneline">想要在centOS6.5上安装mongodb，搜了网上很多方法，似乎很多都是直接编译mongodb的。感觉有点麻烦，看了mongodb官网的安装方法，在linux系统上很简单（不知道这几种安装方法有什...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u014517002">来自：	<span class="blog_title"> u014517002的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_30436259/article/details/77414951,BlogCommendFromBaidu_25"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_30436259/article/details/77414951,BlogCommendFromBaidu_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_30436259/article/details/77414951" target="_blank" title="Linux Centos6.8  安装配置MongoDB-3.4.0">
+				<h4 class="text-truncate oneline">
+						Linux <em>Centos</em>6.8  安装配置MongoDB-3.4.0				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/7/3/3_qq_30436259.jpg" alt="qq_30436259" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_30436259</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							799</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_30436259/article/details/77414951" target="_blank" title="Linux Centos6.8  安装配置MongoDB-3.4.0">
+							<span class="desc oneline">1:下载安装包
+wget  https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.4.0.tgz
+
+2:解压
+
+tar...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_30436259">来自：	<span class="blog_title"> DoZX的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/caofeiliju/article/details/80195036,BlogCommendFromBaidu_26"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/caofeiliju/article/details/80195036,BlogCommendFromBaidu_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/caofeiliju/article/details/80195036" target="_blank" title="Linux CentOS 7 安装mongoDB">
+				<h4 class="text-truncate oneline">
+						Linux <em>CentOS</em> 7 安装mongoDB				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/F/E/3_caofeiliju.jpg" alt="caofeiliju" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">caofeiliju</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-04</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2834</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/caofeiliju/article/details/80195036" target="_blank" title="Linux CentOS 7 安装mongoDB">
+							<span class="desc oneline">安装之前准备工作 
+环境说明： 
+1系统虚拟机信息：CentOS7 X86_64位； 
+2软件及版本：mongodb-linux-x86_64-3.6.3.tgz；Xshell工具 
+MongoDB ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/caofeiliju">来自：	<span class="blog_title"> 飞</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/ddjohn/article/details/40454655,BlogCommendFromCidStrategy_27"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ddjohn/article/details/40454655,BlogCommendFromCidStrategy_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ddjohn/article/details/40454655" target="_blank" title="centos6.5 86_64上安装mongodb">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>6.5 86_64上安装mongodb				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/9/B/3_ddjohn.jpg" alt="ddjohn" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">ddjohn</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1026</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ddjohn/article/details/40454655" target="_blank" title="centos6.5 86_64上安装mongodb">
+							<span class="desc oneline">Mongodb是目前最流行的文档型数据库，也是nosql</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/ddjohn">来自：	<span class="blog_title"> YIP</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/moliyiran/article/details/52554574,BlogCommendFromCidStrategy_28"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/moliyiran/article/details/52554574,BlogCommendFromCidStrategy_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/moliyiran/article/details/52554574" target="_blank" title="MongoDB在CentOS下的装配、启动和配置">
+				<h4 class="text-truncate oneline">
+						MongoDB在<em>CentOS</em>下的装配、启动和配置				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/9/5/3_moliyiran.jpg" alt="moliyiran" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">moliyiran</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2513</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/moliyiran/article/details/52554574" target="_blank" title="MongoDB在CentOS下的装配、启动和配置">
+							<span class="desc oneline">MongoDB在CentOS下的安装、启动和配置
+
+
+1、安装
+
+下载链接：http://www.mongodb.org/downloads
+
+ 
+
+下载安装包
+
+下载版本：rh...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/moliyiran">来自：	<span class="blog_title"> moliyiran的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/Robin_star_/article/details/78754105,BlogCommendFromCidStrategy_29"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Robin_star_/article/details/78754105,BlogCommendFromCidStrategy_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Robin_star_/article/details/78754105" target="_blank" title="通过xshell连接CentOS（6.8/7）问题汇总">
+				<h4 class="text-truncate oneline">
+						通过xshell连接<em>CentOS</em>（6.8/7）问题汇总				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/F/D/3_robin_star_.jpg" alt="Robin_star_" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">Robin_star_</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							735</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Robin_star_/article/details/78754105" target="_blank" title="通过xshell连接CentOS（6.8/7）问题汇总">
+							<span class="desc oneline">一. 前言写在前面：如果你安装的cent6.8镜像是live版，请尽快换成bin版本，live版重启所有配置都会恢复默认，谨记谨记，这可是血的教训啊！！！ 
+我用的cent镜像文件 ==&gt; “Cent...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/Robin_star_">来自：	<span class="blog_title"> Robin 的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_28345313/article/details/78679085,BlogCommendFromCidStrategy_30"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_28345313/article/details/78679085,BlogCommendFromCidStrategy_30"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_28345313/article/details/78679085" target="_blank" title="Linux下mongodb安装">
+				<h4 class="text-truncate oneline">
+						Linux下<em>mongodb安装</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/2/C/3_qq_28345313.jpg" alt="qq_28345313" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_28345313</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							789</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_28345313/article/details/78679085" target="_blank" title="Linux下mongodb安装">
+							<span class="desc oneline">Linux下mongodb安装</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_28345313">来自：	<span class="blog_title"> 遗失在古战场的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_33524158/article/details/79054507,BlogCommendFromCidStrategy_31"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_33524158/article/details/79054507,BlogCommendFromCidStrategy_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_33524158/article/details/79054507" target="_blank" title="[ Liunx的那些事 ] Red Hat / CentOS   6 无法使用yum源问题">
+				<h4 class="text-truncate oneline">
+						[ Liunx的那些事 ] Red Hat / <em>CentOS</em>   6 无法<em>使用</em>yum源问题				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/1/3/3_qq_33524158.jpg" alt="qq_33524158" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_33524158</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-13</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5254</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_33524158/article/details/79054507" target="_blank" title="[ Liunx的那些事 ] Red Hat / CentOS   6 无法使用yum源问题">
+							<span class="desc oneline">问题来源
+
+       在我安装RocketMQ时候由于需要安装git，我使用yum安装时发现安装不了，于是百度了很多文章，但是都没很好的答案，所以就有了我这篇文章。
+
+
+
+卸载自带的yum
+
+查看...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_33524158">来自：	<span class="blog_title"> hfbin的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_33733970/article/details/77983995,BlogCommendFromQuerySearch_32"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_33733970/article/details/77983995,BlogCommendFromQuerySearch_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_33733970/article/details/77983995" target="_blank" title="MongoDB及可视化工具的安装">
+				<h4 class="text-truncate oneline">
+						MongoDB及可视化工具的安装				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/C/E/3_qq_33733970.jpg" alt="qq_33733970" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_33733970</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-14</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1341</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_33733970/article/details/77983995" target="_blank" title="MongoDB及可视化工具的安装">
+							<span class="desc oneline">MongoDB的安装
+
+到官网下载好msi，按照链接里的步骤一步步完成就可以了： 
+MongoDB安装 
+https://jingyan.baidu.com/article/d5c4b52bef726...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_33733970">来自：	<span class="blog_title"> Quincy.Coder的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/chenxy02/article/details/79045120,BlogCommendFromQuerySearch_33"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/chenxy02/article/details/79045120,BlogCommendFromQuerySearch_33"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/chenxy02/article/details/79045120" target="_blank" title="CentOS6上FTP服务的安装与使用">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em>6上FTP服务的安装与<em>使用</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/7/3/3_chenxy02.jpg" alt="chenxy02" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">chenxy02</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1132</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/chenxy02/article/details/79045120" target="_blank" title="CentOS6上FTP服务的安装与使用">
+							<span class="desc oneline">离线安装步骤：
+
+（在线安装的，直接通过yum安装就行，很简单）
+
+
+
+1、查看是否安装vsftp
+
+rpm -qa | grep vsftpd
+
+
+
+
+2、下载vsftp
+
+ftp://rpmfin...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/chenxy02">来自：	<span class="blog_title"> chenxy02的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/jkant/3672881,BlogCommendFromQuerySearch_34"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/jkant/3672881,BlogCommendFromQuerySearch_34"}'>
+			<a href="https://download.csdn.net/download/jkant/3672881" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							<em>Centos</em> 6安装配置图解-jkant						</h4>
+						<span class="data float-right">10-11</span>
+					</div>
+					<div class="desc oneline">
+							Centos 6安装配置图解 Centos 6安装配置手册
+Centos 6安装配置图解Centos 6安装配置图解Centos 6安装配置图解Centos 6安装配置图解Centos 6安装配置图解Centos 6安装配置图解Cento...					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/qq_19448221/9611540,BlogCommendFromQuerySearch_35"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/qq_19448221/9611540,BlogCommendFromQuerySearch_35"}'>
+			<a href="https://download.csdn.net/download/qq_19448221/9611540" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							windows下<em>mongodb安装</em>与<em>使用</em>整理-qq_19448221						</h4>
+						<span class="data float-right">08-24</span>
+					</div>
+					<div class="desc oneline">
+							windows下mongodb安装与使用整理					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/Sophie_U/article/details/53088891,BlogCommendFromQuerySearch_36"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Sophie_U/article/details/53088891,BlogCommendFromQuerySearch_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Sophie_U/article/details/53088891" target="_blank" title="MongoDB的安装与基本使用">
+				<h4 class="text-truncate oneline">
+						MongoDB的安装与基本<em>使用</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/3/7/3_sophie_u.jpg" alt="Sophie_U" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">Sophie_U</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.6万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Sophie_U/article/details/53088891" target="_blank" title="MongoDB的安装与基本使用">
+							<span class="desc oneline">首先，得从MongoDB官网下载到对应操作系统的数据库安装包。
+MongoDB官网：
+https://www.mongodb.com/
+
+MongoDB下载地址：
+https://www.mongod...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/Sophie_U">来自：	<span class="blog_title"> Sophie_U的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qiaqia609/article/details/78900187,BlogCommendFromBaidu_37"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qiaqia609/article/details/78900187,BlogCommendFromBaidu_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qiaqia609/article/details/78900187" target="_blank" title="Centos7 安装mongodb3.4.4">
+				<h4 class="text-truncate oneline">
+						<em>Centos</em>7 安装mongodb3.4.4				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/9/5/3_qiaqia609.jpg" alt="qiaqia609" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qiaqia609</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3751</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qiaqia609/article/details/78900187" target="_blank" title="Centos7 安装mongodb3.4.4">
+							<span class="desc oneline">1.MongoDB的最新版官方下载地址：
+
+https://www.mongodb.com/download-center#community
+
+使用wget命令下载安装包
+
+ [root@local...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qiaqia609">来自：	<span class="blog_title"> 语不惊人死不休</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wangdatao_/article/details/78077774,BlogCommendFromBaidu_38"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wangdatao_/article/details/78077774,BlogCommendFromBaidu_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangdatao_/article/details/78077774" target="_blank" title="Centos下 Mongodb 的安装及远程连接">
+				<h4 class="text-truncate oneline">
+						<em>Centos</em>下 Mongodb 的安装及远程连接				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/6/D/3_wangdatao_.jpg" alt="wangdatao_" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wangdatao_</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7848</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangdatao_/article/details/78077774" target="_blank" title="Centos下 Mongodb 的安装及远程连接">
+							<span class="desc oneline">centos 下安装Mongodb3.4,添加用户，打开远程连接</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wangdatao_">来自：	<span class="blog_title"> 王大涛的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_32579557/article/details/80376069,BlogCommendFromBaidu_39"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_32579557/article/details/80376069,BlogCommendFromBaidu_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_32579557/article/details/80376069" target="_blank" title="Linux系统下安装MongoDB(CentOS7.0版本下)">
+				<h4 class="text-truncate oneline">
+						Linux系统下安装MongoDB(<em>CentOS</em>7.0版本下)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/7/4/3_qq_32579557.jpg" alt="qq_32579557" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_32579557</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							403</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_32579557/article/details/80376069" target="_blank" title="Linux系统下安装MongoDB(CentOS7.0版本下)">
+							<span class="desc oneline">1，下载安装包下载mongoDB的安装文件地址：https://www.mongodb.org/downloads#production http://dl.mongodb.org/dl/linux/...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_32579557">来自：	<span class="blog_title"> 猪大肠的世界</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/jssg_tzw/article/details/53437430,BlogCommendFromBaidu_40"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/jssg_tzw/article/details/53437430,BlogCommendFromBaidu_40"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jssg_tzw/article/details/53437430" target="_blank" title="CentOS7安装MongoDB3.4">
+				<h4 class="text-truncate oneline">
+						<em>CentOS</em>7安装MongoDB3.4				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/8/8/3_jssg_tzw.jpg" alt="jssg_tzw" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">jssg_tzw</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.3万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jssg_tzw/article/details/53437430" target="_blank" title="CentOS7安装MongoDB3.4">
+							<span class="desc oneline">CentOS7 安装 MongoDB3.4</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/jssg_tzw">来自：	<span class="blog_title"> david's Blog</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/zhouzhiwengang/article/details/51446582,BlogCommendFromBaidu_41"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/zhouzhiwengang/article/details/51446582,BlogCommendFromBaidu_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhouzhiwengang/article/details/51446582" target="_blank" title="centos Mongodb 基础使用">
+				<h4 class="text-truncate oneline">
+						<em>centos</em> Mongodb 基础<em>使用</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/5/9/C/3_zhouzhiwengang.jpg" alt="zhouzhiwengang" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zhouzhiwengang</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhouzhiwengang/article/details/51446582" target="_blank" title="centos Mongodb 基础使用">
+							<span class="desc oneline">成功启动MongoDB后，再打开一个命令行窗口输入mongo，就可以进行数据库的一些操作。
+
+输入help可以看到基本操作命令：
+show dbs:显示数据库列表
+show collectio...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zhouzhiwengang">来自：	<span class="blog_title"> zhouzhiwengang的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/buptip/article/details/43191309,BlogCommendFromCidStrategy_42"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/buptip/article/details/43191309,BlogCommendFromCidStrategy_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/buptip/article/details/43191309" target="_blank" title="docker---centos6上安装">
+				<h4 class="text-truncate oneline">
+						docker---<em>centos</em>6上安装				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/A/6/3_buptip.jpg" alt="buptip" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">buptip</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1072</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/buptip/article/details/43191309" target="_blank" title="docker---centos6上安装">
+							<span class="desc oneline">docker启动前必须安装cgroup，不然docker跑不起来，会报error unmounting device以及failed to find the cgroup root错误。
+1、安装cg...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/buptip">来自：	<span class="blog_title"> buptip的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/gocuber/article/details/80500304,BlogCommendFromCidStrategy_43"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/gocuber/article/details/80500304,BlogCommendFromCidStrategy_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gocuber/article/details/80500304" target="_blank" title="Linux-CentOS6.9下安装MongoDB3.6">
+				<h4 class="text-truncate oneline">
+						Linux-<em>CentOS</em>6.9下安装MongoDB3.6				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/E/2/3_gocuber.jpg" alt="gocuber" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">gocuber</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							266</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gocuber/article/details/80500304" target="_blank" title="Linux-CentOS6.9下安装MongoDB3.6">
+							<span class="desc oneline">Linux-CentOS6.9下安装MongoDB3.6
+
+
+
+安装
+
+创建 .repo 文件，直接安装MongoDB3.6企业版，一定要选择偶数版本，奇数版如3.5为开发版，不适合生产部署；
+
+
+
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/gocuber">来自：	<span class="blog_title"> gocuber的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/NovemberMan/article/details/80748386,BlogCommendFromCidStrategy_44"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/NovemberMan/article/details/80748386,BlogCommendFromCidStrategy_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/NovemberMan/article/details/80748386" target="_blank" title="centos7-mongodb安装及授权">
+				<h4 class="text-truncate oneline">
+						<em>centos</em>7-<em>mongodb安装</em>及授权				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/A/1/3_novemberman.jpg" alt="NovemberMan" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">NovemberMan</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-20</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							286</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/NovemberMan/article/details/80748386" target="_blank" title="centos7-mongodb安装及授权">
+							<span class="desc oneline">一、mongodb安装
+
+
+
+配置yum源
+
+一般情况下，MongoDB源配置好后是不能访问的，可以配置代理
+
+[配置yum资源后不能访问可设置代理，vim /etc/yum.conf  添加 pro...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/NovemberMan">来自：	<span class="blog_title"> Benzenes的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/Musda666/article/details/79360694,BlogCommendFromCidStrategy_45"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Musda666/article/details/79360694,BlogCommendFromCidStrategy_45"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Musda666/article/details/79360694" target="_blank" title="如何在CentOS6上搭建一个简单的HTTP服务">
+				<h4 class="text-truncate oneline">
+						如何在<em>CentOS</em>6上搭建一个简单的HTTP服务				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/0/8/3_musda666.jpg" alt="Musda666" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">Musda666</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2598</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Musda666/article/details/79360694" target="_blank" title="如何在CentOS6上搭建一个简单的HTTP服务">
+							<span class="desc oneline">一，安装    登入账户后，如果您使用的是root用户就可以直接输入命令 yum install httpd -y    我们来解析一下这个命令，yum是yellowdog updater modif...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/Musda666">来自：	<span class="blog_title"> Musda的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/nisjlvhudy/article/details/49793907,BlogCommendFromCidStrategy_46"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/nisjlvhudy/article/details/49793907,BlogCommendFromCidStrategy_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/nisjlvhudy/article/details/49793907" target="_blank" title="CentOs下MongoDB安装">
+				<h4 class="text-truncate oneline">
+						<em>CentOs</em>下<em>MongoDB安装</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/A/8/3_nisjlvhudy.jpg" alt="nisjlvhudy" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">nisjlvhudy</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							361</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/nisjlvhudy/article/details/49793907" target="_blank" title="CentOs下MongoDB安装">
+							<span class="desc oneline">﻿﻿
+1、下载mongodb
+wget 
+http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-1.6.3.tgz
+2、解压缩文件
+tar...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/nisjlvhudy">来自：	<span class="blog_title"> nisjlvhudy的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/su1322339466/article/details/53894298,BlogCommendFromQuerySearch_47"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/su1322339466/article/details/53894298,BlogCommendFromQuerySearch_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/su1322339466/article/details/53894298" target="_blank" title="如何在CentOS 6.x/7.x上安装git及最新版">
+				<h4 class="text-truncate oneline">
+						如何在<em>CentOS</em> 6.x/7.x上安装git及最新版				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/8/6/3_su1322339466.jpg" alt="su1322339466" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">su1322339466</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3777</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/su1322339466/article/details/53894298" target="_blank" title="如何在CentOS 6.x/7.x上安装git及最新版">
+							<span class="desc oneline">源码包安装
+步骤1. 安装依赖包
+# yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
+# yum...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/su1322339466">来自：	<span class="blog_title"> MaxSu的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wxf502/article/details/81562732,BlogCommendFromQuerySearch_48"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wxf502/article/details/81562732,BlogCommendFromQuerySearch_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wxf502/article/details/81562732" target="_blank" title="阿里云--MongoDB数据库安装">
+				<h4 class="text-truncate oneline">
+						阿里云--MongoDB数据库安装				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/5/2/3_wxf502.jpg" alt="wxf502" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wxf502</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-10</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							136</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wxf502/article/details/81562732" target="_blank" title="阿里云--MongoDB数据库安装">
+							<span class="desc oneline">1.配置MongoDB的yum源
+
+vim /etc/yum.repos.d/mongodb-org-3.4.repo
+
+#添加以下内容：
+
+[mongodb-org-3.4]
+
+name=Mongo...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wxf502">来自：	<span class="blog_title"> wxf502的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738693,BlogCommendFromQuerySearch_49"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/weixin_43495016/10738693,BlogCommendFromQuerySearch_49"}'>
+			<a href="https://download.csdn.net/download/weixin_43495016/10738693" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							OpenSSH_7.8p1, OpenSSL 1.0.2n-fips-weixin_43495016						</h4>
+						<span class="data float-right">10-23</span>
+					</div>
+					<div class="desc oneline">
+							系统版本为CentOS 6上使用。包括openssh-7.8p1-1.el6.x86_64.rpm、openssh-clients-7.8p1-1.el6.x86_64.rpm、openssh-server-7.8p1-1.el6.x86...					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/wh211212">
+                <img src="https://avatar.csdn.net/6/A/9/3_wh211212.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/wh211212" target="_blank" class="" id="uid">shaonbean</a>
+            </p>
+                        <p class="flag">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-blogexpert"></use>
+                </svg>
+                博客专家
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="228">
+                        <dt><a href="https://blog.csdn.net/wh211212?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/wh211212?t=1"><span class="count">228</span></a></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="242">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">242</span></dd>
+        </dl>
+        <dl class="text-center" title="84">
+            <dt>喜欢</dt>
+            <dd><span class="count">84</span></dd>
+        </dl>
+        <dl class="text-center" title="107">
+            <dt>评论</dt>
+            <dd><span class="count">107</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="7级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-7"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="830162">
+                83万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="10482">
+                1万+            </dd>
+        </dl>
+        <dl title="2352">
+            <dt>排名：</dt>
+            <dd>2352</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                <div class="icon-badge" title="专栏达人">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-columns"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-columns"></use>
+                        </svg>
+                        <p>专栏达人</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予成功创建个人博客专栏的用户。专栏中添加五篇以上博文即可点亮！撰写博客专栏浓缩技术精华，专栏达人就是你！
+                    </div>
+                </div>
+            </div>
+        </div>
+                        <div class="icon-badge" title="持之以恒">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-lasting"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                <script>
+            (function ($) {
+                setTimeout(function(){
+                    $('div.icon-badge.show-moment').removeClass('show-moment');
+                }, 5000);
+            })(window.jQuery)
+        </script>
+    </div>
+    </div>
+		    		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/wh211212/article/details/52982917">CentOS 7.2 配置Apache服务（httpd）--上篇</a>
+					<p class="read">阅读量：<span>45973</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wh211212/article/details/52856240">Linux运维常见面试题汇总</a>
+					<p class="read">阅读量：<span>37783</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wh211212/article/details/54141412">CentOS 7 安装KVM，并创建虚拟机</a>
+					<p class="read">阅读量：<span>24572</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wh211212/article/details/77482138">Jenkins + Pipeline 构建流水线发布</a>
+					<p class="read">阅读量：<span>22565</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/wh211212/article/details/72627803">Gitlab安装使用及汉化配置</a>
+					<p class="read">阅读量：<span>19562</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideColumn" class="aside-box">
+    <h3 class="aside-title">博主专栏</h3>
+    <div class="aside-content">
+        <ul class="column-box csdn-tracking-statistics tracking-click" data-mod="popu_520" >
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/13162.html">
+                            <img src="https://img-blog.csdn.net/20161010163835945?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/13162.html">Git 从放弃到入门</a></p>
+                        <div class="data">阅读量：<span>38902</span><span class="count">66 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/14144.html">
+                            <img src="https://img-blog.csdn.net/20170104204914014?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/14144.html">CentOS 7系统管理与运维实战</a></p>
+                        <div class="data">阅读量：<span>207241</span><span class="count">30 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/16764.html">
+                            <img src="https://img-blog.csdn.net/20170808101742972?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/16764.html">开源持续集成系统</a></p>
+                        <div class="data">阅读量：<span>91872</span><span class="count">23 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/22582.html">
+                            <img src="//img-blog.csdn.net/20180510155452307?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/22582.html">云原生（CNCF）项目学习</a></p>
+                        <div class="data">阅读量：<span>5031</span><span class="count">5 篇</span></div>
+                    </div>
+                </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6449541">
+                    <span class="title oneline">【Aliyun】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/7030486">
+                    <span class="title oneline">【Cloud Native】</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6446471">
+                    <span class="title oneline">【CentOS7】</span>
+                    <span class="count float-right">54篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443629">
+                    <span class="title oneline">【Virtualizations】</span>
+                    <span class="count float-right">29篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6971542">
+                    <span class="title oneline">【Docker】</span>
+                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443623">
+                    <span class="title oneline">【OS】</span>
+                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443643">
+                    <span class="title oneline">【CentOS6】</span>
+                    <span class="count float-right">36篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/7433969">
+                    <span class="title oneline">【Kubernetes】</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6481077">
+                    <span class="title oneline">【Cloud Compute】</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443646">
+                    <span class="title oneline">【Bigdata】</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443683">
+                    <span class="title oneline">【Database】</span>
+                    <span class="count float-right">24篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6479989">
+                    <span class="title oneline">【Storage】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6449442">
+                    <span class="title oneline">【ML】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443628">
+                    <span class="title oneline">【AI】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6503346">
+                    <span class="title oneline">【Architecture】</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6446460">
+                    <span class="title oneline">【optimization】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6481112">
+                    <span class="title oneline">【Code】</span>
+                    <span class="count float-right">23篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443645">
+                    <span class="title oneline">【Monitoring】</span>
+                    <span class="count float-right">17篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443644">
+                    <span class="title oneline">【Batch management】</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6443648">
+                    <span class="title oneline">【Version control】</span>
+                    <span class="count float-right">76篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/7599954">
+                    <span class="title oneline">【Ovirt】</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6467405">
+                    <span class="title oneline">【MQ】</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6655630">
+                    <span class="title oneline">【Logging】</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6506357">
+                    <span class="title oneline">【Security】</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6480004">
+                    <span class="title oneline">【CI/CD】</span>
+                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6453363">
+                    <span class="title oneline">【Troubleshooting】</span>
+                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6480872">
+                    <span class="title oneline">【Dailywork】</span>
+                    <span class="count float-right">59篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/6470112">
+                    <span class="title oneline">【Interview questions】</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/wh211212/article/category/7793496">
+                    <span class="title oneline">【Shell】</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wh211212/article/details/82787146" target="_blank">CentOS7上静默（silent）模式安装Oracle12C Release 2 (12.2)</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wh211212/article/details/82763493" target="_blank">ansible-playbook调用zabbix-api自动添加主机</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wh211212/article/details/82763227" target="_blank">不得不学的Markdown语法</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wh211212/article/details/81865144" target="_blank">shell处理用户输入总结</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/wh211212/article/details/81010387" target="_blank">shell批量设置免密认证</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/09">
+                    2018年9月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/08">
+                    2018年8月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/07">
+                    2018年7月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/06">
+                    2018年6月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/05">
+                    2018年5月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/02">
+                    2018年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/09">
+                    2017年9月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/07">
+                    2017年7月                    <span class="count float-right">20篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/06">
+                    2017年6月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/05">
+                    2017年5月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/04">
+                    2017年4月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/03">
+                    2017年3月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/02">
+                    2017年2月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2017/01">
+                    2017年1月                    <span class="count float-right">17篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2016/12">
+                    2016年12月                    <span class="count float-right">22篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2016/11">
+                    2016年11月                    <span class="count float-right">41篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/wh211212/article/month/2016/10">
+                    2016年10月                    <span class="count float-right">117篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wh211212/article/details/80437696#comments">开源APM工具pinpoint安装...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/limit8116" class="user-name" target="_blank">limit8116</a>：楼主，请问有没有在websphere application server上部署过pinpoint...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wh211212/article/details/79442142#comments">CentOS7 安装并使用Ovir...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_42727366" class="user-name" target="_blank">qq_42727366</a>：运行虚拟机一直显示
+SeaBIOS (version 1.11.0-2.e17)
+Machine ...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wh211212/article/details/52982917#comments">CentOS 7.2 配置Apac...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/SweetyoYY" class="user-name" target="_blank">SweetyoYY</a>：学习了！                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/wh211212/article/details/78730474#comments">CentOS 6.X 安装中文字体</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/yebai" class="user-name" target="_blank">yebai</a>：66666666                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">
+            <div id="dmp_ad_69"><div id="kp_box_75" data-pid="69" data-track-view='{"mod":"kp_popu_75","con":",,"}'><div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://www.csdn.net/2018dev/?utm_source=blogtextlink" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">开发者调查</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #000;padding:2px 5px 0px 5px;background:#000;">
+<a href="http://ai2018.csdn.net/?utm_source=bkxxl" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;font-size:15px;">AI开发者大会日程曝光</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://gitbook.cn/gitchat/1024developer?utm_source=wzl1022" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">全场课程特价最后 1 天</a>
+</div>
+
+<div style="float:left;">
+<script type="text/javascript" src="//rabc1.iteye.com/common/js/ndr3h.js?b=wosyvccl"></script>
+</div></div><script>$(function(){csdn.track.viewCheck($("#kp_box_75"));});</script></div>            		</span>
+		<div class="pulllog-btn float-right clearfix">
+            <div class="float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                <a class="pulllog-login">登录</a>
+            </div>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box ">
+			<button class=" low-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>0</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments low-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+										</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+				<li class="bdsharebuttonbox">
+			<button class="btn-comments low-height hover-box" >
+				<a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</button>
+		</li>
+							<li class="widescreen-hide">
+				<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/wh211212/article/details/79753143" title="在CentOS / RHEL 7上找不到fuser命令">
+					<svg class="icon hover-hide" aria-hidden="true">
+						<use xlink:href="#csdnc-chevronleft"></use>
+					</svg>
+					<span class="hover-show text text3">上一篇</span>
+				</a>
+			</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/wh211212/article/details/79876378" title="Win10 更新系统后vpn不能正常使用">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+						<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+													<li class="widescreen-more">
+						<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/wh211212/article/details/79753143" title="在CentOS / RHEL 7上找不到fuser命令">
+							<svg class="icon hover-hide" aria-hidden="true">
+								<use xlink:href="#csdnc-chevronleft"></use>
+							</svg>
+							<span class="hover-show text text3">上一篇</span>
+						</a>
+					</li>
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/wh211212/article/details/79876378" title="Win10 更新系统后vpn不能正常使用">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 50;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 6;
+    var articleId = "79797705";
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/wh211212/article/details/79797705";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "centos+mongodb";
+    var needInsertBaidu = false;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["centos","mongodb\u5b89\u88c5","\u4f7f\u7528"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [{"user_name":"lzz957748332","nick_name":"orangleliu","avatar":"https:\/\/avatar.csdn.net\/1\/7\/C\/3_lzz957748332.jpg","is_expert":true,"article_count":539},{"user_name":"aerchi","nick_name":"aerchi","avatar":"https:\/\/avatar.csdn.net\/D\/A\/B\/3_aerchi.jpg","is_expert":true,"article_count":2210},{"user_name":"qq_33733970","nick_name":"Quincy379","avatar":"https:\/\/avatar.csdn.net\/E\/C\/E\/3_qq_33733970.jpg","is_expert":false,"article_count":577},{"user_name":"chenxy02","nick_name":"chenxy02","avatar":"https:\/\/avatar.csdn.net\/1\/7\/3\/3_chenxy02.jpg","is_expert":false,"article_count":48},{"user_name":"Sophie_U","nick_name":"Sophie_U","avatar":"https:\/\/avatar.csdn.net\/3\/3\/7\/3_sophie_u.jpg","is_expert":false,"article_count":90},{"user_name":"su1322339466","nick_name":"su1322339466","avatar":"https:\/\/avatar.csdn.net\/A\/8\/6\/3_su1322339466.jpg","is_expert":false,"article_count":25},{"user_name":"wxf502","nick_name":"\u5c0f\u98de\u98de\u4e36502","avatar":"https:\/\/avatar.csdn.net\/9\/5\/2\/3_wxf502.jpg","is_expert":false,"article_count":6},{"user_name":"tian805832313","nick_name":"\u5c0f\u82cf07","avatar":"https:\/\/avatar.csdn.net\/4\/2\/8\/3_tian805832313.jpg","is_expert":false,"article_count":1},{"user_name":"shenwanjiang111","nick_name":"Aaron_Shen_Gao","avatar":"https:\/\/avatar.csdn.net\/E\/4\/3\/3_shenwanjiang111.jpg","is_expert":false,"article_count":163},{"user_name":"MOESECSDN","nick_name":"MoTec95","avatar":"https:\/\/avatar.csdn.net\/D\/3\/B\/3_moesecsdn.jpg","is_expert":false,"article_count":39}];
+
+		var articleType = 1;
+		var CopyrightContent = '本文为木偶人shaon原创文章，转载请注明原文地址，非常感谢。';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+<script src="https://g.csdnimg.cn/login-box/1.0.1/login-box.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-946dc75567.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-7899bda8d3.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-9376486353.min.js"></script>
+<script src="//g.csdnimg.cn/fixed-sidebar/1.0.6/fixed-sidebar.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=centos+mongodb"  type="text/javascript"></script>
+</body>
+<!-- 第四范式SDK -->
+
+<!-- 高亮未与 markdown兼容  -->
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/markdownCopy-3e5d9ef4b0.js" /></script>
+
+<script type="text/javascript" src="//g.csdnimg.cn/check-adblock/1.0.9/check-adblock.js"></script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+</html>
