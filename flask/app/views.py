@@ -69,6 +69,12 @@ def search_normal():
                            keywords = keywords,
                            page_info = page_info,
                            total_articles=total_page)
+@app.route("/personalinfo")
+def personalinfo():
+    article_total_nums = 1000
+    return render_template('personalinfo.html',
+        title = 'Personal',
+        total_articles = article_total_nums)
 
 @app.route("/")
 @app.route("/index")

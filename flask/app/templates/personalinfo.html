@@ -1,0 +1,119 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+<div class="col-sm-8  col-xs-10 col-sm-offset-2">
+    <h5 class="text-center">个人信息收集</h5>
+    <p class="text-left">
+    &nbsp;&nbsp;&nbsp;&nbsp;个人信息界面需要您回答以下问题：
+    </p>
+    <form class="form-horizontal ">
+        <div class="form-group col-xs-10 col-sm-offset-2">
+            <div class="form-group col-xs-10 col-sm-offset-2">
+                <label>年龄</label>
+            </div>
+            <div class="form-group col-xs-10 col-sm-offset-2">
+                <input>
+            </div>
+        </div>
+        <div class="form-group col-xs-10 col-sm-offset-2">
+            <div class="form-group col-xs-10 col-sm-offset-2">
+                <label>性别</label>
+            </div>
+            <div class="form-group col-xs-10 col-sm-offset-2">
+                <select class="form-control">
+                    <option>男</option>
+                    <option>女</option>
+                    <option>其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xs-10 col-sm-offset-2">
+            <div class="form-group col-xs-10 col-sm-offset-2">
+                <label>学历</label>
+            </div>
+            <div class="form-group col-xs-10 col-sm-offset-2">
+                <select class="form-control">
+                    <option>高中</option>
+                    <option>本科</option>
+                    <option>硕士</option>
+                    <option>博士</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xs-10">
+            <div class="form-group col-xs-10">
+                <label>您有多少年计算机进行文献检索的检索经验</label>
+            </div>
+            <div class="form-group col-xs-10">
+                <select class="form-control">
+                    <option>半年以内</option>
+                    <option>半年~一年</option>
+                    <option>一年~三年</option>
+                    <option>三年以上</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xs-10">
+            <div class="form-group col-xs-10">
+                <label>您的检索频率是多少</label>
+            </div>
+            <div class="form-group col-xs-10">
+                <select class="form-control">
+                    <option>1-从不</option>
+                    <option>2-一年一次</option>
+                    <option>3-一月两次</option>
+                    <option>4-一周一次</option>
+                    <option>5-一周一两次</option>
+                    <option>6-每天一次</option>
+                    <option>7-每天多次</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-10">
+            <div class="form-group col-xs-10">
+                <label>您使用过多少文献种数据库</label>
+            </div>
+            <div class="form-group col-xs-10">
+                <select class="form-control">
+                    <option>没用过</option>
+                    <option>1到2种</option>
+                    <option>3到5种</option>
+                    <option>5到10种</option>
+                    <option>10种</option>
+                    <option>10种以上</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xs-10">
+            <div class="form-group col-xs-10">
+                <label>在文献检索时我总能检索到我想要的（通过百度、万方数据库等）？</label>
+                <label>7点李克特量表：1-7，分数越高，与符合描述，</label>
+            </div>
+            <div class="form-group col-xs-10">
+                <select class="form-control">
+                    <option>1-从来没有</option>
+                    <option>2-极少数</option>
+                    <option>3-偶尔</option>
+                    <option>4-有时：大约占50%</option>
+                    <option>5-经常</option>
+                    <option>6-几乎总是</option>
+                    <option>7-总是</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <div class="btn-group btn-group-justified" role="group">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default">返回</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default">下一步</button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
