@@ -41,8 +41,8 @@ def get_search_result(keywords):
     return total_rows
 
 
-@app.route("/search_normal")
-def search_normal():
+@app.route("/search_normal_result")
+def search_normal_result():
     keywords = request.args.get('keywords')
     page = int(request.args.get('page', 1))
 
@@ -62,7 +62,32 @@ def search_normal():
         for row in rows:
             page_info.rows.append(row)
 
+    return render_template('search_normal.html',
+                           title = "search_normal",
+                           keywords = keywords,
+                           page_info = page_info,
+                           total_articles=total_page)
 
+@app.route("/search_profession_result")
+def search_profession_result():
+    keywords = request.args.get('keywords')
+    page = int(request.args.get('page', 1))
+
+    # get the total count and page:
+    total_rows = get_search_result(keywords)
+    total_page = int(math.ceil(total_rows.count() / (ROWS_PER_PAGE * 1.0)))
+
+    page_info = getPageInfo()
+    page_info.total_rows = total_rows
+    page_info.total_page = total_page
+    page_info.current_page = page
+
+    if total_page > 0 and page <= total_page:
+        row_start = (page - 1) * ROWS_PER_PAGE
+        rows = total_rows.skip(row_start).limit(ROWS_PER_PAGE)
+
+        for row in rows:
+            page_info.rows.append(row)
 
     return render_template('search_normal.html',
                            title = "search_normal",
