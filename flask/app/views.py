@@ -39,7 +39,7 @@ def get_search_result(keywords, page):
 
     total_rows = collection.find(keywords_regex).count()
     total_page = int(math.ceil(total_rows / (ROWS_PER_PAGE * 1.0)))
-    page_info = {'current': page, 'total': total_page,
+    page_info = {'current': page, 'total_page': total_page,
                  'total_rows': total_rows, 'rows': []}
 
     if total_page > 0 and page <= total_page:
@@ -68,11 +68,10 @@ def search_normal_result():
 
     # get the total count and page:
     page_tmp = get_search_result(keywords, page)
-    total_page = int(math.ceil(total_rows.count() / (ROWS_PER_PAGE * 1.0)))
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
-    page_info.total_page = page_tmp['total']
+    page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
 
     return render_template('search_normal_result.html',
