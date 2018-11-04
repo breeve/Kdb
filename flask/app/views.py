@@ -75,8 +75,6 @@ def search_normal_result():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
 
-    print(page_info)
-
     return render_template('search_normal_result.html',
                            title = "search_normal",
                            keywords = keywords,
