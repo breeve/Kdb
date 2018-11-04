@@ -34,8 +34,8 @@ def get_search_regex(keywords):
 def get_search_result(keywords, page):
     client = pymongo.MongoClient(host='localhost', port=27017)
     db = client['K_db']
-    #keywords_regex = get_search_regex(keywords)
-    keywords_regex = {'Summary-摘要':{'$regex':'.*'+keywords+'.*'}}
+    keywords_regex = get_search_regex(keywords)
+    #keywords_regex = {'Summary-摘要':{'$regex':'.*'+keywords+'.*'}}
     collection = db['maps_items']
 
     total_rows = collection.find(keywords_regex).count()
