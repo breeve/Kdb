@@ -37,6 +37,7 @@ def get_search_result(keywords):
     collection = K_db.maps_items
 
     keywords_regex = get_search_regex(keywords)
+    print(keywords_regex)
     total_rows = collection.find(keywords_regex)
     return total_rows
 
@@ -89,7 +90,7 @@ def search_profession_result():
         for row in rows:
             page_info.rows.append(row)
 
-    return render_template('search_normal.html',
+    return render_template('search_normal_result.html',
                            title = "search_normal",
                            keywords = keywords,
                            page_info = page_info,
