@@ -80,9 +80,9 @@ def search():
 @app.route("/search_profession")
 def search_profession():
     article_total_nums = 1000
-        return render_template('search_profession.html',
-            title = 'search_profession',
-            total_articles = article_total_nums)    
+    return render_template('search_profession.html',
+        title = 'search_profession',
+        total_articles = article_total_nums)    
 
 @app.route("/personalinfo")
 def personalinfo():
