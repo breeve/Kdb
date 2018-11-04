@@ -36,7 +36,7 @@ def get_search_result(keywords, page):
     db = client['K_db']
     #keywords_regex = get_search_regex(keywords)
     keywords_regex = {'Summary-摘要':{'$regex':'.*'+keywords+'.*'}}
-    collection = db['maps_items']['mongodb_collection']
+    collection = db['maps_items']
 
     total_rows = collection.find(keywords_regex).count()
     total_page = int(math.ceil(total_rows / (ROWS_PER_PAGE * 1.0)))
