@@ -63,7 +63,7 @@ def search_normal_result():
         for row in rows:
             page_info.rows.append(row)
 
-    return render_template('search_normal.html',
+    return render_template('search_normal_result.html',
                            title = "search_normal",
                            keywords = keywords,
                            page_info = page_info,
