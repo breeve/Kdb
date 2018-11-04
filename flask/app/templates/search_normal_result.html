@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="col-sm-8  col-xs-10 col-sm-offset-2">
-    <h5>关键字：{{keywords}}</h5>
+    <div class="col-sm-8  col-xs-10 col-sm-offset-2">
+        <h5>关键字：{{keywords}}</h5>
+    </div>
 
     <div class="col-sm-8  col-xs-10 col-sm-offset-2">
         <div>
@@ -18,10 +20,12 @@
 
     </div>
 
-    <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#search_normal" role="tab" data-toggle="tab">通常</a></li>
-        <li role="presentation"><a href="#search_special" role="tab" data-toggle="tab">特殊</a></li>
-    </ul>
+    <div class="col-sm-8  col-xs-10 col-sm-offset-2">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#search_normal" role="tab" data-toggle="tab">通常</a></li>
+            <li role="presentation"><a href="#search_special" role="tab" data-toggle="tab">特殊</a></li>
+        </ul>
+    </div>
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="search_normal">
