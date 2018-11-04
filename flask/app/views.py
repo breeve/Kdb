@@ -31,15 +31,31 @@ def get_search_regex(keywords):
 
     return keywords_regex
 
-def get_search_result(keywords):
+def get_search_result(keywords, page):
     client = pymongo.MongoClient(host='localhost', port=27017)
-    K_db = client.K_db
-    collection = K_db.maps_items
-
+    db = client[K_db]
     keywords_regex = get_search_regex(keywords)
+    collection = db[maps_items]['mongodb_collection']
+
+    total_rows = collection.find(keywords_regex).count()
+    total_page = int(math.ceil(total_rows / (ROWS_PER_PAGE * 1.0)))
+    page_info = {'current': page, 'total': total_page,
+                 'total_rows': total_rows, 'rows': []}
+
+    if total_page > 0 and page <= total_page:
+        row_start = (page - 1) * ROWS_PER_PAGE
+        cursors = collection.find(keywords_regex) \
+            .skip(row_start).limit(ROWS_PER_PAGE)
+
+        for c in cursors:
+            page_info['rows'].append(c)            
+
     print(keywords_regex)
-    total_rows = collection.find(keywords_regex)
-    return total_rows
+    print(page_info)
+
+    client.close()
+
+    return page_info
 
 
 @app.route("/search_normal_result")
@@ -47,21 +63,17 @@ def search_normal_result():
     keywords = request.args.get('keywords')
     page = int(request.args.get('page', 1))
 
+    if page < 1:
+        page = 1
+
     # get the total count and page:
-    total_rows = get_search_result(keywords)
+    page_tmp = get_search_result(keywords, page)
     total_page = int(math.ceil(total_rows.count() / (ROWS_PER_PAGE * 1.0)))
 
     page_info = getPageInfo()
-    page_info.total_rows = total_rows
-    page_info.total_page = total_page
-    page_info.current_page = page
-
-    if total_page > 0 and page <= total_page:
-        row_start = (page - 1) * ROWS_PER_PAGE
-        rows = total_rows.skip(row_start).limit(ROWS_PER_PAGE)
-
-        for row in rows:
-            page_info.rows.append(row)
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total']
+    page_info.current_page = page_tmp['current']
 
     return render_template('search_normal_result.html',
                            title = "search_normal",
