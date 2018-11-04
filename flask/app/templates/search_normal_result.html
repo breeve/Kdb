@@ -29,12 +29,12 @@
 
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="search_normal">
-            {% for item in page_info.rows %}
+            {% for item in page_info.total_rows %}
 
             <div>
                 <h5><a href="">{{item}}</a></h5>
                 <div>
-                    <small><small>{{item['_id]'}}</small></small>
+                    <small><small>{{item}}</small></small>
                 </div>
             </div>
 
