@@ -4,6 +4,20 @@
 <div class="col-sm-8  col-xs-10 col-sm-offset-2">
     <h5>关键字：{{keywords}}</h5>
 
+    <div class="col-sm-8  col-xs-10 col-sm-offset-2">
+        <div>
+            <form class="form-horizontal" action="/search_normal_result" method="get" name="login">
+                <div class="input-group">
+                    <input type="text" id="keywords" name="keywords" placeholder="{{keywords}}">
+                     <span class="input-group-btn">
+                     <button class="btn btn-default btn-primary" type="submit"><span class="glyphicon glyphicon-search"></button>
+                     </span>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
     <ul class="nav nav-pills" role="tablist">
         <li role="presentation" class="active"><a href="#search_normal" role="tab" data-toggle="tab">通常</a></li>
         <li role="presentation"><a href="#search_special" role="tab" data-toggle="tab">特殊</a></li>
