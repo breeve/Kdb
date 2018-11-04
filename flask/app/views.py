@@ -33,7 +33,7 @@ def get_search_regex(keywords):
 
 def get_search_result(keywords, page):
     client = pymongo.MongoClient(host='localhost', port=27017)
-    db = client[K_db]
+    db = client['K_db']
     keywords_regex = get_search_regex(keywords)
     collection = db[maps_items]['mongodb_collection']
 
