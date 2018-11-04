@@ -78,7 +78,7 @@ def search_normal_result():
                            title = "search_normal",
                            keywords = keywords,
                            page_info = page_info,
-                           total_articles=total_page)
+                           total_articles=page_info.total_page)
 
 @app.route("/search_profession_result")
 def search_profession_result():
