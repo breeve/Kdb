@@ -1,75 +1,78 @@
 {% extends "base.html"  %}
 
 {% block content %}
-<div class="col-sm-3 col-xs-3">
-haha
-</div>
-
-<div class="col-sm-9 col-sm-offset-3 col-xs-9 col-xs-offset-3">
-    <div class="col-sm-12  col-xs-12 ">
-        <h5>关键字：{{keywords}}</h5>
+<div class="col-sm-12 col-xs-12">
+    <div class="col-sm-1 col-xs-1">
+    haha
+    <hr>
     </div>
 
-    <div class="col-sm-12  col-xs-12 ">
-        <div>
-            <form class="form-horizontal" action="/search_normal_result" method="get" name="login">
-                <div class="input-group">
-                    <input type="text" id="keywords" name="keywords" placeholder="{{keywords}}">
-                     <span class="input-group-btn">
-                     <button class="btn btn-default btn-primary" type="submit"><span class="glyphicon glyphicon-search"></button>
-                     </span>
-                </div>
-            </form>
+    <div class="col-sm-9 col-sm-push-3 col-xs-9 col-xs-pushs-3">
+        <div class="col-sm-12  col-xs-12 ">
+            <h5>关键字：{{keywords}}</h5>
         </div>
 
-    </div>
-
-    <div class="col-sm-12  col-xs-12 ">
-        <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#search_normal" role="tab" data-toggle="tab">通常</a></li>
-        <li role="presentation"><a href="#search_special" role="tab" data-toggle="tab">特殊</a></li>
-        </ul>
-    </div>
-
-    <div class="tab-content col-sm-12  col-xs-12 ">
-        <div role="tabpanel" class="tab-pane active" id="search_normal">
-            {% for item in page_info.total_rows %}
-
+        <div class="col-sm-12  col-xs-12 ">
             <div>
-                <h5><a href="search_item?SrcDatabase={{item['SrcDatabase-来源库']}}&Title={{item['Title-题名']}}&Author={{item['Author-作者']}}&Organ={{item['Organ-单位']}}&Source={{item['Source-文献来源']}}&Keyword={{item['Keyword-关键词']}}&Summary={{item['Summary-摘要']}}">{{item["Title-题名"]}}</a></h5>
-                <div>
-                    <small><small>{{item["Summary-摘要"][:64]+'...'}}</small></small>
-                </div>
+                <form class="form-horizontal" action="/search_normal_result" method="get" name="login">
+                    <div class="input-group">
+                        <input type="text" id="keywords" name="keywords" placeholder="{{keywords}}">
+                         <span class="input-group-btn">
+                         <button class="btn btn-default btn-primary" type="submit"><span class="glyphicon glyphicon-search"></button>
+                         </span>
+                    </div>
+                </form>
             </div>
 
-            {% endfor %}
-
-            <script src="static/js/jquery.twbsPagination.js"></script>
-
-            <ul id="pagination" class="pagination-sm"></ul>
-
-            <script >
-                 $(pagination).twbsPagination({
-                    first: "首页",
-                    prev: "前一页",
-                    next: "后一页",
-                    last: "尾页",
-                    totalPages: {{page_info.total_page}},
-                    visiblePages: 5,
-                    startPage: {{page_info.curr_index}},
-                    onPageClick: function (event, page) {
-                        location.href="/search_normal?keywords={{keywords}}&&page="+page;
-                    }
-                });
-            </script>
-
         </div>
 
-        <div role="2tabpanel" class="tab-pane" id="search_special">
-            <h5>search_special</h5>
+        <div class="col-sm-12  col-xs-12 ">
+            <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#search_normal" role="tab" data-toggle="tab">通常</a></li>
+            <li role="presentation"><a href="#search_special" role="tab" data-toggle="tab">特殊</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content col-sm-12  col-xs-12 ">
+            <div role="tabpanel" class="tab-pane active" id="search_normal">
+                {% for item in page_info.total_rows %}
+
+                <div>
+                    <h5><a href="search_item?SrcDatabase={{item['SrcDatabase-来源库']}}&Title={{item['Title-题名']}}&Author={{item['Author-作者']}}&Organ={{item['Organ-单位']}}&Source={{item['Source-文献来源']}}&Keyword={{item['Keyword-关键词']}}&Summary={{item['Summary-摘要']}}">{{item["Title-题名"]}}</a></h5>
+                    <div>
+                        <small><small>{{item["Summary-摘要"][:64]+'...'}}</small></small>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                <script src="static/js/jquery.twbsPagination.js"></script>
+
+                <ul id="pagination" class="pagination-sm"></ul>
+
+                <script >
+                     $(pagination).twbsPagination({
+                        first: "首页",
+                        prev: "前一页",
+                        next: "后一页",
+                        last: "尾页",
+                        totalPages: {{page_info.total_page}},
+                        visiblePages: 5,
+                        startPage: {{page_info.curr_index}},
+                        onPageClick: function (event, page) {
+                            location.href="/search_normal?keywords={{keywords}}&&page="+page;
+                        }
+                    });
+                </script>
+
+            </div>
+
+            <div role="2tabpanel" class="tab-pane" id="search_special">
+                <h5>search_special</h5>
+            </div>
+
         </div>
 
     </div>
-
 </div>
 {% endblock %}
