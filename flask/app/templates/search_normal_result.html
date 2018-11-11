@@ -32,7 +32,7 @@
             {% for item in page_info.total_rows %}
 
             <div>
-                <h5><a href="">{{item["Title-题名"]}}</a></h5>
+                <h5><a href="search_item?item={{item}}">{{item["Title-题名"]}}</a></h5>
                 <div>
                     <small><small>{{item["Summary-摘要"][:64]+'...'}}</small></small>
                 </div>
