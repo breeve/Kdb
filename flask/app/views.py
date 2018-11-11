@@ -108,13 +108,38 @@ def search_profession_result():
                            page_info = page_info,
                            total_articles=total_page)
 
-@app.route("/search", methods = ["GET", "POST"])
+def save_personalinfo(datax):
+    print(datax)
+
+@app.route("/search", methods = ["POST"])
 def search():
-    if request.method == 'POST':
-        datax = request.form.to_dict()
-        print(datax)
+    datax = request.form.to_dict()
+    print(datax)
+
+    # {'name': '11',
+    #  'age': '11', 
+    #  'sex': '男', #
+    #  'education': '高中', 
+    #  'search_time': '半年以内', 
+    #  'search_rate': '1-从不', 
+    #  'search_kinds': '没用过', 
+    #  'search_path': '1-从来没有'}
+
+    print(datax['name'])
+    print(datax['age'])
+    print(datax['sex'])
+    print(datax['education'])
+    print(datax['search_time'])
+    print(datax['search_rate'])
+    print(datax['search_kinds'])
+    print(datax['search_path'])
+
+    save_personalinfo(datax)
+
     article_total_nums = 1000
     return render_template('search.html',
+        name = name,
+        age = age,
         title = 'search',
         total_articles = article_total_nums)
 
