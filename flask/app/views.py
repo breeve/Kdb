@@ -132,9 +132,22 @@ def personalinfo():
 @app.route("/search_item")
 def search_item():
     article_total_nums = 1000
-    item = request.args.get('item')
+    # SrcDatabase={{item['SrcDatabase-来源库']}}
+    # &Title={{item['Title-题名']}}
+    # &Author={{item['Author-作者']}}
+    # &Organ={{item['Organ-单位']}}
+    # &Source={{item['Source-文献来源']}}
+    # &Keyword={{item['Keyword-关键词']}}
+    # &Summary={{item['Summary-摘要']}}
+
     return render_template('search_item.html',
-        item = item,
+        srcDatabase_m=request.args.get('SrcDatabase'),
+        title_m=request.args.get('Title'),
+        author_m=request.args.get('Author'),
+        organ_m=request.args.get('Organ'),
+        source_m=request.args.get('Source'),
+        keyword_m=request.args.get('Keyword'),
+        summary_m=request.args.get('Summary'),
         title = 'Search Item',
         total_articles = article_total_nums)
 
