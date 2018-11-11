@@ -217,6 +217,11 @@ def search_item():
 @app.route("/")
 @app.route("/index")
 def index():
+    global g_name
+    global g_age
+    g_name = ""
+    g_age  = 0
+
     article_total_nums = 1000
     return render_template('index.html',
         title = 'Home',
