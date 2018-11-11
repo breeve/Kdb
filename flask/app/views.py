@@ -129,7 +129,7 @@ def personalinfo():
         title = 'Personal',
         total_articles = article_total_nums)
 
-@app.route("search_item")
+@app.route("/search_item")
 def search_item():
     article_total_nums = 1000
     item = request.args.get('item')
