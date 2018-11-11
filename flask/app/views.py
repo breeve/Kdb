@@ -110,6 +110,11 @@ def search_profession_result():
 
 def save_personalinfo(datax):
     print(datax)
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.personalinfo
+    collection.insert_one(datax).inserted_id
+
 
 @app.route("/search", methods = ["POST"])
 def search():
