@@ -108,8 +108,11 @@ def search_profession_result():
                            page_info = page_info,
                            total_articles=total_page)
 
-@app.route("/search")
+@app.route("/search" methods = ["GET", "POST"])
 def search():
+    if request.method == 'POST':
+        datax = request.form.to_dict()
+        print(datax)
     article_total_nums = 1000
     return render_template('search.html',
         title = 'search',
