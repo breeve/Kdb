@@ -76,8 +76,8 @@ def search_normal_result():
     keywords = request.args.get('keywords')
     name = g_name
     age = g_age
-    print("name: " + name)
-    print("age: " + age)
+    print("name: " + str(name))
+    print("age: " + str(age))
     print("keywords: " + keywords)
     page = int(request.args.get('page', 1))
 
