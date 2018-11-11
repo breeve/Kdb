@@ -8,7 +8,7 @@ from .page_info import pageInfo, searchNormalItem
 
 from .page_info import getPageInfo
 
-ROWS_PER_PAGE = 5
+ROWS_PER_PAGE = 10000
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
@@ -58,11 +58,28 @@ def get_search_result(keywords, page):
 
     return page_info
 
+def save_personalSearchInfo(name, age, keywords):
+    print(name)
+    print(age)
+    print(keywords)
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.personalSearchInfo
+    datax['name'] = name
+    datax['age'] = age
+    datax['keywords'] = keywords
+    collection.insert_one(datax).inserted_id
 
 @app.route("/search_normal_result")
 def search_normal_result():
     keywords = request.args.get('keywords')
+    name = request.args.get('name')
+    age = request.args.get('age')
+    print(name)
+    print(age)
     page = int(request.args.get('page', 1))
+
+    save_personalSearchInfo(name, age, keywords)
 
     if page < 1:
         page = 1
@@ -84,6 +101,8 @@ def search_normal_result():
 @app.route("/search_profession_result")
 def search_profession_result():
     keywords = request.args.get('keywords')
+    name = request.args.get('name')
+    age = request.args.get('age')
     page = int(request.args.get('page', 1))
 
     # get the total count and page:
