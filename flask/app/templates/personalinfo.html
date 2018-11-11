@@ -13,7 +13,7 @@
                 <label>年龄</label>
             </div>
             <div class="form-group col-xs-12 ">
-                <input>
+                <input id="age">
             </div>
         </div>
         <div class="form-group col-xs-12 ">
@@ -21,7 +21,7 @@
                 <label>性别</label>
             </div>
             <div class="form-group col-xs-12 ">
-                <select class="form-control">
+                <select class="form-control" id="sex">
                     <option>男</option>
                     <option>女</option>
                     <option>其他</option>
@@ -33,7 +33,7 @@
                 <label>学历</label>
             </div>
             <div class="form-group col-xs-12 ">
-                <select class="form-control">
+                <select class="form-control" id="education">
                     <option>高中</option>
                     <option>本科</option>
                     <option>硕士</option>
@@ -46,7 +46,7 @@
                 <label>您有多少年计算机进行文献检索的检索经验</label>
             </div>
             <div class="form-group col-xs-12">
-                <select class="form-control">
+                <select class="form-control" id="search_time">
                     <option>半年以内</option>
                     <option>半年~一年</option>
                     <option>一年~三年</option>
@@ -59,7 +59,7 @@
                 <label>您的检索频率是多少</label>
             </div>
             <div class="form-group col-xs-12">
-                <select class="form-control">
+                <select class="form-control" id="search_rate">
                     <option>1-从不</option>
                     <option>2-一年一次</option>
                     <option>3-一月两次</option>
@@ -76,7 +76,7 @@
                 <label>您使用过多少文献种数据库</label>
             </div>
             <div class="form-group col-xs-12">
-                <select class="form-control">
+                <select class="form-control" id="search_kinds">
                     <option>没用过</option>
                     <option>1到2种</option>
                     <option>3到5种</option>
@@ -92,7 +92,7 @@
                 <label>7点李克特量表：1-7，分数越高，与符合描述，</label>
             </div>
             <div class="form-group col-xs-12">
-                <select class="form-control">
+                <select class="form-control" id="search_path">
                     <option>1-从来没有</option>
                     <option>2-极少数</option>
                     <option>3-偶尔</option>
@@ -105,13 +105,17 @@
         </div>
         <div class="input-group">
             <span class="input-group-btn">
-                <button class="btn btn-default btn-primary col-sm-12  col-xs-12 ">返回</button>
+                <a href="index">
+                    <button class="btn btn-default btn-primary col-sm-12  col-xs-12 ">返回</button>
+                </a>
             </span>
         </div>
         <br>
         <div class="input-group">
             <span class="input-group-btn">
-                <button class="btn btn-default btn-primary col-sm-12  col-xs-12 ">下一步</button>
+                <a href="search">
+                    <button class="btn btn-default btn-primary col-sm-12  col-xs-12 ">下一步</button>
+                </a>
             </span>
         </div>
     </form>
