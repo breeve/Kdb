@@ -10,6 +10,9 @@ from .page_info import getPageInfo
 
 ROWS_PER_PAGE = 10000
 
+g_name = ""
+g_age  = 0
+
 @app.route("/login", methods = ["GET", "POST"])
 def login():
     form = LoginForm()
@@ -71,8 +74,8 @@ def save_personalSearchInfo(name, age, keywords):
 @app.route("/search_normal_result")
 def search_normal_result():
     keywords = request.args.get('keywords')
-    name = request.args.get('name')
-    age = request.args.get('age')
+    name = g_name
+    age = g_age
     print("name: " + name)
     print("age: " + age)
     print("keywords: " + keywords)
@@ -100,8 +103,8 @@ def search_normal_result():
 @app.route("/search_profession_result")
 def search_profession_result():
     keywords = request.args.get('keywords')
-    name = request.args.get('name')
-    age = request.args.get('age')
+    name = g_name
+    age = g_age
     page = int(request.args.get('page', 1))
 
     # get the total count and page:
@@ -158,6 +161,9 @@ def search():
     print(datax['search_path'])
 
     save_personalinfo(datax)
+
+    g_name = datax['name']
+    g_age  = datax['age']
 
     article_total_nums = 1000
     return render_template('search.html',
