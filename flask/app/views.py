@@ -108,7 +108,7 @@ def search_profession_result():
                            page_info = page_info,
                            total_articles=total_page)
 
-@app.route("/search" methods = ["GET", "POST"])
+@app.route("/search", methods = ["GET", "POST"])
 def search():
     if request.method == 'POST':
         datax = request.form.to_dict()
