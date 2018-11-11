@@ -59,9 +59,6 @@ def get_search_result(keywords, page):
     return page_info
 
 def save_personalSearchInfo(name, age, keywords):
-    print(name)
-    print(age)
-    print(keywords)
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
     collection = K_db.personalSearchInfo
@@ -76,8 +73,9 @@ def search_normal_result():
     keywords = request.args.get('keywords')
     name = request.args.get('name')
     age = request.args.get('age')
-    print(name)
-    print(age)
+    print("name: " + name)
+    print("age: " + age)
+    print("keywords: " + keywords)
     page = int(request.args.get('page', 1))
 
     save_personalSearchInfo(name, age, keywords)
