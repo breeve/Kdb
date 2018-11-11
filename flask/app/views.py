@@ -138,8 +138,8 @@ def search():
 
     article_total_nums = 1000
     return render_template('search.html',
-        name = name,
-        age = age,
+        name = datax['name'],
+        age = datax['age'],
         title = 'search',
         total_articles = article_total_nums)
 
