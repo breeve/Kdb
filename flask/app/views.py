@@ -151,6 +151,8 @@ def search():
     #  'search_kinds': '没用过', 
     #  'search_path': '1-从来没有'}
 
+    global g_name
+    global g_age
     g_name = datax['name']
     g_age  = datax['age']
     print(g_name)
