@@ -65,6 +65,7 @@ def save_personalSearchInfo(name, age, keywords):
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
     collection = K_db.personalSearchInfo
+    datax = {}
     datax['name'] = name
     datax['age'] = age
     datax['keywords'] = keywords
