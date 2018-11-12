@@ -71,6 +71,9 @@ def save_personalSearchInfo(name, age, keywords):
     datax['keywords'] = keywords
     collection.insert_one(datax).inserted_id
 
+def get_search_result_kinds(rows)
+    print("rows :" + rows)
+
 @app.route("/search_normal_result")
 def search_normal_result():
     keywords = request.args.get('keywords')
@@ -88,6 +91,7 @@ def search_normal_result():
 
     # get the total count and page:
     page_tmp = get_search_result(keywords, page)
+    kinds = get_search_result_kinds(page_tmp['rows'])
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
