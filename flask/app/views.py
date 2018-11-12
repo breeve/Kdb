@@ -71,7 +71,7 @@ def save_personalSearchInfo(name, age, keywords):
     datax['keywords'] = keywords
     collection.insert_one(datax).inserted_id
 
-def get_search_result_kinds(rows)
+def get_search_result_kinds(rows):
     print("rows :" + rows)
 
 @app.route("/search_normal_result")
