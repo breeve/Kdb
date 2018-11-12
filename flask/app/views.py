@@ -72,7 +72,11 @@ def save_personalSearchInfo(name, age, keywords):
     collection.insert_one(datax).inserted_id
 
 def get_search_result_kinds(rows):
-    print("rows :" + str(rows))
+    keyword = []
+    for r in rows:
+        keyword.append(r['Keyword-关键词'])
+
+    print(keyword)
 
 @app.route("/search_normal_result")
 def search_normal_result():
