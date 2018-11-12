@@ -76,7 +76,8 @@ def get_search_result_kinds(rows):
     for r in rows:
         keyword.append(r['Keyword-关键词'])
 
-    print(keyword)
+    for key in keyword:
+        print(key)
 
 @app.route("/search_normal_result")
 def search_normal_result():
