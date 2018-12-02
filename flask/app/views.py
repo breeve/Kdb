@@ -83,7 +83,7 @@ def get_left_row(page_info):
     keys = []
     for item in page_info.total_rows:
         keys.append(item[Keyword-关键词])
-    print list(set(keys))
+    print(list(set(keys)))
 
     return keys
 
