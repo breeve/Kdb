@@ -79,6 +79,14 @@ def get_search_result_kinds(rows):
     for key in keyword:
         print(key)
 
+def get_left_row(page_info):
+    keys = []
+    for item in page_info.total_rows:
+        keys.append(item[Keyword-关键词])
+    print list(set(keys))
+
+    return keys
+
 @app.route("/search_normal_result")
 def search_normal_result():
     keywords = request.args.get('keywords')
@@ -103,10 +111,13 @@ def search_normal_result():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
 
+    left_row = get_left_row(page_info)
+
     return render_template('search_normal_result.html',
                            title = "search_normal",
                            keywords = keywords,
                            page_info = page_info,
+                           left_row = left_row,
                            total_articles=page_info.total_page)
 
 @app.route("/search_profession_result")
