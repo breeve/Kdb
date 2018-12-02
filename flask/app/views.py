@@ -82,7 +82,8 @@ def get_search_result_kinds(rows):
 def get_left_row(page_info):
     keys = []
     for item in page_info.total_rows:
-        keys.append(item["Keyword-关键词"])
+        for key in item["Keyword-关键词"].split(';;'):
+            keys.append()
     print(list(set(keys)))
 
     return keys
