@@ -84,7 +84,9 @@ def get_left_row(page_info):
     for item in page_info.total_rows:
         for key in item["Keyword-关键词"].split(';;'):
             keys.append(key.split('\n')[0])
-    print(list(set(keys)))
+    # print(list(set(keys)))
+
+    
 
     return keys
 
