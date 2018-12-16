@@ -241,7 +241,8 @@ def search_item():
 def search_key():
     keywords = request.args.get('keys')
 
-    keys = keywords[1:len(keywords)]
+    keys = keywords[1:len(keywords)-1]
+    keys = keys.split(',')
     key = request.args.get('key')
 
     return render_template('search_key.html',
