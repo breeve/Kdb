@@ -242,7 +242,9 @@ def search_key():
     keywords = request.args.get('keys')
     key = request.args.get('key')
 
-    print("Key:====="+key)
+    return render_template('search_key.html',
+        title = 'Search Key',
+        total_articles = 1)
 
 @app.route("/")
 @app.route("/index")
