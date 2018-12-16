@@ -243,6 +243,8 @@ def search_key():
     key = request.args.get('key')
 
     return render_template('search_key.html',
+        keys=keywords,
+        key=key
         title = 'Search Key',
         total_articles = 1)
 
