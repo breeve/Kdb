@@ -240,10 +240,11 @@ def search_item():
 @app.route("/search_key")
 def search_key():
     keywords = request.args.get('keys')
+    keys = dict(keywords)
     key = request.args.get('key')
 
     return render_template('search_key.html',
-        keys=keywords,
+        keys=keys,
         key=key,
         title = 'Search Key',
         total_articles = 1)
