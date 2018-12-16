@@ -246,7 +246,8 @@ def search_key():
     keys_tmp = keys_tmp.split(',')
     keys = []
     for item in keys_tmp :
-        keys.append(item[1:len(item)-1])
+        item = item.remove('\'').remove(' ')
+        keys.append(item)
 
 
     return render_template('search_key.html',
