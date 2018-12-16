@@ -240,10 +240,13 @@ def search_item():
 @app.route("/search_key")
 def search_key():
     keywords = request.args.get('keys')
-
-    keys = keywords[1:len(keywords)-1]
-    keys = keys.split(',')
     key = request.args.get('key')
+
+    keys_tmp = keywords[1:len(keywords)-1]
+    keys_tmp = keys_tmp.split(',')
+    for item in keys_tmp :
+        keys.append(item[1:len(item)-1])
+
 
     return render_template('search_key.html',
         keys=keys,
