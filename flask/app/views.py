@@ -246,7 +246,7 @@ def search_key():
     keys_tmp = keys_tmp.split(',')
     keys = []
     for item in keys_tmp :
-        item = s.strip().lstrip().rstrip('\'')
+        item = item.strip().lstrip().rstrip('\'')
         keys.append(item)
 
 
