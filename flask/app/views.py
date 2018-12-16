@@ -244,7 +244,7 @@ def search_key():
 
     return render_template('search_key.html',
         keys=keywords,
-        key=key
+        key=key,
         title = 'Search Key',
         total_articles = 1)
 
