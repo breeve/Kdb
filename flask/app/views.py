@@ -237,6 +237,13 @@ def search_item():
         title = 'Search Item',
         total_articles = article_total_nums)
 
+@app.route("search_key")
+def search_key():
+    keywords = request.args.get('keys')
+    key = request.args.get('key')
+
+    print("Key:====="+key)
+
 @app.route("/")
 @app.route("/index")
 def index():
