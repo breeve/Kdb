@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-  
 #!/usr/bin/python
-#coding=utf-8
+
 
 import jieba.posseg as pseg
 import codecs
@@ -7,13 +8,14 @@ from gensim import corpora, models, similarities
 
 
 class file_item:
-    g_srcDatabase_k = ''
-    g_title_k = ''
-    g_author_k = ''
-    g_organ_k = ''
-    g_source_k = ''
-    g_keyword_k = ''
-    g_summary_k = ''
+    index = 0
+    srcDatabase_k = ''
+    title_k = ''
+    author_k = ''
+    organ_k = ''
+    source_k = ''
+    keyword_k = ''
+    summary_k = ''
 
 g_srcDatabase_k = "SrcDatabase-来源库"
 g_title_k = "Title-题名"
@@ -27,6 +29,7 @@ def read_file(file_name):
     items = []
     item = file_item()
     key_tag = ''
+    index = 0
 
     while 1:
         line = file_name.readline()
@@ -37,6 +40,8 @@ def read_file(file_name):
 
         if line_str[0] == g_srcDatabase_k:
             item = file_item()
+            item.index = index;
+            index = index + 1
             item.srcDatabase_k = line_str[1]
             key_tag = g_srcDatabase_k
         elif line_str[0] == g_title_k:
@@ -72,20 +77,72 @@ def read_file(file_name):
             elif key_tag == g_keyword_k:
                 item.keyword_k = item.keyword_k + line
             elif key_tag == g_summary_k:
-                items[len(items)-1].g_summary_k = items[len(items)-1].g_summary_k + line
+                items[len(items)-1].summary_k = items[len(items)-1].summary_k + line
 
     for item in items:
-        print(item.title_k)
+        keys = item.keyword_k
+        keys = keys.split(';')
+        #print(keys[0])
+
 
     return items
 
 
+
+def fils_class_create(items_ok):
+    total = len(items_ok)
+    file_classes = {}
+
+    for item in items_ok :
+        keys = item.keyword_k
+        keys = keys.split(';')
+        #print(item.index)
+        for key in keys:
+            key_final = key.split(',')
+            for key in key_final :
+                if len(key) == 0 :
+                    continue
+                key = key.decode('utf-8')
+                files = []
+
+                if key in file_classes :
+                    files = file_classes[key]
+
+                files.append(item.index)
+
+                file_classes[key] = files
+
+    #for item in file_classes :
+    #    print(file_classes[item])
+
+    return file_classes
+
+
 def run():
     # 读取已经分类文件
-    # items_ok = read_file(open("/root/Kdb/data/classifier_deal/all.txt"))
+    items_ok = read_file(open("/root/Kdb/data/classifier_deal/all.txt"))
+    #print(items_ok[0].keyword_k)
 
     # 读取待分类文件
     items_wait = read_file(open("/root/Kdb/data/classifier_deal/wait_classifier.txt"))
+
+    # 构建已经分类的文章
+    file_classes = fils_class_create(items_ok)
+    for item in file_classes :
+        index = file_classes[item][0]
+        if index == 0 :
+            print('-----------')
+            print(item)
+            print(file_classes[item])
+            
+            print(index)
+            print(items_ok[index].title_k)
+            print(items_ok[index].keyword_k)
+
+    
+
+
+
 
 
 if __name__ == "__main__":
