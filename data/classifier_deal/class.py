@@ -4,60 +4,85 @@ import jieba.posseg as pseg
 import codecs
 from gensim import corpora, models, similarities
 
-# 读取待分类文件
+
+class file_item:
+    g_srcDatabase_k = ''
+    g_title_k = ''
+    g_author_k = ''
+    g_organ_k = ''
+    g_source_k = ''
+    g_keyword_k = ''
+    g_summary_k = ''
+
+g_srcDatabase_k = "SrcDatabase-来源库"
+g_title_k = "Title-题名"
+g_author_k = "Author-作者"
+g_organ_k = "Organ-单位"
+g_source_k = "Source-文献来源"
+g_keyword_k = "Keyword-关键词"
+g_summary_k = "Summary-摘要"
+
+def read_file(file_name):
+    items = []
+    item = file_item()
+    key_tag = ''
+
+    while 1:
+        line = file_name.readline()
+        if not line:
+            break
+
+        line_str = line.split(':')
+
+        if line_str[0] == g_g_srcDatabase_k:
+            item = file_item()
+            item.g_srcDatabase_k = line_str[1]
+            key_tag = g_srcDatabase_k
+        elif line_str[0] == g_title_k:
+            item.g_title_k = line_str[1]
+            key_tag = g_title_k
+        elif line_str[0] == g_author_k:
+            item.g_author_k = line_str[1]
+            key_tag = g_author_k
+        elif line_str[0] == g_organ_k:
+            item.g_organ_k = line_str[1]
+            key_tag = g_organ_k
+        elif line_str[0] == g_source_k:
+            item.g_source_k = line_str[1]
+            key_tag = g_source_k
+        elif line_str[0] == g_keyword_k:
+            item.g_keyword_k = line_str[1]
+            key_tag = g_keyword_k
+        elif line_str[0] == g_summary_k:
+            item.g_summary_k = line_str[1]
+            key_tag = g_summary_k
+            items.append(item)
+        else :
+            if key_tag == g_srcDatabase_k:
+                item.g_srcDatabase_k = item.g_srcDatabase_k + line
+            elif key_tag == g_title_k:
+                item.g_title_k = item.g_title_k + line
+            elif key_tag == g_author_k:
+                item.g_author_k = item.g_author_k + line
+            elif key_tag == g_organ_k:
+                item.g_organ_k = item.g_organ_k + line
+            elif key_tag == g_source_k:
+                item.g_source_k = item.g_source_k + line
+            elif key_tag == g_keyword_k:
+                item.g_keyword_k = item.g_keyword_k + line
+            elif key_tag == g_summary_k:
+                items[len(items)-1].g_summary_k = items[len(items)-1].g_summary_k + line
+
+    for item in items:
+        print(item.title_k)
 
 
-# 读取分类文件
+def run():
+    # 读取待分类文件
+    read_file("./all.txt")
 
-stop_words = './stopwords.dat'
-stopwords = codecs.open(stop_words,'r',encoding='utf8').readlines()
-stopwords = [ w.strip() for w in stopwords ]
+    # 读取分类文件
 
-stop_flag = ['x', 'c', 'u','d', 'p', 't', 'uj', 'm', 'f', 'r']
 
-def tokenization(filename):
-    result = []
-    with open(filename, 'r') as f:
-        text = f.read()
-        words = pseg.cut(text)
-    for word, flag in words:
-        if flag not in stop_flag and word not in stopwords:
-            result.append(word)
-    return result
-
-filenames = [
-	'./all.txt',
-	'./all.txt'
-]
-
-corpus = []
-
-for each in filenames:
-	corpus.append(tokenization(each))
-
-print len(corpus)
-
-dictionary = corpora.Dictionary(corpus)
-print dictionary
-
-doc_vectors = [dictionary.doc2bow(text) for text in corpus]
-print len(doc_vectors)
-print doc_vectors
-
-tfidf = models.TfidfModel(doc_vectors)
-tfidf_vectors = tfidf[doc_vectors]
-
-print len(tfidf_vectors)
-print len(tfidf_vectors[0])
-
-query = tokenization('./stopwords.dat')
-
-query_bow = dictionary.doc2bow(query)
-
-print len(query_bow)
-print query_bow
-
-index = similarities.MatrixSimilarity(tfidf_vectors)
-
-sims = index[query_bow]
-print list(enumerate(sims))
+if __name__ == "__main__":
+    run
