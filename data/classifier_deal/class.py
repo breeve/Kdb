@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#coding=utf-8
 
 import jieba.posseg as pseg
 import codecs
@@ -34,55 +35,58 @@ def read_file(file_name):
 
         line_str = line.split(':')
 
-        if line_str[0] == g_g_srcDatabase_k:
+        if line_str[0] == g_srcDatabase_k:
             item = file_item()
-            item.g_srcDatabase_k = line_str[1]
+            item.srcDatabase_k = line_str[1]
             key_tag = g_srcDatabase_k
         elif line_str[0] == g_title_k:
-            item.g_title_k = line_str[1]
+            item.title_k = line_str[1]
             key_tag = g_title_k
         elif line_str[0] == g_author_k:
-            item.g_author_k = line_str[1]
+            item.author_k = line_str[1]
             key_tag = g_author_k
         elif line_str[0] == g_organ_k:
-            item.g_organ_k = line_str[1]
+            item.organ_k = line_str[1]
             key_tag = g_organ_k
         elif line_str[0] == g_source_k:
-            item.g_source_k = line_str[1]
+            item.source_k = line_str[1]
             key_tag = g_source_k
         elif line_str[0] == g_keyword_k:
-            item.g_keyword_k = line_str[1]
+            item.keyword_k = line_str[1]
             key_tag = g_keyword_k
         elif line_str[0] == g_summary_k:
-            item.g_summary_k = line_str[1]
+            item.summary_k = line_str[1]
             key_tag = g_summary_k
             items.append(item)
         else :
             if key_tag == g_srcDatabase_k:
-                item.g_srcDatabase_k = item.g_srcDatabase_k + line
+                item.srcDatabase_k = item.srcDatabase_k + line
             elif key_tag == g_title_k:
-                item.g_title_k = item.g_title_k + line
+                item.title_k = item.title_k + line
             elif key_tag == g_author_k:
-                item.g_author_k = item.g_author_k + line
+                item.author_k = item.author_k + line
             elif key_tag == g_organ_k:
-                item.g_organ_k = item.g_organ_k + line
+                item.organ_k = item.organ_k + line
             elif key_tag == g_source_k:
-                item.g_source_k = item.g_source_k + line
+                item.source_k = item.source_k + line
             elif key_tag == g_keyword_k:
-                item.g_keyword_k = item.g_keyword_k + line
+                item.keyword_k = item.keyword_k + line
             elif key_tag == g_summary_k:
                 items[len(items)-1].g_summary_k = items[len(items)-1].g_summary_k + line
 
     for item in items:
         print(item.title_k)
 
+    return items
+
 
 def run():
-    # 读取待分类文件
-    read_file("./all.txt")
+    # 读取已经分类文件
+    # items_ok = read_file(open("/root/Kdb/data/classifier_deal/all.txt"))
 
-    # 读取分类文件
+    # 读取待分类文件
+    items_wait = read_file(open("/root/Kdb/data/classifier_deal/wait_classifier.txt"))
 
 
 if __name__ == "__main__":
-    run
+    run()
