@@ -102,7 +102,7 @@ def fils_class_create(items_ok):
             for key in key_final :
                 if len(key) == 0 :
                     continue
-                key = key.decode('utf-8')
+                #key = key.decode('utf-8')
                 files = []
 
                 if key in file_classes :
@@ -139,6 +139,7 @@ def run():
             print(items_ok[index].title_k)
             print(items_ok[index].keyword_k)
 
+    # 类别
     
 
 
