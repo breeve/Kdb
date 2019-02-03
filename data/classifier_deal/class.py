@@ -4,11 +4,21 @@
 
 import jieba.posseg as pseg
 import codecs
+import pymongo
 from gensim import corpora, models, similarities
 
 
 class file_item:
     index = 0
+    srcDatabase_k = ''
+    title_k = ''
+    author_k = ''
+    organ_k = ''
+    source_k = ''
+    keyword_k = ''
+    summary_k = ''
+
+class db_K_item:
     srcDatabase_k = ''
     title_k = ''
     author_k = ''
@@ -117,6 +127,20 @@ def fils_class_create(items_ok):
 
     return file_classes
 
+def insert_DB(collection, item):
+    item_json = {
+        "SrcDatabase-来源库":item.srcDatabase_k,
+        "Title-题名":item.title_k,
+        "Author-作者":item.author_k,
+        "Organ-单位":item.organ_k,
+        "Source-文献来源":item.source_k,
+        "Keyword-关键词":item.keyword_k,
+        "Summary-摘要":item.summary_k,
+        "Classifier-类别":item.class_k
+    }
+
+    collection.insert_one(item_json).inserted_id
+    return
 
 def run():
     # 读取已经分类文件
@@ -140,7 +164,24 @@ def run():
             print(items_ok[index].keyword_k)
 
     # 类别
+    items = []
+    item = db_K_item()
+
+    # 存储到数据库
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.maps_items
     
+    srcDatabase_k = "SrcDatabase-来源库"
+    title_k = "Title-题名"
+    author_k = "Author-作者"
+    organ_k = "Organ-单位"
+    source_k = "Source-文献来源"
+    keyword_k = "Keyword-关键词"
+    summary_k = "Summary-摘要"
+    classifier_k = "Classifier-类别"
+
+
 
 
 
