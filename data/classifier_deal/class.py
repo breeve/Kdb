@@ -185,20 +185,20 @@ def run():
     for item in items_ok :
         corpus.append(tokenization(item.title_k+item.summary_k, stop_flag, stopwords))
 
-    print(len(corpus))
+    #print(len(corpus))
 
     # 建立词袋模型
     dictionary = corpora.Dictionary(corpus)
-    print(dictionary)
+    #print(dictionary)
 
     doc_vectors = [dictionary.doc2bow(text) for text in corpus]
-    print(len(doc_vectors))
+    #print(len(doc_vectors))
     #print(doc_vectors)
 
     tfidf = models.TfidfModel(doc_vectors)
     tfidf_vectors = tfidf[doc_vectors]
-    print(len(tfidf_vectors))
-    print(len(tfidf_vectors[0]))
+    #print(len(tfidf_vectors))
+    #print(len(tfidf_vectors[0]))
 
     index = similarities.MatrixSimilarity(tfidf_vectors)
 
@@ -213,7 +213,13 @@ def run():
     sims_list = list(enumerate(sims))
     sims_list = sorted(sims_list, key=lambda s: s[1])
     #print(sims_list[len(sims_list)-1])
+    #最相似的
     sims_max = sims_list[len(sims_list)-1]
+
+    #print(items_wait[0].title_k+items_wait[0].summary_k+items_wait[0].keyword_k)
+    #print(sims_max[0])
+    #print(sims_max[1])
+    #print(items_ok[sims_max[0]].title_k+items_ok[sims_max[0]].summary_k+items_ok[sims_max[0]].keyword_k)
 
     # 存储到数据库
     client = pymongo.MongoClient(host='localhost', port=27017)
