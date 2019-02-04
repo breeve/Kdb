@@ -160,6 +160,7 @@ def run():
 
     # 构建已经分类的文章
     file_classes = fils_class_create(items_ok)
+    '''
     for item in file_classes :
         index = file_classes[item][0]
         if index == 0 :
@@ -170,6 +171,7 @@ def run():
             print(index)
             print(items_ok[index].title_k)
             print(items_ok[index].keyword_k)
+    '''
 
     # 类别
     items = []
@@ -202,6 +204,7 @@ def run():
 
     index = similarities.MatrixSimilarity(tfidf_vectors)
 
+    '''
     # test
     query = tokenization(items_wait[0].title_k+items_wait[0].summary_k+items_wait[0].keyword_k,stop_flag, stopwords)
     query_bow = dictionary.doc2bow(query)
@@ -220,11 +223,28 @@ def run():
     #print(sims_max[0])
     #print(sims_max[1])
     #print(items_ok[sims_max[0]].title_k+items_ok[sims_max[0]].summary_k+items_ok[sims_max[0]].keyword_k)
+    '''
+
+    docs_final = []
+    for item in items_wait:
+        query = tokenization(item.title_k+item.summary_k+item.keyword_k,stop_flag, stopwords)
+        query_bow = dictionary.doc2bow(query)
+        sims = index[query_bow]
+        sims_list = list(enumerate(sims))
+        sims_list = sorted(sims_list, key=lambda s: s[1])
+        sims_max = sims_list[len(sims_list)-1]
+        item.class_k = items_ok[sims_max[0]].keyword_k
+        docs_final.append(item)
+        #print(item.keyword_k)
+        #print(item.class_k)
 
     # 存储到数据库
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
     collection = K_db.maps_items
+    x = collection.delete_many({})
+    print(x.deleted_count, " delete")
+
     
     srcDatabase_k = "SrcDatabase-来源库"
     title_k = "Title-题名"
@@ -235,6 +255,21 @@ def run():
     summary_k = "Summary-摘要"
     classifier_k = "Classifier-类别"
 
+    '''
+    item_json = {
+        "SrcDatabase-来源库":item.srcDatabase_k,
+        "Title-题名":item.title_k,
+        "Author-作者":item.author_k,
+        "Organ-单位":item.organ_k,
+        "Source-文献来源":item.source_k,
+        "Keyword-关键词":item.keyword_k,
+        "Summary-摘要":item.summary_k,
+        "Classifier-类别":item.class_k
+    }
+    '''
+    for item in docs_final:
+        insert_DB(collection, item)
+        #print(item.class_k)
 
 
 

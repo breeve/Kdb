@@ -100,7 +100,7 @@ def search_normal_result():
     print("keywords: " + keywords)
     page = int(request.args.get('page', 1))
 
-    save_personalSearchInfo(name, age, keywords)
+    #save_personalSearchInfo(name, age, keywords)
 
     if page < 1:
         page = 1
