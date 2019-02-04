@@ -6,7 +6,7 @@
         <ul class="col-sm-12 col-xs-12 list-group">
             {% for item in keys %}
             <li class="col-sm-12 col-xs-12 list-group-item">
-                <a href="search_key?keys={{keys}}&key={{item}}">
+                <a href="search_key?keys={{keys}}&doc_class={{item}}&keywords={{keywords}}">
                     <span>{{item}}</span>
                 </a>
             </li>
@@ -16,7 +16,8 @@
 
     <div class="col-sm-9 col-xs-9">
         <div class="col-sm-12  col-xs-12 ">
-            <h5>关键字：{{key}}</h5>
+            <h5>类别：{{doc_class}}</h5>
+            <h5>关键字：{{keywords}}</h5>
         </div>
     </div>
 </div>

@@ -82,7 +82,7 @@ def get_search_result_kinds(rows):
 def get_left_row(page_info):
     keys = []
     for item in page_info.total_rows:
-        for key in item["Keyword-关键词"].split(';;'):
+        for key in item["Classifier-类别"].split(';;'):
             keys.append(key.split('\n')[0])
     # print(list(set(keys)))
 
@@ -107,7 +107,7 @@ def search_normal_result():
 
     # get the total count and page:
     page_tmp = get_search_result(keywords, page)
-    kinds = get_search_result_kinds(page_tmp['rows'])
+    #kinds = get_search_result_kinds(page_tmp['rows'])
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
@@ -239,10 +239,11 @@ def search_item():
 
 @app.route("/search_key")
 def search_key():
-    keywords = request.args.get('keys')
-    key = request.args.get('key')
+    keys = request.args.get('keys')
+    doc_class = request.args.get('doc_class')
+    key = request.args.get('keywords')
 
-    keys_tmp = keywords[1:len(keywords)-1]
+    keys_tmp = keys[1:len(keys)-1]
     keys_tmp = keys_tmp.split(',')
     keys = []
     for item in keys_tmp :
@@ -253,7 +254,8 @@ def search_key():
 
     return render_template('search_key.html',
         keys=keys,
-        key=key,
+        keywords=key,
+        doc_class=doc_class,
         title = 'Search Key',
         total_articles = 1)
 
