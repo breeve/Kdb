@@ -142,6 +142,14 @@ def insert_DB(collection, item):
     collection.insert_one(item_json).inserted_id
     return
 
+def tokenization(text, stop_flag, stopwords):
+    result = []
+    words = pseg.cut(text)
+    for word, flag in words:
+        if flag not in stop_flag and word not in stopwords:
+            result.append(word)
+    return result
+
 def run():
     # 读取已经分类文件
     items_ok = read_file(open("/root/Kdb/data/classifier_deal/all.txt"))
@@ -166,6 +174,46 @@ def run():
     # 类别
     items = []
     item = db_K_item()
+
+    # stop words
+    stop_words = '/root/Kdb/data/classifier_deal/stopwords.dat'
+    stopwords = codecs.open(stop_words,'r',encoding='utf8').readlines()
+    stopwords = [ w.strip() for w in stopwords ]
+    stop_flag = ['x', 'c', 'u','d', 'p', 't', 'uj', 'm', 'f', 'r']
+
+    corpus = []
+    for item in items_ok :
+        corpus.append(tokenization(item.title_k+item.summary_k, stop_flag, stopwords))
+
+    print(len(corpus))
+
+    # 建立词袋模型
+    dictionary = corpora.Dictionary(corpus)
+    print(dictionary)
+
+    doc_vectors = [dictionary.doc2bow(text) for text in corpus]
+    print(len(doc_vectors))
+    #print(doc_vectors)
+
+    tfidf = models.TfidfModel(doc_vectors)
+    tfidf_vectors = tfidf[doc_vectors]
+    print(len(tfidf_vectors))
+    print(len(tfidf_vectors[0]))
+
+    index = similarities.MatrixSimilarity(tfidf_vectors)
+
+    # test
+    query = tokenization(items_wait[0].title_k+items_wait[0].summary_k+items_wait[0].keyword_k,stop_flag, stopwords)
+    query_bow = dictionary.doc2bow(query)
+    #print(len(query_bow))
+    #print(query_bow)
+
+    sims = index[query_bow]
+    #print(list(enumerate(sims)).sort())
+    sims_list = list(enumerate(sims))
+    sims_list = sorted(sims_list, key=lambda s: s[1])
+    #print(sims_list[len(sims_list)-1])
+    sims_max = sims_list[len(sims_list)-1]
 
     # 存储到数据库
     client = pymongo.MongoClient(host='localhost', port=27017)
