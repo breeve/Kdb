@@ -1,5 +1,10 @@
 安装mongodb
 
+0. 前置
+升级python
+https://www.zcfy.cc/article/3-methods-to-install-latest-python3-package-on-centos-6-system
+使用第一种
+
 1. 设置源
 vi /etc/yum.repos.d/mongodb-org-3.2.repo
 
@@ -14,6 +19,7 @@ enabled=1
 sudo yum install -y mongodb-org
 
 3.
+话说这几个目录都得先建立起来的说
 mongod --dbpath /data/mongodb/db --fork --logpath=/data/mongodb/logs/mongodb.log 
 
 4. 命令行

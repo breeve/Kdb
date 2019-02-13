@@ -1,7 +1,10 @@
 1.
-flask/datas/db.py
+#flask/datas/db.py
 2.
 flask/run.py
 3.
-datas/classifier_deal/class.py
+scl enable rh-python35 zsh
+pip install jieba
+pip install pymongo gensim
+data/classifier_deal/class.py
 
