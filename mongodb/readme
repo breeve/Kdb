@@ -5,6 +5,13 @@
 https://www.zcfy.cc/article/3-methods-to-install-latest-python3-package-on-centos-6-system
 使用第一种
 
+scl enable rh-python35 zsh
+pip install flask
+pip install flask_wtf
+pip install jieba
+pip install pymongo
+pip install gensim
+
 1. 设置源
 vi /etc/yum.repos.d/mongodb-org-3.2.repo
 
