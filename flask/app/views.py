@@ -328,7 +328,7 @@ def search_key():
         total_articles = 1)
 
 @app.route("/")
-@app.route("/index")
+@app.route("/index", methods = ["POST"])
 def index():
     global g_name
     global g_age
