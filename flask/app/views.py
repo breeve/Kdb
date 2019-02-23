@@ -262,7 +262,7 @@ def view_secondary():
         title = 'view_secondary',
         total_articles = article_total_nums)
 
-@app.route("search_secondary", methods = ["POST"])
+@app.route("/search_secondary", methods = ["POST"])
 def search_secondary():
     article_total_nums = 1000
     return render_template('search_secondary.html',
