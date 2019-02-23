@@ -173,7 +173,7 @@ def search():
     #  'search_rate': '1-从不', 
     #  'search_kinds': '没用过', 
     #  'search_path': '1-从来没有'}
-
+'''
     global g_name
     global g_age
     g_name = datax['name']
@@ -193,11 +193,11 @@ def search():
 
     g_name = datax['name']
     g_age  = datax['age']
-
+'''
     article_total_nums = 1000
     return render_template('search.html',
-        name = datax['name'],
-        age = datax['age'],
+        name = "datax['name']",
+        age = "datax['age']",
         title = 'search',
         total_articles = article_total_nums)
 
