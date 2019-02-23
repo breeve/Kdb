@@ -208,6 +208,13 @@ def search_profession():
         title = 'search_profession',
         total_articles = article_total_nums)    
 
+@app.route("view_first")
+def view1():
+    article_total_nums = 1000
+    return render_template('view1.html',
+        title = 'View1',
+        total_articles = article_total_nums)
+
 @app.route("/personalinfo")
 def personalinfo():
     article_total_nums = 1000
