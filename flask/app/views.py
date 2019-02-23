@@ -162,10 +162,8 @@ def save_personalinfo(datax):
 
 @app.route("/search", methods = ["POST"])
 def search():
-    '''
-    datax = request.form.to_dict()
-    print(datax)
-    '''
+    #datax = request.form.to_dict()
+    #print(datax)
 
     # {'name': '11',
     #  'age': '11', 
@@ -175,27 +173,26 @@ def search():
     #  'search_rate': '1-从不', 
     #  'search_kinds': '没用过', 
     #  'search_path': '1-从来没有'}
-    '''
+
     global g_name
     global g_age
-    g_name = datax['name']
-    g_age  = datax['age']
-    print(g_name)
-    print(g_age)
-    print(datax['name'])
-    print(datax['age'])
-    print(datax['sex'])
-    print(datax['education'])
-    print(datax['search_time'])
-    print(datax['search_rate'])
-    print(datax['search_kinds'])
-    print(datax['search_path'])
+    g_name = "datax['name']"
+    g_age  = "datax['age']"
+    #print(g_name)
+    #print(g_age)
+    #print(datax['name'])
+    #print(datax['age'])
+    #print(datax['sex'])
+    #print(datax['education'])
+    #print(datax['search_time'])
+    #print(datax['search_rate'])
+    #print(datax['search_kinds'])
+    #print(datax['search_path'])
 
-    save_personalinfo(datax)
+    #save_personalinfo(datax)
 
-    g_name = datax['name']
-    g_age  = datax['age']
-    '''
+    g_name = "datax['name']"
+    g_age  = "datax['age']"
 
     article_total_nums = 1000
     return render_template('search.html',
