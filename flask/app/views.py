@@ -215,6 +215,20 @@ def view_first():
         title = 'view_first',
         total_articles = article_total_nums)
 
+@app.route("/view_first_question", methods = ["POST"])
+def view_first_question():
+    article_total_nums = 1000
+    return render_template('view_first_question.html',
+        title = 'view_first_question',
+        total_articles = article_total_nums)
+
+@app.route("/view_secondary", methods = ["POST"])
+def view_secondary():
+    article_total_nums = 1000
+    return render_template('view_secondary.html',
+        title = 'view_secondary',
+        total_articles = article_total_nums)
+
 @app.route("/personalinfo")
 def personalinfo():
     article_total_nums = 1000

@@ -1,0 +1,30 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+<div class="col-sm-12  col-xs-12 ">
+    <h5 class="text-center">个人信息收集</h5>
+    <p class="text-left">
+    &nbsp;&nbsp;&nbsp;&nbsp;个人信息界面需要您回答以下问题：
+    </p>
+
+    <div class="col-sm-12  col-xs-12 ">
+        <label class="radio-inline col-sm-12  col-xs-12">
+            <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> 选项 1
+        </label>
+        <label class="radio-inline col-sm-12  col-xs-12">
+            <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 2
+        </label>
+    </div>
+
+    <form class="form-horizontal col-sm-12 col-xs-12" method="POST" action="view_first">
+        <div class="input-group col-sm-12  col-xs-12">
+            <span class="">
+                <button class="btn btn-default btn-primary" type="submit">下一步</button>
+            </span>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

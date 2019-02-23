@@ -1,0 +1,28 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+<div class="col-sm-12  col-xs-12 ">
+    <h5 class="text-center">任务场景1</h5>
+    <p class="text-left">
+        本体构建问题
+    </p>
+    <p class="text-left">
+    &nbsp;&nbsp;&nbsp;&nbsp;在计算机科学与信息科学领域，本体是对特定领域之中某套概念及其相互之间关系的形式化表达。假设你是一名资深的医学工作者，对医学领域的专业知识有非常深刻的了解，现在医院需要你配合技术人员构建一个医学本体，但是你之前并没有相关经验，请问你会通过方式完成医学本体构建任务呢？ 
+现在请使用当前给定的检索系统输入关键词开始检索，找出您认为相关的文献，并在该文献前面打钩，作为您的判断决策。
+
+点击“开始”将进行本次检索任务，检索任务没有时间限制，您可以根据自己的需求持续的进行输入、浏览和点击，直到您认为已经搜索并标记到了所有相关文献，然后点击“结束”完成本次检索。另外，在本次检索任务结束后完成一个另一个关于主观心理负荷的问卷调查，请根据您在刚刚的检索经历如实完成该问卷。
+    </p>
+    <p class="text-center">明确任务后，请点击“下一步”，开始搜索</p>
+
+    <form class="form-horizontal" action="/search" method="post">
+        <div class="input-group col-sm-12  col-xs-12">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-primary col-sm-12  col-xs-12 " type="submit">下一步</button>
+            </span>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
