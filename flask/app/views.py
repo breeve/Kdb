@@ -255,7 +255,7 @@ def view_first_question():
         title = 'view_first_question',
         total_articles = article_total_nums)
 
-@app.route("/view_secondary_question", methods = ["POST"])
+@app.route("/view_secondary_question", methods = ["POST", "GET"])
 def view_secondary_question():
     article_total_nums = 1000
     return render_template('view_secondary_question.html',
