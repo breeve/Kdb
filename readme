@@ -8,6 +8,11 @@ pip install jieba
 pip install pymongo gensim
 data/classifier_deal/class.py
 
+➜  ~ cd db
+➜  db ls
+K_db
+➜  db mongorestore --drop .
+
 
 
 notes
