@@ -37,8 +37,11 @@
             <div role="tabpanel" class="tab-pane active" id="search_normal">
                 {% for item in page_info.total_rows %}
 
+                <label class="radio-inline col-sm-12  col-xs-12">
+                    <input type="radio" name="optionsRadiosinline" id="optionsRadios11" value="option1" checked><h5><a href="search_item?SrcDatabase={{item['SrcDatabase-来源库']}}&Title={{item['Title-题名']}}&Author={{item['Author-作者']}}&Organ={{item['Organ-单位']}}&Source={{item['Source-文献来源']}}&Keyword={{item['Keyword-关键词']}}&Summary={{item['Summary-摘要']}}">{{item["Title-题名"]}}</a></h5>
+                </label>
+
                 <div>
-                    <h5><a href="search_item?SrcDatabase={{item['SrcDatabase-来源库']}}&Title={{item['Title-题名']}}&Author={{item['Author-作者']}}&Organ={{item['Organ-单位']}}&Source={{item['Source-文献来源']}}&Keyword={{item['Keyword-关键词']}}&Summary={{item['Summary-摘要']}}">{{item["Title-题名"]}}</a></h5>
                     <div>
                         {{item["Summary-摘要"][:64]+'...'}}
                     </div>
