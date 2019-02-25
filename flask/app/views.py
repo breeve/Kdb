@@ -8,7 +8,7 @@ from .page_info import pageInfo, searchNormalItem
 
 from .page_info import getPageInfo
 
-ROWS_PER_PAGE = 6
+ROWS_PER_PAGE = 12
 
 g_name = ""
 g_age  = 0
