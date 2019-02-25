@@ -326,7 +326,7 @@ def search_key():
         doc_class=doc_class,
         title = 'Search Key',
         total_articles = 1)
-@app.route("/exit_view"，methods = ["POST"])
+@app.route("/exit_view", methods = ["POST"])
 def exit_view():
     article_total_nums = 1000
     return render_template('exit_view.html',
