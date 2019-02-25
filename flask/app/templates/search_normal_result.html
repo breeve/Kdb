@@ -61,7 +61,7 @@
                         last: "尾页",
                         totalPages: {{page_info.total_page}},
                         visiblePages: 5,
-                        startPage: {{page_info.curr_index}},
+                        startPage: {{page_info.current_page}},
                         onPageClick: function (event, page) {
                             location.href="/search_normal?keywords={{keywords}}&&page="+page;
                         }
