@@ -6,7 +6,7 @@
         <ul class="col-sm-12 col-xs-12 list-group">
             {% for item in keys %}
             <li class="col-sm-12 col-xs-12 list-group-item">
-                <a href="search_key?keys={{keys}}&doc_class={{item}}&keywords={{keywords}}">
+                <a href="/search_key?doc_class={{key}}&keywords={{keywords}}">
                     <span>{{item}}</span>
                 </a>
             </li>
@@ -50,7 +50,7 @@
                         visiblePages: 5,
                         startPage: {{pages.current_page}},
                         onPageClick: function (event, page) {
-                            location.href="/search_key?keys={{keys}}&doc_class={{item}}&keywords={{keywords}}&page="+page;
+                            location.href="/search_key?doc_class={{key}}&keywords={{keywords}}&page="+page;
                         }
                     });
                 </script>
