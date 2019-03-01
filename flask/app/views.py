@@ -323,9 +323,13 @@ def fix_page_info(page_info, key):
 
 @app.route("/search_key")
 def search_key():
+    page = int(request.args.get('page', 1))
+    if page < 1:
+        page = 1
+
     doc_class = request.args.get('doc_class')
     key = request.args.get('keywords')
-    page_tmp = get_search_result(key, 1)
+    page_tmp = get_search_result(key, page)
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
