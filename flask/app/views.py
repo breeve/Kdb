@@ -310,15 +310,21 @@ def search_key():
     doc_class = request.args.get('doc_class')
     key = request.args.get('keywords')
     page_tmp = get_search_result(key, 1)
-    left_row = get_left_row(page_tmp)
+
+    page_info = getPageInfo()
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total_page']
+    page_info.current_page = page_tmp['current']
+    left_row = get_left_row(page_info)
 
     return render_template('search_key.html',
         keys=left_row,
         keywords=key,
         doc_class=doc_class,
-        pages=page_tmp,
+        pages=page_info,
         title = 'Search Key',
         total_articles = 1)
+
 @app.route("/exit_view", methods = ["POST"])
 def exit_view():
     article_total_nums = 1000
