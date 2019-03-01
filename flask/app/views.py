@@ -304,6 +304,22 @@ def search_item():
         summary_m=request.args.get('Summary'),
         title = 'Search Item',
         total_articles = article_total_nums)
+def fix_page_info(page_info, key):
+    page_info_ret = getPageInfo()
+    index = 0
+
+    rows = []
+    for item in page_info.total_rows :
+        if key in item['Keyword-关键词'] :
+            rows.append(item)
+            index = index + 1
+
+    page_info_ret.total_rows = rows
+    page_info_ret.total_page = index
+    page_info_ret.current_page = page_info.current_page
+
+    return page_info_ret
+
 
 @app.route("/search_key")
 def search_key():
@@ -316,6 +332,7 @@ def search_key():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
     left_row = get_left_row(page_info)
+    page_info = fix_page_info(page_info, key)
 
     return render_template('search_key.html',
         keys=left_row,
