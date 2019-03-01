@@ -307,6 +307,9 @@ def search_item():
 
 @app.route("/search_key")
 def search_key():
+    page_tmp = get_search_result(keywords, page)
+    left_row = get_left_row(page_info)
+
     keys = request.args.get('keys')
     doc_class = request.args.get('doc_class')
     key = request.args.get('keywords')
@@ -321,9 +324,10 @@ def search_key():
     #
 
     return render_template('search_key.html',
-        keys=keys,
+        keys=left_row,
         keywords=key,
         doc_class=doc_class,
+        pages=page_tmp
         title = 'Search Key',
         total_articles = 1)
 @app.route("/exit_view", methods = ["POST"])
