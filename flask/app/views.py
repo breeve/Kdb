@@ -353,6 +353,13 @@ def exit_view():
         title = 'exit_view',
         total_articles = article_total_nums)
 
+@app.route("/dispatch")
+def dispatch():
+    article_total_nums = 1000
+    return render_template('dispatch.html',
+        title = 'dispatch',
+        total_articles = article_total_nums)
+
 @app.route("/")
 @app.route("/index", methods = ["POST"])
 def index():
