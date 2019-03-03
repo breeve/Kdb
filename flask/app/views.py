@@ -2,6 +2,7 @@ import pymongo
 import re
 import math
 import uuid
+import time
 from flask import render_template, flash, redirect, request
 from app import app
 from .forms import LoginForm
@@ -320,11 +321,15 @@ def search_normal_start():
                            total_articles=page_info.total_page,
                            user_id = user_id)
 
+def save_personal_time_start(user_id):
+    start_time = time.localtime(time.time())
+    print(user_id+" start_time: "+start_time)
 
 @app.route("/search", methods = ["POST", "GET", "PUSH"])
 def search():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    save_personal_time_start(user_id)
     return render_template('search.html',
         name = "datax['name']",
         age = "datax['age']",
