@@ -182,16 +182,6 @@ def view_secondary_question():
         title = 'view_secondary_question',
         total_articles = article_total_nums)
 
-
-@app.route("/search_secondary")
-def search_secondary():
-    article_total_nums = 1000
-    return render_template('search_secondary.html',
-        title = 'view_secondary',
-        total_articles = article_total_nums)
-
-
-
 @app.route("/search_item")
 def search_item():
     article_total_nums = 1000
@@ -221,6 +211,15 @@ def exit_view():
         title = 'exit_view',
         total_articles = article_total_nums)
 
+@app.route("/search_secondary")
+def search_secondary():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('search_secondary.html',
+        title = 'view_secondary',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
 @app.route("/view_secondary", methods = ["POST", "GET", "PUSH"])
 def view_secondary():
     user_id = request.form.get("user_id")
@@ -228,7 +227,8 @@ def view_secondary():
     article_total_nums = 1000
     return render_template('view_secondary.html',
         title = 'view_secondary',
-        total_articles = article_total_nums)
+        total_articles = article_total_nums,
+        user_id = user_id)
 
 @app.route("/view_first_question", methods = ["POST", "GET", "PUSH"])
 def view_first_question():
