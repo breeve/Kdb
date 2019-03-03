@@ -12,16 +12,16 @@
 内容，如果没有，请点击“退出”结束本次实验，在此感谢您的参与
     </p>
 
-    <div class="form-group col-sm-12 col-xs-12 ">
-        <div class="form-group col-sm-5 col-xs-5 ">
-            <label>请输入您的意见:</label>
-        </div>
-        <div class="form-group col-sm-5 col-xs-5 ">
-            <input name="suggest">
-        </div>
-    </div>
-
     <form class="form-horizontal" action="/end_search" method="post">
+        <div class="form-group col-sm-12 col-xs-12 ">
+            <div class="form-group col-sm-5 col-xs-5 ">
+                <label>请输入您的意见:</label>
+            </div>
+            <div class="form-group col-sm-5 col-xs-5 ">
+                <input name="suggest">
+            </div>
+        </div>
+
         <div class="input-group col-sm-12  col-xs-12">
             <input type="hidden" id="user_id" name="user_id" value="{{user_id}}">
             <span class="input-group-btn">
