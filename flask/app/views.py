@@ -175,15 +175,6 @@ def search_profession():
         title = 'search_profession',
         total_articles = article_total_nums)    
 
-
-
-@app.route("/view_first_question")
-def view_first_question():
-    article_total_nums = 1000
-    return render_template('view_first_question.html',
-        title = 'view_first_question',
-        total_articles = article_total_nums)
-
 @app.route("/view_secondary_question", methods = ["POST", "GET"])
 def view_secondary_question():
     article_total_nums = 1000
@@ -235,6 +226,15 @@ def exit_view():
     return render_template('exit_view.html',
         title = 'exit_view',
         total_articles = article_total_nums)
+
+@app.route("/view_first_question", methods = ["POST", "GET", "PUSH"])
+def view_first_question():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('view_first_question.html',
+        title = 'view_first_question',
+        total_articles = article_total_nums,
+        user_id = user_id)
 
 def fix_page_info(page_info, key):
     page_info_ret = getPageInfo()
