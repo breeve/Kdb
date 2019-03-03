@@ -389,7 +389,7 @@ def check_input():
     for arg in args :
         print(arg)
 
-    return None
+    return 'ok'
 
 @app.route("/")
 @app.route("/index")
