@@ -201,7 +201,7 @@ def search_normal_result_secondary():
                            total_articles=page_info.total_page)
 
 @app.route("/view_secondary_question", methods = ["POST", "GET", "PUSH"])
-def view_first_question():
+def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     return render_template('view_secondary_question.html',
