@@ -299,7 +299,7 @@ def search_normal_start():
                            user_id = user_id)
 
 
-@app.route("/search", methods = ["POST"])
+@app.route("/search", methods = ["POST", "GET", "PUSH"])
 def search():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
