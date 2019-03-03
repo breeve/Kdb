@@ -378,7 +378,7 @@ def dispatch():
     '''
 
     save_personalinfo(datax)
-    print("uuid: " + g_user_id)
+    print(g_user_id)
 
     article_total_nums = 1000
     return render_template('dispatch.html',
