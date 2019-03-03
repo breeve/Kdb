@@ -1,6 +1,7 @@
 import pymongo
 import re
 import math
+import uuid
 from flask import render_template, flash, redirect, request
 from app import app
 from .forms import LoginForm
@@ -186,10 +187,11 @@ def search_profession_result():
                            total_articles=total_page)
 
 def save_personalinfo(datax):
-    print(datax)
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
     collection = K_db.personalinfo
+    datax["user_id"] = uuid.uuid()
+    print(datax)
     collection.insert_one(datax).inserted_id
 
 
@@ -368,7 +370,7 @@ def dispatch():
     print(datax['search_kinds'])
     print(datax['search_path'])
 
-    #save_personalinfo(datax)
+    save_personalinfo(datax)
 
     article_total_nums = 1000
     return render_template('dispatch.html',
