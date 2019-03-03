@@ -413,6 +413,18 @@ def normal_search_key_secondary():
         total_articles = 1,
         user_id = user_id)
 
+@app.route("/search_normal_secondary", methods = ["POST", "GET", "PUSH"])
+def search_normal_secondary():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    save_personal_time_start(user_id)
+    return render_template('normal_search_first.html',
+        name = "datax['name']",
+        age = "datax['age']",
+        title = 'search',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
 @app.route("/normal_view_secondary", methods = ["POST", "GET", "PUSH"])
 def normal_view_secondary():
     user_id = request.form.get("user_id")
