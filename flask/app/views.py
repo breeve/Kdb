@@ -386,8 +386,7 @@ def check_input():
     print(user_id)
     check_args = request.form.get('check_args')
     args = [arg for arg in check_args.strip().split('breeve') if arg != '']
-    for arg in args :
-        print(arg)
+    print(args)
 
     return 'ok'
 
