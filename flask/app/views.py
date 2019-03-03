@@ -210,7 +210,7 @@ def view_secondary_question():
         user_id = user_id)
 
 @app.route("/search_key_secondary")
-def search_key():
+def search_key_secondary():
     page = int(request.args.get('page', 1))
     if page < 1:
         page = 1
@@ -237,7 +237,7 @@ def search_key():
         user_id = user_id)
 
 @app.route("/search_normal_start_secondary", methods = ["POST", "GET", "PUSH"])
-def search_normal_start():
+def search_normal_start_secondary():
     user_id = request.args.get('user_id')
     keywords = request.args.get('keywords')
     #print(keywords)
