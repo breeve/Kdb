@@ -16,17 +16,13 @@ g_name = ""
 g_age  = 0
 g_user_id = 0
 
+def save_personal_time_start(user_id):
+    start_time = time.localtime(time.time())
+    print(str(user_id)+" start_time: "+str(start_time))
 
-@app.route("/login", methods = ["GET", "POST"])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login request for OpenId=' + form.openid.data)
-        return redirect('/index')
-    return render_template('login.html',
-        title = 'Sign in',
-        form = form,
-        providers = app.config['OPENID_PROVIDERS'])
+def save_personal_time_end(user_id):
+    end_time = time.localtime(time.time())
+    print(str(user_id)+" end_time: "+str(end_time))
 
 def get_search_regex(keywords):
     keywords_regex = {}
@@ -90,8 +86,6 @@ def get_left_row(page_info):
         for key in item["Classifier-类别"].split(';;'):
             keys.append(key.split('\n')[0])
     # print(list(set(keys)))
-
-    
 
     return keys
 
@@ -208,10 +202,6 @@ def exit_view():
         title = 'exit_view',
         total_articles = article_total_nums,
         user_id = user_id)
-
-def save_personal_time_end(user_id):
-    end_time = time.localtime(time.time())
-    print(str(user_id)+" end_time: "+str(end_time))
 
 @app.route("/view_secondary_question", methods = ["POST", "GET", "PUSH"])
 def view_secondary_question():
@@ -387,9 +377,17 @@ def search_normal_start():
                            total_articles=page_info.total_page,
                            user_id = user_id)
 
-def save_personal_time_start(user_id):
-    start_time = time.localtime(time.time())
-    print(str(user_id)+" start_time: "+str(start_time))
+@app.route("/search_normal", methods = ["POST", "GET", "PUSH"])
+def search():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    save_personal_time_start(user_id)
+    return render_template('search_normal.html',
+        name = "datax['name']",
+        age = "datax['age']",
+        title = 'search',
+        total_articles = article_total_nums,
+        user_id = user_id)
 
 @app.route("/search", methods = ["POST", "GET", "PUSH"])
 def search():
@@ -400,6 +398,15 @@ def search():
         name = "datax['name']",
         age = "datax['age']",
         title = 'search',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
+@app.route("/view_first_normal")
+def view_first():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('view_first_normal.html',
+        title = 'view_first_normal',
         total_articles = article_total_nums,
         user_id = user_id)
 

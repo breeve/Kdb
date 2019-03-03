@@ -1,0 +1,22 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+<div class="col-sm-6  col-xs-6 ">
+	<div>
+		<form class="form-horizontal" action="/search_normal_start" method="get">
+	        <div class="input-group">
+	            <input type="text" id="keywords" name="keywords" placeholder="输入搜索关键词……">
+                <input type="hidden" id="user_id" name="user_id" value="{{user_id}}">
+	            <span class="input-group-btn">
+					<button class="btn btn-default btn-primary" type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+	            </span>
+	        </div>
+	    </form>
+	</div>
+
+</div>
+
+{% endblock %}
