@@ -378,12 +378,13 @@ def dispatch():
     '''
 
     save_personalinfo(datax)
-    print(g_user_id)
+    print("uuid: " + g_user_id)
 
     article_total_nums = 1000
     return render_template('dispatch.html',
         title = 'dispatch',
-        total_articles = article_total_nums)
+        total_articles = article_total_nums,
+        user_id = g_user_id)
 
 @app.route("/personalinfo", methods = ["GET"])
 def personalinfo():
