@@ -80,7 +80,7 @@
                 check_args += check_list[i].value + "breeve";
             }
         }
-        $.post("/check_input, {"user_id":{{user_id}}, "check_args":check_args});
+        $.post("/check_input", {"user_id":{{user_id}}, "check_args":check_args});
     }
 </script>
 {% endblock %}
