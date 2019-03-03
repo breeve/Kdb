@@ -237,7 +237,7 @@ def exit_view():
 def fix_page_info(page_info, key):
     page_info_ret = getPageInfo()
     index = 0
-
+    key = key.strip(' ')
     rows = []
     for item in page_info.total_rows :
         if key in item['Keyword-关键词'] :
