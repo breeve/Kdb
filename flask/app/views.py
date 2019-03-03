@@ -276,12 +276,7 @@ def search_secondary():
         title = 'view_secondary',
         total_articles = article_total_nums)
 
-@app.route("/personalinfo")
-def personalinfo():
-    article_total_nums = 1000
-    return render_template('personalinfo.html',
-        title = 'Personal',
-        total_articles = article_total_nums)
+
 
 @app.route("/search_item")
 def search_item():
@@ -355,9 +350,36 @@ def exit_view():
 
 @app.route("/dispatch", methods = ["POST"])
 def dispatch():
+    datax = request.form.to_dict()
+    print(datax)
+
+    global g_name
+    global g_age
+    g_name = "datax['name']"
+    g_age  = "datax['age']"
+    print(g_name)
+    print(g_age)
+    print(datax['name'])
+    print(datax['age'])
+    print(datax['sex'])
+    print(datax['education'])
+    print(datax['search_time'])
+    print(datax['search_rate'])
+    print(datax['search_kinds'])
+    print(datax['search_path'])
+
+    #save_personalinfo(datax)
+
     article_total_nums = 1000
     return render_template('dispatch.html',
         title = 'dispatch',
+        total_articles = article_total_nums)
+
+@app.route("/personalinfo", methods = ["GET"])
+def personalinfo():
+    article_total_nums = 1000
+    return render_template('personalinfo.html',
+        title = 'Personal Info',
         total_articles = article_total_nums)
 
 @app.route("/")
