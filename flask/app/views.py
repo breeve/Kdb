@@ -240,7 +240,12 @@ def fix_page_info(page_info, key):
     key = key.strip(' ')
     rows = []
     for item in page_info.total_rows :
+        print(key)
+        print(item['Keyword-关键词'])
         if key in item['Keyword-关键词'] :
+            rows.append(item)
+            index = index + 1
+        elif key in item['Summary-摘要'] :
             rows.append(item)
             index = index + 1
 
