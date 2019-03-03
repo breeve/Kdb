@@ -280,21 +280,8 @@ def exit_view():
 def search_normal_start():
     user_id = request.args.get('user_id')
     keywords = request.args.get('keywords')
-    name = g_name
-    age = g_age
-    print("name: " + str(name))
-    print("age: " + str(age))
-    print("keywords: " + keywords)
-    page = int(request.args.get('page', 1))
 
-    #save_personalSearchInfo(name, age, keywords)
-
-    if page < 1:
-        page = 1
-
-    # get the total count and page:
-    page_tmp = get_search_result(keywords, page)
-    #kinds = get_search_result_kinds(page_tmp['rows'])
+    page_tmp = get_search_result(keywords, 1)
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
