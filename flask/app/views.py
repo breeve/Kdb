@@ -383,7 +383,7 @@ def search_normal_start():
 ########## normal
 
 @app.route("/normal_view_secondary_question", methods = ["POST", "GET", "PUSH"])
-def normal_view_first_question():
+def normal_view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     return render_template('normal_view_secondary_question.html',
