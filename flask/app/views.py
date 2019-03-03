@@ -276,7 +276,7 @@ def exit_view():
         total_articles = article_total_nums)
 
 
-@app.route("/search_normal_result")
+@app.route("/search_normal_start")
 def search_normal_result():
     user_id = request.args.get('user_id')
     keywords = request.args.get('keywords')
