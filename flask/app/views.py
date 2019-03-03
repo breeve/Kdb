@@ -203,7 +203,7 @@ def end_search():
 @app.route("/exit_view", methods = ["POST", "GET", "PUSH"])
 def exit_view():
     article_total_nums = 1000
-    user_id = request.args.get('user_id')
+    user_id = request.form.get('user_id')
     return render_template('exit_view.html',
         title = 'exit_view',
         total_articles = article_total_nums,
