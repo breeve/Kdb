@@ -323,7 +323,7 @@ def search_normal_start():
 
 def save_personal_time_start(user_id):
     start_time = time.localtime(time.time())
-    print(user_id+" start_time: "+start_time)
+    print(str(user_id)+" start_time: "+str(start_time))
 
 @app.route("/search", methods = ["POST", "GET", "PUSH"])
 def search():
