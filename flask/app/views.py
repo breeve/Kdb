@@ -195,8 +195,8 @@ def search_normal_result_secondary():
 
 @app.route("/end_search", methods = ["POST", "GET", "PUSH"])
 def end_search():
-    user_id = request.args.get('user_id')
-    suggest = request.args.get('suggest')
+    user_id = request.form.get('user_id')
+    suggest = request.form.get('suggest')
     print(str(user_id) +" :"+ str(suggest))
     return "exit"
 
