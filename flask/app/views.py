@@ -93,38 +93,6 @@ def get_left_row(page_info):
 
     return keys
 
-@app.route("/search_normal_result")
-def search_normal_result():
-    keywords = request.args.get('keywords')
-    name = g_name
-    age = g_age
-    print("name: " + str(name))
-    print("age: " + str(age))
-    print("keywords: " + keywords)
-    page = int(request.args.get('page', 1))
-
-    #save_personalSearchInfo(name, age, keywords)
-
-    if page < 1:
-        page = 1
-
-    # get the total count and page:
-    page_tmp = get_search_result(keywords, page)
-    #kinds = get_search_result_kinds(page_tmp['rows'])
-
-    page_info = getPageInfo()
-    page_info.total_rows = page_tmp['rows']
-    page_info.total_page = page_tmp['total_page']
-    page_info.current_page = page_tmp['current']
-
-    left_row = get_left_row(page_info)
-
-    return render_template('search_normal_result.html',
-                           title = "search_normal",
-                           keywords = keywords,
-                           page_info = page_info,
-                           left_row = left_row,
-                           total_articles=page_info.total_page)
 
 @app.route("/search_normal_result_secondary")
 def search_normal_result_secondary():
@@ -306,6 +274,43 @@ def exit_view():
     return render_template('exit_view.html',
         title = 'exit_view',
         total_articles = article_total_nums)
+
+
+@app.route("/search_normal_result")
+def search_normal_result():
+    user_id = request.args.get('user_id')
+    keywords = request.args.get('keywords')
+    name = g_name
+    age = g_age
+    print("name: " + str(name))
+    print("age: " + str(age))
+    print("keywords: " + keywords)
+    page = int(request.args.get('page', 1))
+
+    #save_personalSearchInfo(name, age, keywords)
+
+    if page < 1:
+        page = 1
+
+    # get the total count and page:
+    page_tmp = get_search_result(keywords, page)
+    #kinds = get_search_result_kinds(page_tmp['rows'])
+
+    page_info = getPageInfo()
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total_page']
+    page_info.current_page = page_tmp['current']
+
+    left_row = get_left_row(page_info)
+
+    return render_template('search_normal_result.html',
+                           title = "search_normal",
+                           keywords = keywords,
+                           page_info = page_info,
+                           left_row = left_row,
+                           total_articles=page_info.total_page,
+                           user_id = user_id)
+
 
 @app.route("/search", methods = ["POST"])
 def search():
