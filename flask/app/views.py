@@ -226,6 +226,14 @@ def search_item():
         summary_m=request.args.get('Summary'),
         title = 'Search Item',
         total_articles = article_total_nums)
+
+@app.route("/exit_view")
+def exit_view():
+    article_total_nums = 1000
+    return render_template('exit_view.html',
+        title = 'exit_view',
+        total_articles = article_total_nums)
+
 def fix_page_info(page_info, key):
     page_info_ret = getPageInfo()
     index = 0
@@ -240,14 +248,10 @@ def fix_page_info(page_info, key):
     page_info_ret.total_page = index
     page_info_ret.current_page = page_info.current_page
 
-    return page_info_ret
+    if page_info_ret.current_page > page_info_ret.total_rows :
+        page_info_ret.current_page = page_info_ret.total_rows
 
-@app.route("/exit_view")
-def exit_view():
-    article_total_nums = 1000
-    return render_template('exit_view.html',
-        title = 'exit_view',
-        total_articles = article_total_nums)
+    return page_info_ret
 
 @app.route("/search_key")
 def search_key():
