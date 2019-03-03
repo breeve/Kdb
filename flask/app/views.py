@@ -57,8 +57,8 @@ def get_search_result(keywords, page):
         for c in cursors:
             page_info['rows'].append(c)            
 
-    print(keywords_regex)
-    print(page_info)
+    #print(keywords_regex)
+    #print(page_info)
 
     client.close()
 
@@ -80,7 +80,7 @@ def get_search_result_kinds(rows):
         keyword.append(r['Keyword-关键词'])
 
     for key in keyword:
-        print(key)
+        #print(key)
 
 def get_left_row(page_info):
     keys = []
@@ -99,9 +99,9 @@ def search_normal_result_secondary():
     keywords = request.args.get('keywords')
     name = g_name
     age = g_age
-    print("name: " + str(name))
-    print("age: " + str(age))
-    print("keywords: " + keywords)
+    #print("name: " + str(name))
+    #print("age: " + str(age))
+    #print("keywords: " + keywords)
     page = int(request.args.get('page', 1))
 
     #save_personalSearchInfo(name, age, keywords)
@@ -299,8 +299,8 @@ def search_key():
 def search_normal_start():
     user_id = request.args.get('user_id')
     keywords = request.args.get('keywords')
-    print(keywords)
-    print(user_id)
+    #print(keywords)
+    #print(user_id)
 
     page_tmp = get_search_result(keywords, 1)
 
@@ -364,7 +364,7 @@ def dispatch():
     '''
 
     save_personalinfo(datax)
-    print(g_user_id)
+    #print(g_user_id)
 
     article_total_nums = 1000
     return render_template('dispatch.html',
