@@ -78,9 +78,10 @@ def get_search_result_kinds(rows):
     keyword = []
     for r in rows:
         keyword.append(r['Keyword-关键词'])
-
+    '''
     for key in keyword:
-        #print(key)
+        print(key)
+    '''
 
 def get_left_row(page_info):
     keys = []
