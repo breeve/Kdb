@@ -380,6 +380,15 @@ def personalinfo():
         title = 'Personal Info',
         total_articles = article_total_nums)
 
+@app.route("/check_input", methods = ["GET"])
+def check_input():
+    user_id = request.args.get('user_id')
+    check_args = request.args.get('check_args')
+    args = [arg for arg in check_args.strip().split('breeve') if arg != '']
+    for arg in args :
+        print(arg)
+
+
 @app.route("/")
 @app.route("/index")
 def index():
