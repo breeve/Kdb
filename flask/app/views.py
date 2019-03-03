@@ -95,40 +95,6 @@ def get_left_row(page_info):
 
     return keys
 
-
-@app.route("/search_normal_result_secondary")
-def search_normal_result_secondary():
-    keywords = request.args.get('keywords')
-    name = g_name
-    age = g_age
-    #print("name: " + str(name))
-    #print("age: " + str(age))
-    #print("keywords: " + keywords)
-    page = int(request.args.get('page', 1))
-
-    #save_personalSearchInfo(name, age, keywords)
-
-    if page < 1:
-        page = 1
-
-    # get the total count and page:
-    page_tmp = get_search_result(keywords, page)
-    #kinds = get_search_result_kinds(page_tmp['rows'])
-
-    page_info = getPageInfo()
-    page_info.total_rows = page_tmp['rows']
-    page_info.total_page = page_tmp['total_page']
-    page_info.current_page = page_tmp['current']
-
-    left_row = get_left_row(page_info)
-
-    return render_template('search_normal_result_secondary.html',
-                           title = "search_normal",
-                           keywords = keywords,
-                           page_info = page_info,
-                           left_row = left_row,
-                           total_articles=page_info.total_page)
-
 @app.route("/search_profession_result")
 def search_profession_result():
     keywords = request.args.get('keywords')
@@ -173,13 +139,6 @@ def search_profession():
     article_total_nums = 1000
     return render_template('search_profession.html',
         title = 'search_profession',
-        total_articles = article_total_nums)    
-
-@app.route("/view_secondary_question", methods = ["POST", "GET"])
-def view_secondary_question():
-    article_total_nums = 1000
-    return render_template('view_secondary_question.html',
-        title = 'view_secondary_question',
         total_articles = article_total_nums)
 
 @app.route("/search_item")
@@ -210,6 +169,96 @@ def exit_view():
     return render_template('exit_view.html',
         title = 'exit_view',
         total_articles = article_total_nums)
+
+@app.route("/search_normal_result_secondary")
+def search_normal_result_secondary():
+    user_id = request.args.get('user_id')
+    keywords = request.args.get('keywords')
+
+    page = int(request.args.get('page', 1))
+
+    #save_personalSearchInfo(name, age, keywords)
+
+    if page < 1:
+        page = 1
+
+    # get the total count and page:
+    page_tmp = get_search_result(keywords, page)
+    #kinds = get_search_result_kinds(page_tmp['rows'])
+
+    page_info = getPageInfo()
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total_page']
+    page_info.current_page = page_tmp['current']
+
+    left_row = get_left_row(page_info)
+
+    return render_template('search_normal_result_secondary.html',
+                           title = "search_normal",
+                           keywords = keywords,
+                           page_info = page_info,
+                           left_row = left_row,
+                           total_articles=page_info.total_page)
+
+@app.route("/view_secondary_question", methods = ["POST", "GET", "PUSH"])
+def view_first_question():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('view_secondary_question.html',
+        title = 'view_secondary_question',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
+@app.route("/search_key_secondary")
+def search_key():
+    page = int(request.args.get('page', 1))
+    if page < 1:
+        page = 1
+
+    doc_class = request.args.get('doc_class')
+    key = request.args.get('keywords')
+    page_tmp = get_search_result(key, page)
+    user_id = request.args.get('user_id')
+
+    page_info = getPageInfo()
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total_page']
+    page_info.current_page = page_tmp['current']
+    left_row = get_left_row(page_info)
+    page_info = fix_page_info(page_info, doc_class)
+
+    return render_template('search_key_secondary.html',
+        keys=left_row,
+        keywords=key,
+        doc_class=doc_class,
+        pages=page_info,
+        title = 'Search Key Secondary',
+        total_articles = 1,
+        user_id = user_id)
+
+@app.route("/search_normal_start_secondary", methods = ["POST", "GET", "PUSH"])
+def search_normal_start():
+    user_id = request.args.get('user_id')
+    keywords = request.args.get('keywords')
+    #print(keywords)
+    #print(user_id)
+
+    page_tmp = get_search_result(keywords, 1)
+
+    page_info = getPageInfo()
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total_page']
+    page_info.current_page = page_tmp['current']
+
+    left_row = get_left_row(page_info)
+
+    return render_template('search_normal_start_secondary.html',
+                           title = "search normal start secondary",
+                           keywords = keywords,
+                           page_info = page_info,
+                           left_row = left_row,
+                           total_articles=page_info.total_page,
+                           user_id = user_id)
 
 @app.route("/search_secondary", methods = ["POST", "GET", "PUSH"])
 def search_secondary():

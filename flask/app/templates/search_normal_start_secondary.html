@@ -1,0 +1,31 @@
+{% extends "base.html"  %}
+
+{% block content %}
+<div class="col-sm-12 col-xs-12">
+    <div class="col-sm-3 col-xs-3">
+        <ul class="col-sm-12 col-xs-12 list-group">
+            {% for key in left_row %}
+            <li class="col-sm-12 col-xs-12 list-group-item">
+                <a href="search_key_secondary?user_id={{user_id}}&doc_class={{key}}&keywords={{keywords}}">
+                    <span>{{key}}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-sm-9 col-xs-9">
+        <div class="col-sm-12 col-xs-12">
+            <a href="/search_secondary?user_id={{user_id}}">返回搜索</a>
+        </div>
+        <div class="col-sm-12  col-xs-12 ">
+            <h5>关键字：{{keywords}}</h5>
+        </div>
+
+        <div class="tab-content col-sm-12  col-xs-12 ">
+            <p>请点击左侧类别目录，查看每个类别的文章</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
