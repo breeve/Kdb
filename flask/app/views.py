@@ -303,7 +303,7 @@ def search_normal_result():
 
     left_row = get_left_row(page_info)
 
-    return render_template('search_normal_result.html',
+    return render_template('search_normal_start.html',
                            title = "search_normal",
                            keywords = keywords,
                            page_info = page_info,
