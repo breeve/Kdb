@@ -57,7 +57,7 @@
                             var check_list = document.getElementsByName("valid_title");
                             for (var i=0; i<check_list.length; i++) {
                                 if (check_list[i].checked) {
-                                    check_args += check_list[i].value;
+                                    check_args += check_list[i].value + "breeve";
                                 }
                             }
                             location.href="/search_key?check_args="+check_args+"&user_id={{user_id}}&doc_class={{doc_class}}&keywords={{keywords}}&page="+page;
