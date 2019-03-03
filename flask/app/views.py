@@ -211,7 +211,7 @@ def exit_view():
         title = 'exit_view',
         total_articles = article_total_nums)
 
-@app.route("/search_secondary")
+@app.route("/search_secondary", methods = ["POST", "GET", "PUSH"])
 def search_secondary():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
