@@ -281,6 +281,8 @@ def search_normal_start():
     user_id = request.args.get('user_id')
     keywords = request.args.get('keywords')
     print(keywords)
+    print(user_id)
+
     page_tmp = get_search_result(keywords, 1)
 
     page_info = getPageInfo()

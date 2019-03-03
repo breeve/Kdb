@@ -4,14 +4,24 @@
 
 <div class="col-sm-6  col-xs-6 ">
 	<div>
-		<form class="form-horizontal" action="/search_normal_start?user_id={{user_id}}" method="get">
+		<form class="form-horizontal" action="/search_normal_start" method="get">
 	        <div class="input-group">
 	            <input type="text" id="keywords" name="keywords" placeholder="输入搜索关键词……">
 	            <span class="input-group-btn">
-	            <button class="btn btn-default btn-primary" type="submit"><span class="glyphicon glyphicon-search"></button>
+					<button class="btn btn-default btn-primary" type="submit" onclick="user_id()">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
 	            </span>
+				<label id="user_id" name="user_id"></label>
 	        </div>
 	    </form>
+
+		<script>
+			function user_id(){
+				var f = document.getElementsByTagName("form")[0];
+				f.action=f.action+"&user_id="+{{user_id}};
+			}
+		</script>
 	</div>
 
 </div>
