@@ -190,7 +190,7 @@ def save_personalinfo(datax):
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
     collection = K_db.personalinfo
-    datax["user_id"] = uuid.uuid()
+    datax["user_id"] = uuid.uuid1()
     print(datax)
     collection.insert_one(datax).inserted_id
 
