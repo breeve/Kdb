@@ -378,7 +378,7 @@ def search_normal_start():
                            user_id = user_id)
 
 @app.route("/search_normal", methods = ["POST", "GET", "PUSH"])
-def search():
+def search_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     save_personal_time_start(user_id)
@@ -402,7 +402,7 @@ def search():
         user_id = user_id)
 
 @app.route("/view_first_normal")
-def view_first():
+def view_first_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     return render_template('view_first_normal.html',
