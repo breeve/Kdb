@@ -193,7 +193,7 @@ def save_personalinfo(datax):
     collection.insert_one(datax).inserted_id
 
 
-@app.route("/search", methods = ["POST"])
+@app.route("/search")
 def search():
     #datax = request.form.to_dict()
     #print(datax)
@@ -241,14 +241,14 @@ def search_profession():
         title = 'search_profession',
         total_articles = article_total_nums)    
 
-@app.route("/view_first", methods = ["POST"])
+@app.route("/view_first")
 def view_first():
     article_total_nums = 1000
     return render_template('view_first.html',
         title = 'view_first',
         total_articles = article_total_nums)
 
-@app.route("/view_first_question", methods = ["POST"])
+@app.route("/view_first_question")
 def view_first_question():
     article_total_nums = 1000
     return render_template('view_first_question.html',
@@ -262,14 +262,14 @@ def view_secondary_question():
         title = 'view_secondary_question',
         total_articles = article_total_nums)
 
-@app.route("/view_secondary", methods = ["POST"])
+@app.route("/view_secondary")
 def view_secondary():
     article_total_nums = 1000
     return render_template('view_secondary.html',
         title = 'view_secondary',
         total_articles = article_total_nums)
 
-@app.route("/search_secondary", methods = ["POST"])
+@app.route("/search_secondary")
 def search_secondary():
     article_total_nums = 1000
     return render_template('search_secondary.html',
@@ -346,7 +346,7 @@ def search_key():
         title = 'Search Key',
         total_articles = 1)
 
-@app.route("/exit_view", methods = ["POST"])
+@app.route("/exit_view")
 def exit_view():
     article_total_nums = 1000
     return render_template('exit_view.html',
@@ -361,7 +361,7 @@ def dispatch():
         total_articles = article_total_nums)
 
 @app.route("/")
-@app.route("/index", methods = ["POST"])
+@app.route("/index")
 def index():
     global g_name
     global g_age
