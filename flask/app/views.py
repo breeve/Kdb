@@ -242,6 +242,12 @@ def fix_page_info(page_info, key):
 
     return page_info_ret
 
+@app.route("/exit_view")
+def exit_view():
+    article_total_nums = 1000
+    return render_template('exit_view.html',
+        title = 'exit_view',
+        total_articles = article_total_nums)
 
 @app.route("/search_key")
 def search_key():
@@ -252,6 +258,7 @@ def search_key():
     doc_class = request.args.get('doc_class')
     key = request.args.get('keywords')
     page_tmp = get_search_result(key, page)
+    user_id = request.args.get('user_id')
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
@@ -266,15 +273,8 @@ def search_key():
         doc_class=doc_class,
         pages=page_info,
         title = 'Search Key',
-        total_articles = 1)
-
-@app.route("/exit_view")
-def exit_view():
-    article_total_nums = 1000
-    return render_template('exit_view.html',
-        title = 'exit_view',
-        total_articles = article_total_nums)
-
+        total_articles = 1,
+        user_id = user_id)
 
 @app.route("/search_normal_start", methods = ["POST", "GET", "PUSH"])
 def search_normal_start():
