@@ -14,7 +14,7 @@
         $.post("/check_input", {"user_id":"{{user_id}}", "check_args":check_args});
     }
 </script>
-
+<body onunload="check_input()" onbeforeunload="check_input()">
 <div class="col-sm-12 col-xs-12" onunload="check_input()" onbeforeunload="check_input()">
     <div class="col-sm-3 col-xs-3">
         <ul class="col-sm-12 col-xs-12 list-group">
@@ -83,6 +83,6 @@
         </div>
     </div>
 </div>
-
+</body>
 
 {% endblock %}
