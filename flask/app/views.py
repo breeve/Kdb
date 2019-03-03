@@ -277,7 +277,7 @@ def exit_view():
 
 
 @app.route("/search_normal_start")
-def search_normal_result():
+def search_normal_start():
     user_id = request.args.get('user_id')
     keywords = request.args.get('keywords')
     name = g_name
