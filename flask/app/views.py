@@ -198,48 +198,6 @@ def save_personalinfo(datax):
     #print(datax)
     collection.insert_one(datax).inserted_id
 
-
-@app.route("/search")
-def search():
-    #datax = request.form.to_dict()
-    #print(datax)
-
-    # {'name': '11',
-    #  'age': '11', 
-    #  'sex': '男', #
-    #  'education': '高中', 
-    #  'search_time': '半年以内', 
-    #  'search_rate': '1-从不', 
-    #  'search_kinds': '没用过', 
-    #  'search_path': '1-从来没有'}
-
-    global g_name
-    global g_age
-    g_name = "datax['name']"
-    g_age  = "datax['age']"
-    #print(g_name)
-    #print(g_age)
-    #print(datax['name'])
-    #print(datax['age'])
-    #print(datax['sex'])
-    #print(datax['education'])
-    #print(datax['search_time'])
-    #print(datax['search_rate'])
-    #print(datax['search_kinds'])
-    #print(datax['search_path'])
-
-    #save_personalinfo(datax)
-
-    g_name = "datax['name']"
-    g_age  = "datax['age']"
-
-    article_total_nums = 1000
-    return render_template('search.html',
-        name = "datax['name']",
-        age = "datax['age']",
-        title = 'search',
-        total_articles = article_total_nums)
-
 @app.route("/search_profession")
 def search_profession():
     article_total_nums = 1000
@@ -247,12 +205,7 @@ def search_profession():
         title = 'search_profession',
         total_articles = article_total_nums)    
 
-@app.route("/view_first")
-def view_first():
-    article_total_nums = 1000
-    return render_template('view_first.html',
-        title = 'view_first',
-        total_articles = article_total_nums)
+
 
 @app.route("/view_first_question")
 def view_first_question():
@@ -353,6 +306,26 @@ def exit_view():
     return render_template('exit_view.html',
         title = 'exit_view',
         total_articles = article_total_nums)
+
+@app.route("/search", methods = ["POST"])
+def search():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('search.html',
+        name = "datax['name']",
+        age = "datax['age']",
+        title = 'search',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
+@app.route("/view_first")
+def view_first():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('view_first.html',
+        title = 'view_first',
+        total_articles = article_total_nums,
+        user_id = user_id)
 
 @app.route("/dispatch", methods = ["POST"])
 def dispatch():
