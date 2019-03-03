@@ -17,12 +17,13 @@
             <label>请输入您的意见:</label>
         </div>
         <div class="form-group col-sm-5 col-xs-5 ">
-            <input name="age">
+            <input name="suggest">
         </div>
     </div>
 
-    <form class="form-horizontal" action="/index" method="post">
+    <form class="form-horizontal" action="/end_search" method="post">
         <div class="input-group col-sm-12  col-xs-12">
+            <input type="hidden" id="user_id" name="user_id" value="{{user_id}}">
             <span class="input-group-btn">
                 <button class="btn btn-default btn-primary col-sm-12  col-xs-12 " type="submit">提交并结束</button>
             </span>

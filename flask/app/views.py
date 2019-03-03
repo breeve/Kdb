@@ -163,13 +163,6 @@ def search_item():
         title = 'Search Item',
         total_articles = article_total_nums)
 
-@app.route("/exit_view")
-def exit_view():
-    article_total_nums = 1000
-    return render_template('exit_view.html',
-        title = 'exit_view',
-        total_articles = article_total_nums)
-
 @app.route("/search_normal_result_secondary")
 def search_normal_result_secondary():
     user_id = request.args.get('user_id')
@@ -200,9 +193,25 @@ def search_normal_result_secondary():
                            left_row = left_row,
                            total_articles=page_info.total_page)
 
+@app.route("/end_search", methods = ["POST", "GET", "PUSH"])
+def end_search():
+    user_id = request.args.get('user_id')
+    suggest = request.args.get('suggest')
+    print(str(user_id) +" :"+ str(suggest))
+    return "exit"
+
+@app.route("/exit_view", methods = ["POST", "GET", "PUSH"])
+def exit_view():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('exit_view.html',
+        title = 'exit_view',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
 def save_personal_time_end(user_id):
     end_time = time.localtime(time.time())
-    print(str(user_id)+" start_time: "+str(end_time))
+    print(str(user_id)+" end_time: "+str(end_time))
 
 @app.route("/view_secondary_question", methods = ["POST", "GET", "PUSH"])
 def view_secondary_question():
