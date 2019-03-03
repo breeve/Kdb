@@ -382,7 +382,7 @@ def search_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     save_personal_time_start(user_id)
-    return render_template('search_normal.html',
+    return render_template('normal_search_first.html',
         name = "datax['name']",
         age = "datax['age']",
         title = 'search',
