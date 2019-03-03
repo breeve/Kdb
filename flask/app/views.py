@@ -248,8 +248,8 @@ def fix_page_info(page_info, key):
     page_info_ret.total_page = index
     page_info_ret.current_page = page_info.current_page
 
-    if page_info_ret.current_page > page_info_ret.total_rows :
-        page_info_ret.current_page = page_info_ret.total_rows
+    if page_info_ret.current_page > page_info_ret.total_page :
+        page_info_ret.current_page = page_info_ret.total_page
 
     return page_info_ret
 
