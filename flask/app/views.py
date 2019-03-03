@@ -13,6 +13,8 @@ ROWS_PER_PAGE = 10
 
 g_name = ""
 g_age  = 0
+g_user_id = 0
+
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
@@ -191,7 +193,9 @@ def save_personalinfo(datax):
     K_db = client.K_db
     collection = K_db.personalinfo
     datax["user_id"] = uuid.uuid1()
-    print(datax)
+    global g_user_id
+    g_user_id = datax["user_id"]
+    #print(datax)
     collection.insert_one(datax).inserted_id
 
 
@@ -353,7 +357,9 @@ def exit_view():
 @app.route("/dispatch", methods = ["POST"])
 def dispatch():
     datax = request.form.to_dict()
-    print(datax)
+
+    '''
+    #print(datax)
 
     global g_name
     global g_age
@@ -369,8 +375,10 @@ def dispatch():
     print(datax['search_rate'])
     print(datax['search_kinds'])
     print(datax['search_path'])
+    '''
 
     save_personalinfo(datax)
+    print(g_user_id)
 
     article_total_nums = 1000
     return render_template('dispatch.html',
