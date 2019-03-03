@@ -200,10 +200,15 @@ def search_normal_result_secondary():
                            left_row = left_row,
                            total_articles=page_info.total_page)
 
+def save_personal_time_end(user_id):
+    end_time = time.localtime(time.time())
+    print(str(user_id)+" start_time: "+str(end_time))
+
 @app.route("/view_secondary_question", methods = ["POST", "GET", "PUSH"])
 def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    save_personal_time_end(user_id)
     return render_template('view_secondary_question.html',
         title = 'view_secondary_question',
         total_articles = article_total_nums,
