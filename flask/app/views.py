@@ -483,7 +483,6 @@ def search_normal():
 def search():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    save_personal_time_start(user_id)
     return render_template('search.html',
         name = "datax['name']",
         age = "datax['age']",
