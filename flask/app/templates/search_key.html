@@ -1,6 +1,7 @@
 {% extends "base.html"  %}
 
 {% block content %}
+<body>
 <div class="col-sm-12 col-xs-12">
     <div class="col-sm-3 col-xs-3">
         <ul class="col-sm-12 col-xs-12 list-group">
@@ -70,9 +71,7 @@
     </div>
 </div>
 <script type='text/javascript'>
-    window.onunload=check_input;
-
-    function check_input(){
+    window.onunload = function (){
         var check_args = "";
         var check_list = document.getElementsByName("valid_title");
         for (var i=0; i<check_list.length; i++) {
@@ -83,4 +82,5 @@
         $.post("/check_input", {"user_id":"{{user_id}}", "check_args":check_args});
     }
 </script>
+</body>
 {% endblock %}
