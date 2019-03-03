@@ -50,7 +50,7 @@
                         visiblePages: 5,
                         startPage: {{pages.current_page}},
                         onPageClick: function (event, page) {
-                            location.href="/search_key?doc_class={{doc_class}}&keywords={{keywords}}&page="+page;
+                            location.href="/search_key?user_id={{user_id}}doc_class={{doc_class}}&keywords={{keywords}}&page="+page;
                         }
                     });
                 </script>
@@ -63,11 +63,6 @@
                     </div>                    
                 </form>
             </div>
-
-            <div role="2tabpanel" class="tab-pane" id="search_special">
-                <h5>search_special</h5>
-            </div>
-
         </div>
     </div>
 </div>
