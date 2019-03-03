@@ -63,7 +63,15 @@
                         visiblePages: 5,
                         startPage: {{page_info.current_page}},
                         onPageClick: function (event, page) {
-                            location.href="/search_normal_result?keywords={{keywords}}&&page="+page;
+                            var check_args = "";
+                            var check_list = document.getElementsByName("valid_title");
+                            for (var i=0; i<check_list.length; i++) {
+                                if (check_list[i].checked) {
+                                    check_args += check_list[i].value;
+                                }
+                            }
+
+                            location.href="/search_normal_result?check_args="+check_args+"&keywords={{keywords}}&&page="+page;
                         }
                     });
                 </script>
