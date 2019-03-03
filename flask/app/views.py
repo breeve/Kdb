@@ -253,6 +253,9 @@ def fix_page_info(page_info, key):
         elif key in item['Title-题名'] :
             rows.append(item)
             index = index + 1
+        elif key in item['Classifier-类别'] :
+            rows.append(item)
+            index = index + 1
 
     page_info_ret.total_rows = rows
     page_info_ret.total_page = index
@@ -279,7 +282,7 @@ def search_key():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
     left_row = get_left_row(page_info)
-    page_info = fix_page_info(page_info, key)
+    page_info = fix_page_info(page_info, doc_class)
 
     return render_template('search_key.html',
         keys=left_row,
