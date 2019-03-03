@@ -386,6 +386,7 @@ def search_normal_start():
 def normal_view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    save_personal_time_end(user_id)
     return render_template('normal_view_secondary_question.html',
         title = 'view_first_question',
         total_articles = article_total_nums,
@@ -428,7 +429,7 @@ def search_normal_secondary():
 @app.route("/normal_view_secondary", methods = ["POST", "GET", "PUSH"])
 def normal_view_secondary():
     user_id = request.form.get("user_id")
-    print(user_id)
+    #print(user_id)
     article_total_nums = 1000
     return render_template('normal_view_secondary.html',
         title = 'view_secondary',
@@ -550,10 +551,10 @@ def personalinfo():
 @app.route("/check_input", methods = ["POST"])
 def check_input():
     user_id = request.form.get('user_id')
-    print(user_id)
+    #print(user_id)
     check_args = request.form.get('check_args')
     args = [arg for arg in check_args.strip().split('breeve') if arg != '']
-    print(args)
+    #print(args)
 
     return 'ok'
 
