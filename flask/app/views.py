@@ -198,7 +198,7 @@ def end_search():
     user_id = request.form.get('user_id')
     suggest = request.form.get('suggest')
     print(str(user_id) +" :"+ str(suggest))
-    return "exit"
+    return None
 
 @app.route("/exit_view", methods = ["POST", "GET", "PUSH"])
 def exit_view():
