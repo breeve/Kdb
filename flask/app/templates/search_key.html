@@ -2,6 +2,19 @@
 
 {% block content %}
 
+<script>
+    function check_input(){
+        var check_args = "";
+        var check_list = document.getElementsByName("valid_title");
+        for (var i=0; i<check_list.length; i++) {
+            if (check_list[i].checked) {
+                check_args += check_list[i].value + "breeve";
+            }
+        }
+        $.post("/check_input", {"user_id":"{{user_id}}", "check_args":check_args});
+    }
+</script>
+
 <div class="col-sm-12 col-xs-12" onunload="check_input()" onbeforeunload="check_input()">
     <div class="col-sm-3 col-xs-3">
         <ul class="col-sm-12 col-xs-12 list-group">
@@ -70,17 +83,6 @@
         </div>
     </div>
 </div>
-<script type='text/javascript'>
-    function check_input(){
-        var check_args = "";
-        var check_list = document.getElementsByName("valid_title");
-        for (var i=0; i<check_list.length; i++) {
-            if (check_list[i].checked) {
-                check_args += check_list[i].value + "breeve";
-            }
-        }
-        $.post("/check_input", {"user_id":"{{user_id}}", "check_args":check_args});
-    }
-</script>
+
 
 {% endblock %}
