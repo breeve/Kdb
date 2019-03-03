@@ -242,10 +242,15 @@ def fix_page_info(page_info, key):
     for item in page_info.total_rows :
         print(key)
         print(item['Keyword-关键词'])
+        print(item['Title-题名'])
+        print(item['Summary-摘要'])
         if key in item['Keyword-关键词'] :
             rows.append(item)
             index = index + 1
         elif key in item['Summary-摘要'] :
+            rows.append(item)
+            index = index + 1
+        elif key in item['Title-题名'] :
             rows.append(item)
             index = index + 1
 
