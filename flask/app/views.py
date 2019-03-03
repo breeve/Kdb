@@ -279,7 +279,7 @@ def search_key():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
     left_row = get_left_row(page_info)
-    page_info = fix_page_info(page_info, doc_class)
+    page_info = fix_page_info(page_info, key)
 
     return render_template('search_key.html',
         keys=left_row,
