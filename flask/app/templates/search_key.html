@@ -53,7 +53,14 @@
                         visiblePages: 10,
                         startPage: {{pages.current_page}},
                         onPageClick: function (event, page) {
-                            location.href="/search_key?user_id={{user_id}}&doc_class={{doc_class}}&keywords={{keywords}}&page="+page;
+                            var check_args = "";
+                            var check_list = document.getElementsByName("valid_title");
+                            for (var i=0; i<check_list.length; i++) {
+                                if (check_list[i].checked) {
+                                    check_args += check_list[i].value;
+                                }
+                            }
+                            location.href="/search_key?check_args="+check_args+"&user_id={{user_id}}&doc_class={{doc_class}}&keywords={{keywords}}&page="+page;
                         }
                     });
                 </script>
