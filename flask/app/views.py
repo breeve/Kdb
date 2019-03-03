@@ -377,6 +377,61 @@ def search_normal_start():
                            total_articles=page_info.total_page,
                            user_id = user_id)
 
+
+
+
+########## normal
+
+@app.route("/normal_view_secondary_question", methods = ["POST", "GET", "PUSH"])
+def normal_view_first_question():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('normal_view_secondary_question.html',
+        title = 'view_first_question',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
+@app.route("/normal_search_key_secondary", methods = ["POST", "GET", "PUSH"])
+def normal_search_key_secondary():
+    page = int(request.args.get('page', 1))
+    if page < 1:
+        page = 1
+
+    key = request.args.get('keywords')
+    page_tmp = get_search_result(key, page)
+    user_id = request.args.get('user_id')
+
+    page_info = getPageInfo()
+    page_info.total_rows = page_tmp['rows']
+    page_info.total_page = page_tmp['total_page']
+    page_info.current_page = page_tmp['current']
+
+    return render_template('normal_search_key_secondary.html',
+        keywords=key,
+        pages=page_info,
+        title = 'Search Key',
+        total_articles = 1,
+        user_id = user_id)
+
+@app.route("/normal_view_secondary", methods = ["POST", "GET", "PUSH"])
+def normal_view_secondary():
+    user_id = request.form.get("user_id")
+    print(user_id)
+    article_total_nums = 1000
+    return render_template('normal_view_secondary.html',
+        title = 'view_secondary',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
+@app.route("/normal_view_first_question", methods = ["POST", "GET", "PUSH"])
+def normal_view_first_question():
+    article_total_nums = 1000
+    user_id = request.args.get('user_id')
+    return render_template('normal_view_first_question.html',
+        title = 'view_first_question',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
 @app.route("/normal_search_key", methods = ["POST", "GET", "PUSH"])
 def normal_search_key():
     page = int(request.args.get('page', 1))
