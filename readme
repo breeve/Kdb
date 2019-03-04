@@ -8,11 +8,39 @@ pip install jieba
 pip install pymongo gensim
 data/classifier_deal/class.py
 
-➜  ~ cd db
-➜  db ls
-K_db
-➜  db mongorestore --drop .
+➜  mongodb git:(master) ✗ mongodump
+2019-03-04T20:55:55.268+0800    writing admin.system.version to
+2019-03-04T20:55:55.270+0800    done dumping admin.system.version (1 document)
+2019-03-04T20:55:55.270+0800    writing K_db.maps_items to
+2019-03-04T20:55:55.270+0800    writing K_db.personalinfo to
+2019-03-04T20:55:55.271+0800    writing K_db.personalSearchInfo to
+2019-03-04T20:55:55.284+0800    done dumping K_db.personalinfo (14 documents)
+2019-03-04T20:55:55.287+0800    done dumping K_db.personalSearchInfo (5 documents)
+2019-03-04T20:55:55.310+0800    done dumping K_db.maps_items (2713 documents)
+➜  mongodb git:(master) ✗
 
+➜  mongodb git:(master) ✗ tar -zcvf dump.tar.gz  ./dump
+./dump/
+./dump/K_db/
+./dump/K_db/personalSearchInfo.metadata.json
+./dump/K_db/maps_items.metadata.json
+./dump/K_db/personalinfo.metadata.json
+./dump/K_db/personalinfo.bson
+./dump/K_db/maps_items.bson
+./dump/K_db/personalSearchInfo.bson
+./dump/admin/
+./dump/admin/system.version.metadata.json
+./dump/admin/system.version.bson
+
+
+
+➜  mongodb git:(master) ✗ ll
+总用量 892K
+-rw-r--r-- 1 root root 147K  2月 23 10:43 79797705
+drwxr-xr-x 4 root root 4.0K  3月  4 07:55 dump
+-rw-r--r-- 1 root root 734K  3月  4 07:59 dump.tar.gz
+-rw-r--r-- 1 root root 1.9K  2月 23 10:43 readme
+➜  mongodb git:(master) ✗ mongorestore --dir ./dump --drop
 
 
 notes
