@@ -18,7 +18,7 @@ g_user_id = 0
 
 def save_personal_time_start(user_id):
     start_time = time.localtime(time.time())
-    print(str(user_id)+" start_time: "+str(start_time))
+    #print(str(user_id)+" start_time: "+str(start_time))
 
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
@@ -39,12 +39,12 @@ def save_personal_time_start(user_id):
         datax['end_time'] = ''
         collection.insert_one(datax).inserted_id
 
-    print(datax)
+    #print(datax)
 
 
 def save_personal_time_end(user_id):
     end_time = time.localtime(time.time())
-    print(str(user_id)+" end_time: "+str(end_time))
+    #print(str(user_id)+" end_time: "+str(end_time))
 
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
@@ -64,7 +64,7 @@ def save_personal_time_end(user_id):
         datax['start_time'] = ''
         collection.insert_one(datax).inserted_id
 
-    print(datax)
+    #print(datax)
 
 def get_search_regex(key, keywords):
     keywords_regex = {}
