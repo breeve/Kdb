@@ -24,35 +24,50 @@ def save_personal_time_end(user_id):
     end_time = time.localtime(time.time())
     print(str(user_id)+" end_time: "+str(end_time))
 
-def get_search_regex(keywords):
+def get_search_regex(key, keywords):
     keywords_regex = {}
     kws = [ks for ks in keywords.strip().split(' ') if ks != '']
 
     if len(kws) > 0:
         reg_pattern = re.compile('|'.join(kws), re.IGNORECASE)
-        keywords_regex['Summary-摘要'] = reg_pattern
+        keywords_regex[key] = reg_pattern
 
     return keywords_regex
 
 def get_search_result(keywords, page):
     client = pymongo.MongoClient(host='localhost', port=27017)
     db = client['K_db']
-    keywords_regex = get_search_regex(keywords)
-    #keywords_regex = {'Summary-摘要':{'$regex':'.*'+keywords+'.*'}}
+    keywords_regex_summary = get_search_regex('Summary-摘要', keywords)
+    keywords_regex_title = get_search_regex('Title-题名', keywords)
+    keywords_regex_key_word = get_search_regex('Keyword-关键词', keywords)
+
+
     collection = db['maps_items']
 
-    total_rows = collection.find(keywords_regex).count()
+    total_rows = collection.find(keywords_regex_summary).count()
     total_page = int(math.ceil(total_rows / (ROWS_PER_PAGE * 1.0)))
     page_info = {'current': page, 'total_page': total_page,
                  'total_rows': total_rows, 'rows': []}
 
     if total_page > 0 and page <= total_page:
         row_start = (page - 1) * ROWS_PER_PAGE
-        cursors = collection.find(keywords_regex) \
-            .skip(row_start).limit(ROWS_PER_PAGE)
 
+        cursors = collection.find(keywords_regex_summary) \
+            .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
-            page_info['rows'].append(c)            
+            page_info['rows'].append(c)
+
+        cursors = collection.find(keywords_regex_title) \
+            .skip(row_start).limit(ROWS_PER_PAGE)
+        for c in cursors:
+            if c not in page_info['rows']:
+                page_info['rows'].append(c)
+
+        cursors = collection.find(keywords_regex_key_word) \
+            .skip(row_start).limit(ROWS_PER_PAGE)
+        for c in cursors:
+            if c not in page_info['rows']:
+                page_info['rows'].append(c)
 
     #print(keywords_regex)
     #print(page_info)
