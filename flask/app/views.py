@@ -90,6 +90,7 @@ def get_search_result(keywords, page):
 
     rows = []
     for item in page_info['rows']:
+        print(item)
         if item not in rows:
             rows.append(item)
 
