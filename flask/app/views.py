@@ -16,6 +16,11 @@ g_name = ""
 g_age  = 0
 g_user_id = 0
 
+# class_first      1
+# class_secondary  2
+# normal_first     3
+# normal_secondary 4
+
 def save_question(form, user_id, classifier):
     line1 = form.get('line1')
     line2 = form.get('line2')
@@ -37,6 +42,7 @@ def save_question(form, user_id, classifier):
 
     line15 = form.get('line15')
 
+    '''
     print(line1)
     print(line2)
     print(line3)
@@ -56,6 +62,7 @@ def save_question(form, user_id, classifier):
     print(line14)
 
     print(line15)
+    '''
 
     mind        = form.get('mind')
     physical    = form.get('physical')
@@ -64,12 +71,68 @@ def save_question(form, user_id, classifier):
     strive      = form.get('strive')
     frustration = form.get('frustration')
 
+    '''
     print(mind)
     print(physical)
     print(time)
     print(satisfy)
     print(strive)
     print(frustration)
+    '''
+
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    kdb = client.K_db
+    collection = 0
+
+    # class_first      1
+    # class_secondary  2
+    # normal_first     3
+    # normal_secondary 4
+
+    if classifier == 1:
+        collection = kdb.question_class_first
+    elif classifier == 2:
+        collection = kdb.question_class_secondary
+    elif classifier == 3:
+        collection = kdb.question_normal_first
+    elif classifier == 4:
+        collection = kdb.question_normal_secondary
+    else:
+        return
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    row = collection.find_one(keywords_regex)
+
+    question = {}
+
+    question['line1'] = line1
+    question['line2'] = line2
+    question['line3'] = line3
+    question['line4'] = line4
+    question['line5'] = line5
+
+    question['line6'] = line6
+    question['line7'] = line7
+    question['line8'] = line8
+    question['line9'] = line9
+
+    question['line10'] = line10
+    question['line11'] = line11
+    question['line12'] = line12
+
+    question['line13'] = line13
+    question['line14'] = line14
+
+    question['line15'] = line15
+
+    question['user_id'] = user_id
+    if row :
+        collection.update(row, question)
+    else:
+        collection.insert_one(question).inserted_id
+
+
 
 
 def save_personal_time_start(user_id):
@@ -346,7 +409,7 @@ def exit_view_first():
     user_id = request.form.get('user_id')
 
     # save question class search view 2
-    save_question(request.form, user_id, 'first')
+    save_question(request.form, user_id, 2)
 
     return render_template('exit_view_first.html',
         title = 'exit_view',
@@ -359,7 +422,7 @@ def exit_view_secondary():
     user_id = request.form.get('user_id')
 
     # save question class search view 2
-    save_question(request.form, user_id, 'first')
+    save_question(request.form, user_id, 4)
 
     return render_template('exit_view_secondary.html',
         title = 'exit_view',
@@ -444,7 +507,7 @@ def view_secondary():
     #print(user_id)
     article_total_nums = 1000
 
-    save_question(request.form, user_id, 'first')
+    save_question(request.form, user_id, 1)
 
     # save question class search view 1
 
@@ -608,7 +671,7 @@ def normal_view_secondary():
     #print(user_id)
     article_total_nums = 1000
 
-    save_question(request.form, user_id, 'first')
+    save_question(request.form, user_id, 3)
 
     # save question class search view 2
 
