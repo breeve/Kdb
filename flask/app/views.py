@@ -16,6 +16,62 @@ g_name = ""
 g_age  = 0
 g_user_id = 0
 
+def save_question(form, user_id, classifier):
+    line1 = form.get('line1')
+    line2 = form.get('line2')
+    line3 = form.get('line3')
+    line4 = form.get('line4')
+    line5 = form.get('line5')
+
+    line6 = form.get('line6')
+    line7 = form.get('line7')
+    line8 = form.get('line8')
+    line9 = form.get('line9')
+
+    line10 = form.get('line10')
+    line11 = form.get('line11')
+    line12 = form.get('line12')
+
+    line13 = form.get('line13')
+    line14 = form.get('line14')
+
+    line15 = form.get('line15')
+
+    print(line1)
+    print(line2)
+    print(line3)
+    print(line4)
+    print(line5)
+
+    print(line6)
+    print(line7)
+    print(line8)
+    print(line9)
+
+    print(line10)
+    print(line11)
+    print(line12)
+
+    print(line13)
+    print(line14)
+
+    print(line15)
+
+    mind        = form.get('mind')
+    physical    = form.get('physical')
+    time        = form.get('time')
+    satisfy     = form.get('satisfy')
+    strive      = form.get('strive')
+    frustration = form.get('frustration')
+
+    print(mind)
+    print(physical)
+    print(time)
+    print(satisfy)
+    print(strive)
+    print(frustration)
+
+
 def save_personal_time_start(user_id):
     start_time = time.localtime(time.time())
     #print(str(user_id)+" start_time: "+str(start_time))
@@ -290,6 +346,7 @@ def exit_view_first():
     user_id = request.form.get('user_id')
 
     # save question class search view 2
+    save_question(request.form, user_id, 'first')
 
     return render_template('exit_view_first.html',
         title = 'exit_view',
@@ -302,6 +359,7 @@ def exit_view_secondary():
     user_id = request.form.get('user_id')
 
     # save question class search view 2
+    save_question(request.form, user_id, 'first')
 
     return render_template('exit_view_secondary.html',
         title = 'exit_view',
@@ -380,69 +438,13 @@ def search_secondary():
         total_articles = article_total_nums,
         user_id = user_id)
 
-def save_question(form, user_id):
-    line1 = form.get('line1')
-    line2 = form.get('line2')
-    line3 = form.get('line3')
-    line4 = form.get('line4')
-    line5 = form.get('line5')
-
-    line6 = form.get('line6')
-    line7 = form.get('line7')
-    line8 = form.get('line8')
-    line9 = form.get('line9')
-
-    line10 = form.get('line10')
-    line11 = form.get('line11')
-    line12 = form.get('line12')
-
-    line13 = form.get('line13')
-    line14 = form.get('line14')
-
-    line15 = form.get('line15')
-
-    print(line1)
-    print(line2)
-    print(line3)
-    print(line4)
-    print(line5)
-
-    print(line6)
-    print(line7)
-    print(line8)
-    print(line9)
-
-    print(line10)
-    print(line11)
-    print(line12)
-
-    print(line13)
-    print(line14)
-
-    print(line15)
-
-    mind        = form.get('mind')
-    physical    = form.get('physical')
-    time        = form.get('time')
-    satisfy     = form.get('satisfy')
-    strive      = form.get('strive')
-    frustration = form.get('frustration')
-
-    print(mind)
-    print(physical)
-    print(time)
-    print(satisfy)
-    print(strive)
-    print(frustration)
-
-
 @app.route("/view_secondary", methods = ["POST", "GET", "PUSH"])
 def view_secondary():
     user_id = request.form.get("user_id")
     #print(user_id)
     article_total_nums = 1000
 
-    save_question(request.form, user_id)
+    save_question(request.form, user_id, 'first')
 
     # save question class search view 1
 
@@ -605,6 +607,8 @@ def normal_view_secondary():
     user_id = request.form.get("user_id")
     #print(user_id)
     article_total_nums = 1000
+
+    save_question(request.form, user_id, 'first')
 
     # save question class search view 2
 
