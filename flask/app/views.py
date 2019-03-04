@@ -285,7 +285,7 @@ def end_search():
     return redirect("/index")
 
 @app.route("/exit_view_first", methods = ["POST", "GET", "PUSH"])
-def exit_view():
+def exit_view_first():
     article_total_nums = 1000
     user_id = request.form.get('user_id')
 
@@ -297,7 +297,7 @@ def exit_view():
         user_id = user_id)
 
 @app.route("/exit_view_secondary", methods = ["POST", "GET", "PUSH"])
-def exit_view():
+def exit_view_secondary():
     article_total_nums = 1000
     user_id = request.form.get('user_id')
 
