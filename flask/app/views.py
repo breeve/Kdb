@@ -38,15 +38,15 @@ def get_search_result(keywords, page):
     client = pymongo.MongoClient(host='localhost', port=27017)
     db = client['K_db']
     keywords_regex_summary = get_search_regex('Summary-摘要', keywords)
-    keywords_regex_title = get_search_regex('Title-题名', keywords)
-    keywords_regex_key_word = get_search_regex('Keyword-关键词', keywords)
+    #keywords_regex_title = get_search_regex('Title-题名', keywords)
+    #keywords_regex_key_word = get_search_regex('Keyword-关键词', keywords)
 
 
     collection = db['maps_items']
 
-    total_rows_summary = collection.find(keywords_regex_summary).distinct('Summary-摘要').count()
-    total_rows_title = collection.find(keywords_regex_title).distinct('Title-题名').count()
-    total_rows_key_word = collection.find(keywords_regex_key_word).distinct('Keyword-关键词').count()
+    total_rows_summary = collection.find(keywords_regex_summary).count()
+    #total_rows_title = collection.find(keywords_regex_title).count()
+    #total_rows_key_word = collection.find(keywords_regex_key_word).count()
     '''
     print(total_rows_summary)
     print(total_rows_title)
@@ -54,8 +54,8 @@ def get_search_result(keywords, page):
     '''
 
     total_page = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
-    total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
-    total_page += int(math.ceil(total_rows_key_word / (ROWS_PER_PAGE * 1.0)))
+    #total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
+    #total_page += int(math.ceil(total_rows_key_word / (ROWS_PER_PAGE * 1.0)))
 
     page_info = {'current': page, 'total_page': total_page,
                  'total_rows': total_rows_summary, 'rows': []}
@@ -63,20 +63,22 @@ def get_search_result(keywords, page):
     if total_page > 0 and page <= total_page:
         row_start = (page - 1) * ROWS_PER_PAGE
 
-        cursors = collection.find(keywords_regex_summary).distinct('Summary-摘要') \
+        cursors = collection.find(keywords_regex_summary) \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
             page_info['rows'].append(c)
 
-        cursors = collection.find(keywords_regex_title).distinct('Title-题名') \
+        '''
+        cursors = collection.find(keywords_regex_title) \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
             page_info['rows'].append(c)
 
-        cursors = collection.find(keywords_regex_key_word).distinct('Keyword-关键词') \
+        cursors = collection.find(keywords_regex_key_word) \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
             page_info['rows'].append(c)
+        '''
 
     '''
     print(keywords_regex_summary)
