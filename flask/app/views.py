@@ -66,7 +66,8 @@ def get_search_result(keywords, page):
         cursors = collection.find(keywords_regex_summary) \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
-            page_info['rows'].append(c)
+            if c not in page_info['rows']:
+                page_info['rows'].append(c)
 
         '''
         cursors = collection.find(keywords_regex_title) \
@@ -86,6 +87,11 @@ def get_search_result(keywords, page):
     print(keywords_regex_key_word)
     print(page_info)
     '''
+
+    total_rows_summary = page_info['rows'].count()
+    page_info['total_rows'] = total_rows_summary
+    page_info['total_page'] = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
+
 
     client.close()
 
