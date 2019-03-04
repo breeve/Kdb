@@ -802,6 +802,23 @@ def check_input():
     args = [arg for arg in check_args.strip().split('breeve') if arg != '']
     #print(args)
 
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    kdb = client.K_db
+    collection = kdb.user_check_args
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    row = collection.find_one(keywords_regex)
+
+    check_args = {}
+    check_args['user_id'] = user_id
+    check_args['args'] = args
+
+    if row :
+        collection.update(row, check_args)
+    else:
+        collection.insert_one(check_args).inserted_id
+
     return 'ok'
 
 @app.route("/")
