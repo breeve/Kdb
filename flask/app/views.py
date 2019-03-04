@@ -88,7 +88,7 @@ def get_search_result(keywords, page):
     print(page_info)
     '''
 
-    total_rows_summary = page_info['rows'].count()
+    total_rows_summary = len(page_info['rows'])
     page_info['total_rows'] = total_rows_summary
     page_info['total_page'] = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
 
