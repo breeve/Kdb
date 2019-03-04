@@ -44,9 +44,9 @@ def get_search_result(keywords, page):
 
     collection = db['maps_items']
 
-    total_rows_summary = collection.distinct(keywords_regex_summary).count()
-    total_rows_title = collection.distinct(keywords_regex_title).count()
-    total_rows_key_word = collection.distinct(keywords_regex_key_word).count()
+    total_rows_summary = collection.find(keywords_regex_summary).distinct('Summary-摘要').count()
+    total_rows_title = collection.find(keywords_regex_title).distinct('Title-题名').count()
+    total_rows_key_word = collection.find(keywords_regex_key_word).distinct('Keyword-关键词').count()
     '''
     print(total_rows_summary)
     print(total_rows_title)
@@ -63,17 +63,17 @@ def get_search_result(keywords, page):
     if total_page > 0 and page <= total_page:
         row_start = (page - 1) * ROWS_PER_PAGE
 
-        cursors = collection.distinct(keywords_regex_summary) \
+        cursors = collection.find(keywords_regex_summary).distinct('Summary-摘要') \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
             page_info['rows'].append(c)
 
-        cursors = collection.distinct(keywords_regex_title) \
+        cursors = collection.find(keywords_regex_title).distinct('Title-题名') \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
             page_info['rows'].append(c)
 
-        cursors = collection.distinct(keywords_regex_key_word) \
+        cursors = collection.find(keywords_regex_key_word).distinct('Keyword-关键词') \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
             page_info['rows'].append(c)
