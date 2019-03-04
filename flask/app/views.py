@@ -387,7 +387,8 @@ def view_secondary():
     article_total_nums = 1000
 
     # save question class search view 1
-
+    optionsRadiosinline1 = request.form.get('optionsRadiosinline1')
+    print(optionsRadiosinline1)
 
     return render_template('view_secondary.html',
         title = 'view_secondary',
