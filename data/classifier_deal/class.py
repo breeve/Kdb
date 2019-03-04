@@ -156,7 +156,7 @@ def run():
     #print(items_ok[0].keyword_k)
 
     # 读取待分类文件
-    items_wait = read_file(open("/root/Kdb/data/classifier_deal/wait_classifier.txt"))
+    items_wait = read_file(open("/root/Kdb/data/classifier_deal/all.txt"))
 
     # 构建已经分类的文章
     file_classes = fils_class_create(items_ok)
