@@ -29,7 +29,7 @@ def save_personal_time_start(user_id):
     rows = collection.find(keywords_regex)
 
     datax = {}
-    if len(rows) > 0 :
+    if rows.count() > 0 :
         datax = rows[0]
 
     datax['user_id'] = user_id
@@ -52,7 +52,7 @@ def save_personal_time_end(user_id):
     rows = collection.find(keywords_regex)
 
     datax = {}
-    if len(rows) > 0:
+    if rows.count() > 0:
         datax = rows[0]
 
     datax['user_id'] = user_id
@@ -293,7 +293,7 @@ def exit_view():
 def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    #save_personal_time_end(user_id)
+    save_personal_time_end(user_id)
     return render_template('view_secondary_question.html',
         title = 'view_secondary_question',
         total_articles = article_total_nums,
@@ -445,6 +445,8 @@ def search_normal_start():
     keywords = request.args.get('keywords')
     #print(keywords)
     #print(user_id)
+
+    save_personal_time_start(user_id)
 
     page_tmp = get_search_result(keywords, 1)
 
