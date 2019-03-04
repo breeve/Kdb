@@ -297,7 +297,9 @@ def exit_view():
 def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    print('view_secondary_question start')
     save_personal_time_end(user_id)
+    print('view_secondary_question end')
     return render_template('view_secondary_question.html',
         title = 'view_secondary_question',
         total_articles = article_total_nums,
@@ -480,7 +482,9 @@ def search_normal_start():
 def normal_view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    print('normal_view_secondary_question start')
     save_personal_time_end(user_id)
+    print('normal_view_secondary_question end')
     return render_template('normal_view_secondary_question.html',
         title = 'view_first_question',
         total_articles = article_total_nums,
