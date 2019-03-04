@@ -47,7 +47,9 @@ def get_search_result(keywords, page):
     total_rows_summary = collection.find(keywords_regex_summary).count()
     total_rows_title = collection.find(keywords_regex_title).count()
     total_rows_key_word = collection.find(keywords_regex_key_word).count()
-
+    print(total_rows_summary)
+    print(total_rows_title)
+    print(total_rows_key_word)
 
     total_page = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
     total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
@@ -74,8 +76,10 @@ def get_search_result(keywords, page):
         for c in cursors:
             page_info['rows'].append(c)
 
-    #print(keywords_regex)
-    #print(page_info)
+    print(keywords_regex_summary)
+    print(keywords_regex_title)
+    print(keywords_regex_key_word)
+    print(page_info)
 
     client.close()
 
