@@ -26,18 +26,21 @@ def save_personal_time_start(user_id):
 
     keywords_regex = {}
     keywords_regex['user_id'] = user_id
-    rows = collection.find(keywords_regex)
+    row = collection.find_one(keywords_regex)
 
     datax = {}
-    if rows.count() > 0 :
-        datax = rows[0]
-
     datax['user_id'] = user_id
     datax['start_time'] = start_time
 
+    if row :
+        datax['end_time'] = row['end_time']
+        collection.update(row, datax)
+    else :
+        datax['end_time'] = ''
+        collection.insert_one(datax).inserted_id
+
     print(datax)
-    
-    collection.insert_one(datax).inserted_id
+
 
 def save_personal_time_end(user_id):
     end_time = time.localtime(time.time())
@@ -49,18 +52,19 @@ def save_personal_time_end(user_id):
 
     keywords_regex = {}
     keywords_regex['user_id'] = user_id
-    rows = collection.find(keywords_regex)
+    row = collection.find_one(keywords_regex)
 
     datax = {}
-    if rows.count() > 0:
-        datax = rows[0]
-
     datax['user_id'] = user_id
     datax['end_time'] = end_time
+    if row :
+        datax['start_time'] = row['start_time']
+        collection.update(row, datax)
+    else :
+        datax['start_time'] = ''
+        collection.insert_one(datax).inserted_id
 
     print(datax)
-
-    collection.insert_one(datax).inserted_id
 
 def get_search_regex(key, keywords):
     keywords_regex = {}
