@@ -20,9 +20,47 @@ def save_personal_time_start(user_id):
     start_time = time.localtime(time.time())
     print(str(user_id)+" start_time: "+str(start_time))
 
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.personalTime
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    rows = collection.find(keywords_regex)
+
+    datax = {}
+    if len(rows) > 0 :
+        datax = rows[0]
+
+    datax['user_id'] = user_id
+    datax['start_time'] = start_time
+
+    print(datax)
+    
+    collection.insert_one(datax).inserted_id
+
 def save_personal_time_end(user_id):
     end_time = time.localtime(time.time())
     print(str(user_id)+" end_time: "+str(end_time))
+
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.personalTime
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    rows = collection.find(keywords_regex)
+
+    datax = {}
+    if len(rows) > 0:
+        datax = rows[0]
+
+    datax['user_id'] = user_id
+    datax['end_time'] = end_time
+
+    print(datax)
+
+    collection.insert_one(datax).inserted_id
 
 def get_search_regex(key, keywords):
     keywords_regex = {}
@@ -239,7 +277,7 @@ def search_normal_result_secondary():
 def end_search():
     user_id = request.form.get('user_id')
     suggest = request.form.get('suggest')
-    print(str(user_id) +" :"+ str(suggest))
+    #print(str(user_id) +" :"+ str(suggest))
     return redirect("/index")
 
 @app.route("/exit_view", methods = ["POST", "GET", "PUSH"])
@@ -255,7 +293,7 @@ def exit_view():
 def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    save_personal_time_end(user_id)
+    #save_personal_time_end(user_id)
     return render_template('view_secondary_question.html',
         title = 'view_secondary_question',
         total_articles = article_total_nums,
@@ -324,7 +362,7 @@ def search_secondary():
 @app.route("/view_secondary", methods = ["POST", "GET", "PUSH"])
 def view_secondary():
     user_id = request.form.get("user_id")
-    print(user_id)
+    #print(user_id)
     article_total_nums = 1000
     return render_template('view_secondary.html',
         title = 'view_secondary',
@@ -466,7 +504,7 @@ def normal_search_key_secondary():
 def search_normal_secondary():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    save_personal_time_start(user_id)
+    #save_personal_time_start(user_id)
     return render_template('normal_search_first.html',
         name = "datax['name']",
         age = "datax['age']",
