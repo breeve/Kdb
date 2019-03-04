@@ -44,10 +44,17 @@ def get_search_result(keywords, page):
 
     collection = db['maps_items']
 
-    total_rows = collection.find(keywords_regex_summary).count()
-    total_page = int(math.ceil(total_rows / (ROWS_PER_PAGE * 1.0)))
+    total_rows_summary = collection.find(keywords_regex_summary).count()
+    total_rows_title = collection.find(keywords_regex_title).count()
+    total_rows_key_word = collection.find(keywords_regex_key_word).count()
+
+
+    total_page = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
+    total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
+    total_page += int(math.ceil(total_rows_key_word / (ROWS_PER_PAGE * 1.0)))
+
     page_info = {'current': page, 'total_page': total_page,
-                 'total_rows': total_rows, 'rows': []}
+                 'total_rows': total_rows_summary, 'rows': []}
 
     if total_page > 0 and page <= total_page:
         row_start = (page - 1) * ROWS_PER_PAGE
@@ -60,14 +67,12 @@ def get_search_result(keywords, page):
         cursors = collection.find(keywords_regex_title) \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
-            if c not in page_info['rows']:
-                page_info['rows'].append(c)
+            page_info['rows'].append(c)
 
         cursors = collection.find(keywords_regex_key_word) \
             .skip(row_start).limit(ROWS_PER_PAGE)
         for c in cursors:
-            if c not in page_info['rows']:
-                page_info['rows'].append(c)
+            page_info['rows'].append(c)
 
     #print(keywords_regex)
     #print(page_info)
