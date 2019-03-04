@@ -88,13 +88,7 @@ def get_search_result(keywords, page):
     print(page_info)
     '''
 
-    rows = []
-    for item in page_info['rows']:
-        print(item)
-        if item not in rows:
-            rows.append(item)
-
-    page_info['rows'] = rows
+    page_info['rows'] = list(set(page_info['rows']))
 
     total_rows_summary = len(page_info['rows'])
     page_info['total_rows'] = total_rows_summary
