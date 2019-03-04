@@ -279,16 +279,31 @@ def search_normal_result_secondary():
 
 @app.route("/end_search", methods = ["POST", "GET", "PUSH"])
 def end_search():
-    user_id = request.form.get('user_id')
-    suggest = request.form.get('suggest')
+    #user_id = request.form.get('user_id')
+    #suggest = request.form.get('suggest')
     #print(str(user_id) +" :"+ str(suggest))
     return redirect("/index")
 
-@app.route("/exit_view", methods = ["POST", "GET", "PUSH"])
+@app.route("/exit_view_first", methods = ["POST", "GET", "PUSH"])
 def exit_view():
     article_total_nums = 1000
     user_id = request.form.get('user_id')
-    return render_template('exit_view.html',
+
+    # save question class search view 2
+
+    return render_template('exit_view_first.html',
+        title = 'exit_view',
+        total_articles = article_total_nums,
+        user_id = user_id)
+
+@app.route("/exit_view_secondary", methods = ["POST", "GET", "PUSH"])
+def exit_view():
+    article_total_nums = 1000
+    user_id = request.form.get('user_id')
+
+    # save question class search view 2
+
+    return render_template('exit_view_secondary.html',
         title = 'exit_view',
         total_articles = article_total_nums,
         user_id = user_id)
@@ -297,9 +312,9 @@ def exit_view():
 def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    print('view_secondary_question start')
+    #print('view_secondary_question start')
     save_personal_time_end(user_id)
-    print('view_secondary_question end')
+    #print('view_secondary_question end')
     return render_template('view_secondary_question.html',
         title = 'view_secondary_question',
         total_articles = article_total_nums,
@@ -370,6 +385,10 @@ def view_secondary():
     user_id = request.form.get("user_id")
     #print(user_id)
     article_total_nums = 1000
+
+    # save question class search view 1
+
+
     return render_template('view_secondary.html',
         title = 'view_secondary',
         total_articles = article_total_nums,
@@ -452,9 +471,9 @@ def search_normal_start():
     #print(keywords)
     #print(user_id)
 
-    print("search_normal_start start")
+    #print("search_normal_start start")
     save_personal_time_start(user_id)
-    print("search_normal_start end")
+    #print("search_normal_start end")
 
     page_tmp = get_search_result(keywords, 1)
 
@@ -482,9 +501,9 @@ def search_normal_start():
 def normal_view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    print('normal_view_secondary_question start')
+    #print('normal_view_secondary_question start')
     save_personal_time_end(user_id)
-    print('normal_view_secondary_question end')
+    #print('normal_view_secondary_question end')
     return render_template('normal_view_secondary_question.html',
         title = 'view_first_question',
         total_articles = article_total_nums,
@@ -529,6 +548,10 @@ def normal_view_secondary():
     user_id = request.form.get("user_id")
     #print(user_id)
     article_total_nums = 1000
+
+    # save question class search view 2
+
+
     return render_template('normal_view_secondary.html',
         title = 'view_secondary',
         total_articles = article_total_nums,
@@ -569,9 +592,9 @@ def normal_search_key():
 def search_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    print("search_normal start")
+    #print("search_normal start")
     save_personal_time_start(user_id)
-    print("search_normal end")
+    #print("search_normal end")
     return render_template('normal_search_first.html',
         name = "datax['name']",
         age = "datax['age']",

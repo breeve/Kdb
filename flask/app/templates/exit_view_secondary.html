@@ -1,0 +1,35 @@
+{% extends "base.html"  %}
+
+{% block content %}
+
+<div class="col-sm-12  col-xs-12 ">
+    <h5 class="text-center">结束界面</h5>
+    <p class="text-left">
+        非常感谢您参与本次实验!
+    </p>
+    <p class="text-left">
+    &nbsp;&nbsp;&nbsp;&nbsp;如果您对本次实验有任何的意见或者建议，请在下方输入框内给出您的
+内容，如果没有，请点击“退出”结束本次实验，在此感谢您的参与
+    </p>
+
+    <form class="form-horizontal" action="/end_search" method="post">
+        <div class="form-group col-sm-12 col-xs-12 ">
+            <div class="form-group col-sm-5 col-xs-5 ">
+                <label>请输入您的意见:</label>
+            </div>
+            <div class="form-group col-sm-5 col-xs-5 ">
+                <input name="suggest">
+            </div>
+        </div>
+
+        <div class="input-group col-sm-12  col-xs-12">
+            <input type="hidden" id="user_id" name="user_id" value="{{user_id}}">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-primary col-sm-12  col-xs-12 " type="submit">提交并结束</button>
+            </span>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
