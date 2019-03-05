@@ -838,8 +838,7 @@ def export_result():
     wb.save('/root/Kdb/flask/app/upload/2003.xls')
 
 
-    #return send_from_directory('./upload', '2003.xls', as_attachment=True)
-    return send_from_directory('/root/Kdb/flask/app/upload/', '2003.xls')
+    return send_from_directory('./upload', '2003.xls', as_attachment=True)
 
 @app.route("/")
 @app.route("/index")
