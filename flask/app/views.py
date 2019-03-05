@@ -983,7 +983,7 @@ def export_result():
     frustration = form.get('frustration')
 
     '''
-    sheet = wb.add_sheet("问卷一结果")
+    sheet = wb.add_sheet("分类搜索问卷一结果")
     collection = K_db.question_class_first
     rows = collection.find()
 
@@ -1058,22 +1058,22 @@ def export_result():
             sheet.write(i, 15, str(item['line15']))
 
         if item['mind']:
-            sheet.write(i, 15, str(item['mind']))
+            sheet.write(i, 16, str(item['mind']))
 
         if item['physical']:
-            sheet.write(i, 15, str(item['physical']))
+            sheet.write(i, 17, str(item['physical']))
 
         if item['time']:
-            sheet.write(i, 15, str(item['time']))
+            sheet.write(i, 18, str(item['time']))
 
         if item['satisfy']:
-            sheet.write(i, 15, str(item['satisfy']))
+            sheet.write(i, 19, str(item['satisfy']))
 
         if item['strive']:
-            sheet.write(i, 15, str(item['strive']))
+            sheet.write(i, 20, str(item['strive']))
 
         if item['frustration']:
-            sheet.write(i, 15, str(item['frustration']))
+            sheet.write(i, 21, str(item['frustration']))
 
 
         i += 1
@@ -1101,7 +1101,7 @@ def export_result():
     }
     '''
 
-    sheet = wb.add_sheet("问卷二结果")
+    sheet = wb.add_sheet("分类搜索问卷二结果")
     collection = K_db.question_class_secondary
     rows = collection.find()
 
@@ -1176,24 +1176,215 @@ def export_result():
             sheet.write(i, 15, str(item['line15']))
 
         if item['mind']:
-            sheet.write(i, 15, str(item['mind']))
+            sheet.write(i, 16, str(item['mind']))
 
         if item['physical']:
-            sheet.write(i, 15, str(item['physical']))
+            sheet.write(i, 17, str(item['physical']))
 
         if item['time']:
-            sheet.write(i, 15, str(item['time']))
+            sheet.write(i, 18, str(item['time']))
 
         if item['satisfy']:
-            sheet.write(i, 15, str(item['satisfy']))
+            sheet.write(i, 19, str(item['satisfy']))
 
         if item['strive']:
-            sheet.write(i, 15, str(item['strive']))
+            sheet.write(i, 20, str(item['strive']))
 
         if item['frustration']:
-            sheet.write(i, 15, str(item['frustration']))
+            sheet.write(i, 21, str(item['frustration']))
 
         i += 1
+
+
+    sheet = wb.add_sheet("普通搜索问卷一结果")
+    collection = K_db.question_normal_secondary
+    rows = collection.find()
+
+    value = ['用户id',
+             '心智需求vs体力需求',
+             '心智需求vs时间需求',
+             '心智需求vs满足',
+             '心智需求vs努力',
+             '心智需求vs挫折感',
+             '体力需求vs时间需求',
+             '体力需求vs满足',
+             '体力需求vs努力',
+             '体力需求vs挫折感',
+             '时间需求vs满足',
+             '时间需求vs努力',
+             '时间需求vs挫折感',
+             '满足vs努力',
+             '满足vs挫折感',
+             '努力vs挫折感',
+             '心智需求',
+             '体力需求',
+             '时间需求',
+             '满足',
+             '努力',
+             '挫折感'
+             ]
+
+    for i in range(0, len(value)):
+        sheet.write(0, i, value[i])
+
+    i = 1
+    for item in rows:
+        sheet.write(i, 0, str(item['user_id']))
+
+        if item['line1']:
+            sheet.write(i, 1, str(item['line1']))
+
+        if item['line2']:
+            sheet.write(i, 2, str(item['line2']))
+
+        if item['line3']:
+            sheet.write(i, 3, str(item['line3']))
+
+        if item['line4']:
+            sheet.write(i, 4, str(item['line4']))
+
+        if item['line5']:
+            sheet.write(i, 5, str(item['line5']))
+
+        if item['line6']:
+            sheet.write(i, 6, str(item['line6']))
+        if item['line7']:
+            sheet.write(i, 7, str(item['line7']))
+        if item['line8']:
+            sheet.write(i, 8, str(item['line8']))
+        if item['line9']:
+            sheet.write(i, 9, str(item['line9']))
+
+        if item['line10']:
+            sheet.write(i, 10, str(item['line10']))
+        if item['line11']:
+            sheet.write(i, 11, str(item['line11']))
+        if item['line12']:
+            sheet.write(i, 12, str(item['line12']))
+
+        if item['line13']:
+            sheet.write(i, 13, str(item['line13']))
+        if item['line14']:
+            sheet.write(i, 14, str(item['line14']))
+
+        if item['line15']:
+            sheet.write(i, 15, str(item['line15']))
+
+        if item['mind']:
+            sheet.write(i, 16, str(item['mind']))
+
+        if item['physical']:
+            sheet.write(i, 17, str(item['physical']))
+
+        if item['time']:
+            sheet.write(i, 18, str(item['time']))
+
+        if item['satisfy']:
+            sheet.write(i, 19, str(item['satisfy']))
+
+        if item['strive']:
+            sheet.write(i, 20, str(item['strive']))
+
+        if item['frustration']:
+            sheet.write(i, 21, str(item['frustration']))
+
+        i += 1
+
+    sheet = wb.add_sheet("普通搜索问卷二结果")
+    collection = K_db.question_normal_secondary
+    rows = collection.find()
+
+    value = ['用户id',
+             '心智需求vs体力需求',
+             '心智需求vs时间需求',
+             '心智需求vs满足',
+             '心智需求vs努力',
+             '心智需求vs挫折感',
+             '体力需求vs时间需求',
+             '体力需求vs满足',
+             '体力需求vs努力',
+             '体力需求vs挫折感',
+             '时间需求vs满足',
+             '时间需求vs努力',
+             '时间需求vs挫折感',
+             '满足vs努力',
+             '满足vs挫折感',
+             '努力vs挫折感',
+             '心智需求',
+             '体力需求',
+             '时间需求',
+             '满足',
+             '努力',
+             '挫折感'
+             ]
+
+    for i in range(0, len(value)):
+        sheet.write(0, i, value[i])
+
+    i = 1
+    for item in rows:
+        sheet.write(i, 0, str(item['user_id']))
+
+        if item['line1']:
+            sheet.write(i, 1, str(item['line1']))
+
+        if item['line2']:
+            sheet.write(i, 2, str(item['line2']))
+
+        if item['line3']:
+            sheet.write(i, 3, str(item['line3']))
+
+        if item['line4']:
+            sheet.write(i, 4, str(item['line4']))
+
+        if item['line5']:
+            sheet.write(i, 5, str(item['line5']))
+
+        if item['line6']:
+            sheet.write(i, 6, str(item['line6']))
+        if item['line7']:
+            sheet.write(i, 7, str(item['line7']))
+        if item['line8']:
+            sheet.write(i, 8, str(item['line8']))
+        if item['line9']:
+            sheet.write(i, 9, str(item['line9']))
+
+        if item['line10']:
+            sheet.write(i, 10, str(item['line10']))
+        if item['line11']:
+            sheet.write(i, 11, str(item['line11']))
+        if item['line12']:
+            sheet.write(i, 12, str(item['line12']))
+
+        if item['line13']:
+            sheet.write(i, 13, str(item['line13']))
+        if item['line14']:
+            sheet.write(i, 14, str(item['line14']))
+
+        if item['line15']:
+            sheet.write(i, 15, str(item['line15']))
+
+        if item['mind']:
+            sheet.write(i, 16, str(item['mind']))
+
+        if item['physical']:
+            sheet.write(i, 17, str(item['physical']))
+
+        if item['time']:
+            sheet.write(i, 18, str(item['time']))
+
+        if item['satisfy']:
+            sheet.write(i, 19, str(item['satisfy']))
+
+        if item['strive']:
+            sheet.write(i, 20, str(item['strive']))
+
+        if item['frustration']:
+            sheet.write(i, 21, str(item['frustration']))
+
+        i += 1
+
+
 
     '''
     user_check_args
