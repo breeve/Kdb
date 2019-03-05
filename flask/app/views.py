@@ -863,8 +863,9 @@ def export_result():
     value = ['用户id', '年龄', '性别', '教育背景', '检索频率', '检索经验', '使用过的数据库种类个数', '7点李克特量表']
 
     for i in range(0, len(value)):
-        sheet.write(0, i, value[0][i])
+        sheet.write(0, i, value[i])
 
+    i = 1
     for item in personalinfo_row:
         print(item['user_id'])
         print(item['age'])
@@ -875,9 +876,16 @@ def export_result():
         print(item['search_kinds'])
         print(item['search_path'])
 
-        for i in range(0, personalinfo_row.count()):
-            for j in range(0, len(value)):
-                sheet.write(i+1, j, value[i+1][j])
+        sheet.write(i, 0, item['user_id'])
+        sheet.write(i, 1, item['age'])
+        sheet.write(i, 2, item['sex'])
+        sheet.write(i, 3, item['education'])
+        sheet.write(i, 4, item['search_rate'])
+        sheet.write(i, 5, item['search_time'])
+        sheet.write(i, 6, item['search_kinds'])
+        sheet.write(i, 7, item['search_path'])
+
+        i += 1
 
 
 
