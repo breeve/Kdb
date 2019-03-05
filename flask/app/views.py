@@ -125,20 +125,34 @@ def save_question(form, user_id, classifier):
     question['line15'] = line15
 
     question['user_id'] = user_id
+    if form.get('mind'):
+        mind        = form.get('mind')
+    if form.get('physical'):
+        physical    = form.get('physical')
+    if form.get('time'):
+        time        = form.get('time')
+    if form.get('satisfy'):
+        satisfy     = form.get('satisfy')
+    if form.get('strive'):
+        strive      = form.get('strive')
+    if form.get('frustration'):
+        frustration = form.get('frustration')
 
-    mind        = form.get('mind')
-    physical    = form.get('physical')
-    time        = form.get('time')
-    satisfy     = form.get('satisfy')
-    strive      = form.get('strive')
-    frustration = form.get('frustration')
 
-    question['mind'] = mind
-    question['physical'] = physical
-    question['time'] = time
-    question['satisfy'] = satisfy
-    question['strive'] = strive
-    question['frustration'] = frustration
+
+    print('mind' + str(mind))
+    print('physical' + str(physical))
+    print('time' + str(time))
+    print('satisfy' + str(satisfy))
+    print('strive' + str(strive))
+    print('frustration' + str(frustration))
+
+    question['mind'] = str(mind) +
+    question['physical'] = str(physical)
+    question['time'] = str(time)
+    question['satisfy'] = str(satisfy)
+    question['strive'] = str(strive)
+    question['frustration'] = str(frustration)
 
     if row :
         collection.update(row, question)
