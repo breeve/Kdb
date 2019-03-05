@@ -828,22 +828,16 @@ def check_input():
 
 @app.route("/export_result")
 def export_result():
-    file_name = '2003.xls'
-    dirpath = os.path.join(app.root_path, 'upload')
-
-    if os.path.exists(os.path.join(dirpath, file_name)):
-        os.remove(os.path.join(dirpath, file_name))
-
+    if os.path.exists('./upload/2003.xls'):
+        os.remove('./upload/2003.xls')
 
 
     wb = xlwt.Workbook()
     sheet = wb.add_sheet("2003测试表")
-    wb.save('./upload/' + file_name)
+    wb.save('./upload/2003.xls')
 
 
-
-
-    return send_from_directory(dirpath, '2003.xls', as_attachment=True)
+    return send_from_directory('./upload', '2003.xls', as_attachment=True)
 
 @app.route("/")
 @app.route("/index")
