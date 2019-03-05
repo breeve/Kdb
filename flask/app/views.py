@@ -829,6 +829,7 @@ def check_input():
 @app.route("/export_result")
 def export_result():
     if os.path.exists('./upload/2003.xls'):
+        print('remove ./upload/2003.xls')
         os.remove('./upload/2003.xls')
 
 
