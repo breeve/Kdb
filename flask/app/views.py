@@ -147,7 +147,7 @@ def save_question(form, user_id, classifier):
     print('strive' + str(strive))
     print('frustration' + str(frustration))
 
-    question['mind'] = str(mind) +
+    question['mind'] = str(mind)
     question['physical'] = str(physical)
     question['time'] = str(time)
     question['satisfy'] = str(satisfy)
