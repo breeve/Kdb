@@ -69,13 +69,6 @@ def save_question(form, user_id, classifier):
     print(line15)
     '''
 
-    mind        = form.get('mind')
-    physical    = form.get('physical')
-    time        = form.get('time')
-    satisfy     = form.get('satisfy')
-    strive      = form.get('strive')
-    frustration = form.get('frustration')
-
     '''
     print(mind)
     print(physical)
@@ -132,6 +125,21 @@ def save_question(form, user_id, classifier):
     question['line15'] = line15
 
     question['user_id'] = user_id
+
+    mind        = form.get('mind')
+    physical    = form.get('physical')
+    time        = form.get('time')
+    satisfy     = form.get('satisfy')
+    strive      = form.get('strive')
+    frustration = form.get('frustration')
+
+    question['mind'] = mind
+    question['physical'] = physical
+    question['time'] = time
+    question['satisfy'] = satisfy
+    question['strive'] = strive
+    question['frustration'] = frustration
+
     if row :
         collection.update(row, question)
     else:
@@ -857,8 +865,8 @@ def export_result():
 
 
     sheet = wb.add_sheet("个人信息表")
-    personalinfo_collection = K_db.personalinfo
-    personalinfo_row = personalinfo_collection.find()
+    collection = K_db.personalinfo
+    rows = collection.find()
 
     value = ['用户id', '年龄', '性别', '教育背景', '检索频率', '检索经验', '使用过的数据库种类个数', '7点李克特量表']
 
@@ -866,16 +874,7 @@ def export_result():
         sheet.write(0, i, value[i])
 
     i = 1
-    for item in personalinfo_row:
-        print(item['user_id'])
-        print(item['age'])
-        print(item['sex'])
-        print(item['education'])
-        print(item['search_rate'])
-        print(item['search_time'])
-        print(item['search_kinds'])
-        print(item['search_path'])
-
+    for item in rows:
         sheet.write(i, 0, str(item['user_id']))
         sheet.write(i, 1, str(item['age']))
         sheet.write(i, 2, str(item['sex']))
@@ -887,8 +886,6 @@ def export_result():
 
         i += 1
 
-
-
     '''
     personalTime
     {
@@ -897,7 +894,30 @@ def export_result():
 	"end_time": [2019, 3, 5, 8, 47, 26, 1, 64, 0],
 	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121"
     }
+    '''
 
+    sheet = wb.add_sheet("搜索时间表")
+    collection = K_db.personalTime
+    rows = collection.find()
+
+    value = ['用户id', '开始时间', '结束时间']
+
+    for i in range(0, len(value)):
+        sheet.write(0, i, value[i])
+
+    i = 1
+    for item in rows:
+        print(item['user_id'])
+        print(item['start_time'])
+        print(item['end_time'])
+
+        sheet.write(i, 0, str(item['user_id']))
+        sheet.write(i, 1, str(item['start_time']))
+        sheet.write(i, 2, str(item['end_time']))
+
+        i += 1
+
+    '''
     question_class_first
     {
 	"_id": ObjectId("5c7e7de002f52b1c4e6f6449"),
@@ -919,6 +939,79 @@ def export_result():
 	"line6": "time"
     }
 
+    mind        = form.get('mind')
+    physical    = form.get('physical')
+    time        = form.get('time')
+    satisfy     = form.get('satisfy')
+    strive      = form.get('strive')
+    frustration = form.get('frustration')
+
+    '''
+    sheet = wb.add_sheet("问卷一结果")
+    collection = K_db.question_class_first
+    rows = collection.find()
+
+    value = ['用户id',
+             '心智需求vs体力需求',
+             '心智需求vs时间需求',
+             '心智需求vs满足',
+             '心智需求vs努力',
+             '心智需求vs挫折感',
+             '体力需求vs时间需求',
+             '体力需求vs满足',
+             '体力需求vs努力',
+             '体力需求vs挫折感',
+             '时间需求vs满足',
+             '时间需求vs努力',
+             '时间需求vs挫折感',
+             '满足vs努力',
+             '满足vs挫折感',
+             '努力vs挫折感',
+             '心智需求',
+             '体力需求',
+             '时间需求',
+             '满足',
+             '努力',
+             '挫折感'
+             ]
+
+    for i in range(0, len(value)):
+        sheet.write(0, i, value[i])
+
+    i = 1
+    for item in rows:
+        sheet.write(i, 0, str(item['user_id']))
+
+        sheet.write(i, 1, str(item['line1']))
+        sheet.write(i, 2, str(item['line2']))
+        sheet.write(i, 3, str(item['line3']))
+        sheet.write(i, 4, str(item['line4']))
+        sheet.write(i, 5, str(item['line5']))
+                                    
+        sheet.write(i, 6, str(item['line6']))
+        sheet.write(i, 7, str(item['line7']))
+        sheet.write(i, 8, str(item['line8']))
+        sheet.write(i, 9, str(item['line9']))
+
+        sheet.write(i, 10, str(item['line10']))
+        sheet.write(i, 11, str(item['line11']))
+        sheet.write(i, 12, str(item['line12']))
+
+        sheet.write(i, 13, str(item['line13']))
+        sheet.write(i, 14, str(item['line14']))
+
+        sheet.write(i, 15, str(item['line15']))
+
+        sheet.write(i, 15, str(item['mind']))
+        sheet.write(i, 15, str(item['physical']))
+        sheet.write(i, 15, str(item['time']))
+        sheet.write(i, 15, str(item['satisfy']))
+        sheet.write(i, 15, str(item['strive']))
+        sheet.write(i, 15, str(item['frustration']))
+
+        i += 1
+
+    '''
     question_class_secondary
     {
 	"_id": ObjectId("5c7e7e0802f52b1c4e6f644f"),
@@ -939,7 +1032,73 @@ def export_result():
 	"line11": "strive",
 	"line6": "physical"
     }
- 
+    '''
+
+    sheet = wb.add_sheet("问卷二结果")
+    collection = K_db.question_class_secondary
+    rows = collection.find()
+
+    value = ['用户id',
+             '心智需求vs体力需求',
+             '心智需求vs时间需求',
+             '心智需求vs满足',
+             '心智需求vs努力',
+             '心智需求vs挫折感',
+             '体力需求vs时间需求',
+             '体力需求vs满足',
+             '体力需求vs努力',
+             '体力需求vs挫折感',
+             '时间需求vs满足',
+             '时间需求vs努力',
+             '时间需求vs挫折感',
+             '满足vs努力',
+             '满足vs挫折感',
+             '努力vs挫折感',
+             '心智需求',
+             '体力需求',
+             '时间需求',
+             '满足',
+             '努力',
+             '挫折感'
+             ]
+
+    for i in range(0, len(value)):
+        sheet.write(0, i, value[i])
+
+    i = 1
+    for item in rows:
+        sheet.write(i, 0, str(item['user_id']))
+
+        sheet.write(i, 1, str(item['line1']))
+        sheet.write(i, 2, str(item['line2']))
+        sheet.write(i, 3, str(item['line3']))
+        sheet.write(i, 4, str(item['line4']))
+        sheet.write(i, 5, str(item['line5']))
+
+        sheet.write(i, 6, str(item['line6']))
+        sheet.write(i, 7, str(item['line7']))
+        sheet.write(i, 8, str(item['line8']))
+        sheet.write(i, 9, str(item['line9']))
+
+        sheet.write(i, 10, str(item['line10']))
+        sheet.write(i, 11, str(item['line11']))
+        sheet.write(i, 12, str(item['line12']))
+
+        sheet.write(i, 13, str(item['line13']))
+        sheet.write(i, 14, str(item['line14']))
+
+        sheet.write(i, 15, str(item['line15']))
+
+        sheet.write(i, 15, str(item['mind']))
+        sheet.write(i, 15, str(item['physical']))
+        sheet.write(i, 15, str(item['time']))
+        sheet.write(i, 15, str(item['satisfy']))
+        sheet.write(i, 15, str(item['strive']))
+        sheet.write(i, 15, str(item['frustration']))
+
+        i += 1
+
+    '''
     user_check_args
     {
 	"_id": ObjectId("5c7e7e8f02f52b0cdd7a281c"),
@@ -948,7 +1107,22 @@ def export_result():
     }
     '''
 
-    sheet = wb.add_sheet("2003测试表")
+    sheet = wb.add_sheet("文章选择表")
+    collection = K_db.user_check_args
+    rows = collection.find()
+
+    value = ['用户id', '有用的文章']
+
+    for i in range(0, len(value)):
+        sheet.write(0, i, value[i])
+
+    i = 1
+    for item in rows:
+        sheet.write(i, 0, str(item['user_id']))
+        sheet.write(i, 1, str(item['args']))
+
+        i += 1
+
     wb.save('/root/Kdb/flask/app/upload/2003.xls')
 
 
