@@ -875,14 +875,30 @@ def export_result():
 
     i = 1
     for item in rows:
-        sheet.write(i, 0, str(item['user_id']))
-        sheet.write(i, 1, str(item['age']))
-        sheet.write(i, 2, str(item['sex']))
-        sheet.write(i, 3, str(item['education']))
-        sheet.write(i, 4, str(item['search_rate']))
-        sheet.write(i, 5, str(item['search_time']))
-        sheet.write(i, 6, str(item['search_kinds']))
-        sheet.write(i, 7, str(item['search_path']))
+        if item['user_id'] :
+            sheet.write(i, 0, str(item['user_id']))
+
+        if item['age'] :
+            sheet.write(i, 1, str(item['age']))
+
+        if item['sex'] :
+            sheet.write(i, 2, str(item['sex']))
+
+        if item['education'] :
+            sheet.write(i, 3, str(item['education']))
+
+        if item['search_rate'] :
+            sheet.write(i, 4, str(item['search_rate']))
+
+        if item['search_time'] :
+            sheet.write(i, 5, str(item['search_time']))
+
+        if item['search_kinds'] :
+            sheet.write(i, 6, str(item['search_kinds']))
+
+        if item['search_path'] :
+            sheet.write(i, 7, str(item['search_path']))
+
 
         i += 1
 
@@ -911,9 +927,15 @@ def export_result():
         print(item['start_time'])
         print(item['end_time'])
 
-        sheet.write(i, 0, str(item['user_id']))
-        sheet.write(i, 1, str(item['start_time']))
-        sheet.write(i, 2, str(item['end_time']))
+        if item['user_id']:
+            sheet.write(i, 0, str(item['user_id']))
+
+        if item['start_time']:
+            sheet.write(i, 1, str(item['start_time']))
+
+        if item['end_time']:
+            sheet.write(i, 2, str(item['end_time']))
+
 
         i += 1
 
@@ -982,32 +1004,63 @@ def export_result():
     for item in rows:
         sheet.write(i, 0, str(item['user_id']))
 
-        sheet.write(i, 1, str(item['line1']))
-        sheet.write(i, 2, str(item['line2']))
-        sheet.write(i, 3, str(item['line3']))
-        sheet.write(i, 4, str(item['line4']))
-        sheet.write(i, 5, str(item['line5']))
-                                    
-        sheet.write(i, 6, str(item['line6']))
-        sheet.write(i, 7, str(item['line7']))
-        sheet.write(i, 8, str(item['line8']))
-        sheet.write(i, 9, str(item['line9']))
+        if item['line1']:
+            sheet.write(i, 1, str(item['line1']))
 
-        sheet.write(i, 10, str(item['line10']))
-        sheet.write(i, 11, str(item['line11']))
-        sheet.write(i, 12, str(item['line12']))
+        if item['line2']:
+            sheet.write(i, 2, str(item['line2']))
 
-        sheet.write(i, 13, str(item['line13']))
-        sheet.write(i, 14, str(item['line14']))
+        if item['line3']:
+            sheet.write(i, 3, str(item['line3']))
 
-        sheet.write(i, 15, str(item['line15']))
+        if item['line4']:
+            sheet.write(i, 4, str(item['line4']))
 
-        sheet.write(i, 15, str(item['mind']))
-        sheet.write(i, 15, str(item['physical']))
-        sheet.write(i, 15, str(item['time']))
-        sheet.write(i, 15, str(item['satisfy']))
-        sheet.write(i, 15, str(item['strive']))
-        sheet.write(i, 15, str(item['frustration']))
+        if item['line5']:
+            sheet.write(i, 5, str(item['line5']))
+
+        if item['line6']:
+            sheet.write(i, 6, str(item['line6']))
+        if item['line7']:
+            sheet.write(i, 7, str(item['line7']))
+        if item['line8']:
+            sheet.write(i, 8, str(item['line8']))
+        if item['line9']:
+            sheet.write(i, 9, str(item['line9']))
+
+        if item['line10']:
+            sheet.write(i, 10, str(item['line10']))
+        if item['line11']:
+            sheet.write(i, 11, str(item['line11']))
+        if item['line12']:
+            sheet.write(i, 12, str(item['line12']))
+
+        if item['line13']:
+            sheet.write(i, 13, str(item['line13']))
+        if item['line14']:
+            sheet.write(i, 14, str(item['line14']))
+
+        if item['line15']:
+            sheet.write(i, 15, str(item['line15']))
+
+        if item['mind']:
+            sheet.write(i, 15, str(item['mind']))
+
+        if item['physical']:
+            sheet.write(i, 15, str(item['physical']))
+
+        if item['time']:
+            sheet.write(i, 15, str(item['time']))
+
+        if item['satisfy']:
+            sheet.write(i, 15, str(item['satisfy']))
+
+        if item['strive']:
+            sheet.write(i, 15, str(item['strive']))
+
+        if item['frustration']:
+            sheet.write(i, 15, str(item['frustration']))
+
 
         i += 1
 
@@ -1069,32 +1122,62 @@ def export_result():
     for item in rows:
         sheet.write(i, 0, str(item['user_id']))
 
-        sheet.write(i, 1, str(item['line1']))
-        sheet.write(i, 2, str(item['line2']))
-        sheet.write(i, 3, str(item['line3']))
-        sheet.write(i, 4, str(item['line4']))
-        sheet.write(i, 5, str(item['line5']))
+        if item['line1']:
+            sheet.write(i, 1, str(item['line1']))
 
-        sheet.write(i, 6, str(item['line6']))
-        sheet.write(i, 7, str(item['line7']))
-        sheet.write(i, 8, str(item['line8']))
-        sheet.write(i, 9, str(item['line9']))
+        if item['line2']:
+            sheet.write(i, 2, str(item['line2']))
 
-        sheet.write(i, 10, str(item['line10']))
-        sheet.write(i, 11, str(item['line11']))
-        sheet.write(i, 12, str(item['line12']))
+        if item['line3']:
+            sheet.write(i, 3, str(item['line3']))
 
-        sheet.write(i, 13, str(item['line13']))
-        sheet.write(i, 14, str(item['line14']))
+        if item['line4']:
+            sheet.write(i, 4, str(item['line4']))
 
-        sheet.write(i, 15, str(item['line15']))
+        if item['line5']:
+            sheet.write(i, 5, str(item['line5']))
 
-        sheet.write(i, 15, str(item['mind']))
-        sheet.write(i, 15, str(item['physical']))
-        sheet.write(i, 15, str(item['time']))
-        sheet.write(i, 15, str(item['satisfy']))
-        sheet.write(i, 15, str(item['strive']))
-        sheet.write(i, 15, str(item['frustration']))
+        if item['line6']:
+            sheet.write(i, 6, str(item['line6']))
+        if item['line7']:
+            sheet.write(i, 7, str(item['line7']))
+        if item['line8']:
+            sheet.write(i, 8, str(item['line8']))
+        if item['line9']:
+            sheet.write(i, 9, str(item['line9']))
+
+        if item['line10']:
+            sheet.write(i, 10, str(item['line10']))
+        if item['line11']:
+            sheet.write(i, 11, str(item['line11']))
+        if item['line12']:
+            sheet.write(i, 12, str(item['line12']))
+
+        if item['line13']:
+            sheet.write(i, 13, str(item['line13']))
+        if item['line14']:
+            sheet.write(i, 14, str(item['line14']))
+
+        if item['line15']:
+            sheet.write(i, 15, str(item['line15']))
+
+        if item['mind']:
+            sheet.write(i, 15, str(item['mind']))
+
+        if item['physical']:
+            sheet.write(i, 15, str(item['physical']))
+
+        if item['time']:
+            sheet.write(i, 15, str(item['time']))
+
+        if item['satisfy']:
+            sheet.write(i, 15, str(item['satisfy']))
+
+        if item['strive']:
+            sheet.write(i, 15, str(item['strive']))
+
+        if item['frustration']:
+            sheet.write(i, 15, str(item['frustration']))
 
         i += 1
 
@@ -1119,7 +1202,8 @@ def export_result():
     i = 1
     for item in rows:
         sheet.write(i, 0, str(item['user_id']))
-        sheet.write(i, 1, str(item['args']))
+        if item['args']:
+            sheet.write(i, 1, str(item['args']))
 
         i += 1
 
