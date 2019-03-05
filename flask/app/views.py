@@ -3,6 +3,11 @@ import re
 import math
 import uuid
 import time
+import xlrd
+import xlwt
+import openpyxl
+import os
+from flask import Flask, render_template, send_from_directory, request, jsonify
 from flask import render_template, flash, redirect, request
 from app import app
 from .forms import LoginForm
@@ -820,6 +825,11 @@ def check_input():
         collection.insert_one(check_args).inserted_id
 
     return 'ok'
+
+@app.route("/export_result")
+def export_result():
+    dirpath = os.path.join(app.root_path, 'upload')
+    return send_from_directory(dirpath, '2003.xls', as_attachment=True)
 
 @app.route("/")
 @app.route("/index")
