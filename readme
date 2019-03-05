@@ -42,6 +42,10 @@ drwxr-xr-x 4 root root 4.0K  3月  4 07:55 dump
 -rw-r--r-- 1 root root 1.9K  2月 23 10:43 readme
 ➜  mongodb git:(master) ✗ mongorestore --dir ./dump --drop
 
+git fetch --all
+git reset --hard origin/master
+git pull
+
 
 notes
 3. 显示文章总数

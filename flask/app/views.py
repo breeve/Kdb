@@ -832,8 +832,104 @@ def export_result():
         print('remove ./app/upload/2003.xls')
         os.remove('/root/Kdb/flask/app/upload/2003.xls')
 
-
     wb = xlwt.Workbook()
+
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+
+
+
+    '''
+    personalinfo
+    {
+	"_id": ObjectId("5c7e7dad02f52b1c4e6f6441"),
+	"search_rate": "1-从不",
+	"age": "18",
+	"user_id": BinData(3, "D3PSnD9NEemNORPOXnnBIQ=="),
+	"search_path": "1-从来没有",
+	"sex": "男",
+	"search_time": "半年以内",
+	"name": "",
+	"search_kinds": "没用过",
+	"education": "高中"
+    } 
+    '''
+
+
+    sheet = wb.add_sheet("个人信息表")
+    personalinfo_collection = K_db.personalinfo
+    personalinfo_row = personalinfo_collection.find()
+
+    for item in personalinfo_row:
+        print(item['user_id'])
+        print(item['age'])
+        print(item['sex'])
+        print(item['search_rate'])
+        print(item['search_path'])
+        print(item['search_time'])
+        print(item['search_kinds'])
+        print(item['education'])
+
+
+    '''
+    personalTime
+    {
+	"_id": ObjectId("5c7e7dba02f52b1c4e6f6443"),
+	"start_time": [2019, 3, 5, 8, 46, 34, 1, 64, 0],
+	"end_time": [2019, 3, 5, 8, 47, 26, 1, 64, 0],
+	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121"
+    }
+
+    question_class_first
+    {
+	"_id": ObjectId("5c7e7de002f52b1c4e6f6449"),
+	"line15": "strive",
+	"line1": "mind",
+	"line10": "satisfy",
+	"line5": "mind",
+	"line13": "satisfy",
+	"line3": "mind",
+	"line9": "physical",
+	"line14": "frustration",
+	"line4": "strive",
+	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121",
+	"line12": "frustration",
+	"line7": "physical",
+	"line8": "strive",
+	"line2": "time",
+	"line11": "time",
+	"line6": "time"
+    }
+
+    question_class_secondary
+    {
+	"_id": ObjectId("5c7e7e0802f52b1c4e6f644f"),
+	"line15": "frustration",
+	"line1": "physical",
+	"line10": "time",
+	"line5": "frustration",
+	"line13": "strive",
+	"line3": "satisfy",
+	"line9": "frustration",
+	"line14": "satisfy",
+	"line4": "mind",
+	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121",
+	"line12": "time",
+	"line7": "satisfy",
+	"line8": "physical",
+	"line2": "mind",
+	"line11": "strive",
+	"line6": "physical"
+    }
+ 
+    user_check_args
+    {
+	"_id": ObjectId("5c7e7e8f02f52b0cdd7a281c"),
+	"args": ["情报学研究中理论应用的国际比较\n"],
+	"user_id": "79edcd6c-3f4d-11e9-8f84-cd6a8ac7ae3a"
+    }
+    '''
+
     sheet = wb.add_sheet("2003测试表")
     wb.save('/root/Kdb/flask/app/upload/2003.xls')
 
