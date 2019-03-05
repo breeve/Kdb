@@ -828,14 +828,14 @@ def check_input():
 
 @app.route("/export_result")
 def export_result():
-    if os.path.exists('./upload/2003.xls'):
-        print('remove ./upload/2003.xls')
-        os.remove('./upload/2003.xls')
+    if os.path.exists('./app/upload/2003.xls'):
+        print('remove ./app/upload/2003.xls')
+        os.remove('./app/upload/2003.xls')
 
 
     wb = xlwt.Workbook()
     sheet = wb.add_sheet("2003测试表")
-    wb.save('./upload/2003.xls')
+    wb.save('./app/upload/2003.xls')
 
 
     return send_from_directory('./upload', '2003.xls', as_attachment=True)
