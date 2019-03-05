@@ -838,7 +838,8 @@ def export_result():
     wb.save('./app/upload/2003.xls')
 
 
-    return send_from_directory('./upload', '2003.xls', as_attachment=True)
+    #return send_from_directory('./upload', '2003.xls', as_attachment=True)
+    return send_from_directory('./app/upload', '2003.xls')
 
 @app.route("/")
 @app.route("/index")
