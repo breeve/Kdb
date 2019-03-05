@@ -876,14 +876,14 @@ def export_result():
         print(item['search_kinds'])
         print(item['search_path'])
 
-        sheet.write(i, 0, item['user_id'])
-        sheet.write(i, 1, item['age'])
-        sheet.write(i, 2, item['sex'])
-        sheet.write(i, 3, item['education'])
-        sheet.write(i, 4, item['search_rate'])
-        sheet.write(i, 5, item['search_time'])
-        sheet.write(i, 6, item['search_kinds'])
-        sheet.write(i, 7, item['search_path'])
+        sheet.write(i, 0, str(item['user_id']))
+        sheet.write(i, 1, str(item['age']))
+        sheet.write(i, 2, str(item['sex']))
+        sheet.write(i, 3, str(item['education']))
+        sheet.write(i, 4, str(item['search_rate']))
+        sheet.write(i, 5, str(item['search_time']))
+        sheet.write(i, 6, str(item['search_kinds']))
+        sheet.write(i, 7, str(item['search_path']))
 
         i += 1
 
