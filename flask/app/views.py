@@ -7,7 +7,6 @@ import xlrd
 import xlwt
 import openpyxl
 import os
-import random
 from flask import Flask, render_template, send_from_directory, request, jsonify
 from flask import render_template, flash, redirect, request
 from app import app
@@ -21,6 +20,7 @@ ROWS_PER_PAGE = 10
 g_name = ""
 g_age  = 0
 g_user_id = 0
+g_search_class = 1
 
 # class_first      1
 # class_secondary  2
@@ -806,20 +806,19 @@ def dispatch():
     print(datax['search_path'])
     '''
 
-    search_class = random.random()
-    if search_class > 0.5 :
-        search_class = 1
+    if g_search_class == 1:
+        g_search_class = 2
     else:
-        search_class = 2
+        g_search_class = 1
 
-    datax['search_class'] = search_class
+    datax['search_class'] = g_search_class
 
     save_personalinfo(datax)
     #print(g_user_id)
 
     article_total_nums = 1000
 
-    if search_class == 1:
+    if g_search_class == 1:
         return render_template('view_first.html',
                                title='view_first',
                                total_articles=article_total_nums,
