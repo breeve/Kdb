@@ -140,13 +140,14 @@ def save_question(form, user_id, classifier):
         frustration = form.get('frustration')
 
 
-
+    '''
     print('mind' + str(mind))
     print('physical' + str(physical))
     print('time' + str(time))
     print('satisfy' + str(satisfy))
     print('strive' + str(strive))
     print('frustration' + str(frustration))
+    '''
 
     question['mind'] = str(mind)
     question['physical'] = str(physical)
@@ -154,6 +155,10 @@ def save_question(form, user_id, classifier):
     question['satisfy'] = str(satisfy)
     question['strive'] = str(strive)
     question['frustration'] = str(frustration)
+
+    task_select = form.get('task_select')
+
+    question['task_select'] = task_select
 
     if row :
         collection.update(row, question)
