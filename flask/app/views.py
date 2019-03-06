@@ -164,10 +164,6 @@ def save_question(form, user_id, classifier):
     question['strive'] = str(strive)
     question['frustration'] = str(frustration)
 
-    task_select = form.get('task_select')
-
-    question['task_select'] = task_select
-
     if row :
         collection.update(row, question)
     else:
@@ -437,11 +433,31 @@ def search_normal_result_secondary():
                            left_row = left_row,
                            total_articles=page_info.total_page)
 
+def save_task_select(user_id, task_select):
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.taskSelect
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    row = collection.find_one(keywords_regex)
+
+    datax = {}
+    datax['user_id'] = user_id
+    datax['task_select'] = task_select
+    if row :
+        collection.update(row, datax)
+    else :
+        collection.insert_one(datax).inserted_id
+
+    #print(datax)
+
 @app.route("/end_search", methods = ["POST", "GET", "PUSH"])
 def end_search():
-    #user_id = request.form.get('user_id')
-    #suggest = request.form.get('suggest')
-    #print(str(user_id) +" :"+ str(suggest))
+    user_id = request.form.get('user_id')
+    task_select = request.form.get('task_select')
+
+    save_task_select(user_id, task_select)
     return redirect("/index")
 
 @app.route("/exit_view_first", methods = ["POST", "GET", "PUSH"])
