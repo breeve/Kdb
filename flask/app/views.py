@@ -806,6 +806,8 @@ def dispatch():
     print(datax['search_path'])
     '''
 
+    global g_search_class
+
     if g_search_class == 1:
         g_search_class = 2
     else:
