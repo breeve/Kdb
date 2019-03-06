@@ -1051,7 +1051,39 @@ def export_result():
 
     i = 1
     for item in rows:
-        print(item.keys())
+        #print(item.keys())
+        keys = item.keys()
+        if 'user_id' not in keys:
+            continue
+
+        if 'search_class' not in keys:
+            continue
+
+        if 'search_level' not in keys:
+            continue
+
+        if 'age' not in keys:
+            continue
+
+        if 'sex' not in keys:
+            continue
+
+        if 'education' not in keys:
+            continue
+
+        if 'search_rate' not in keys:
+            continue
+
+        if 'search_time' not in keys:
+            continue
+
+        if 'search_kinds' not in keys:
+            continue
+
+        if 'search_path' not in keys:
+            continue
+
+
         user_id = item['user_id']
         search_class = item['search_class']
         search_cab = item['search_level']
@@ -1107,6 +1139,20 @@ def export_result():
         if row_personal_time is None:
             continue
 
+        keys = row_personal_time.keys()
+
+        if 'start_time_first' not in keys:
+            continue
+
+        if 'end_time_first' not in keys:
+            continue
+
+        if 'start_time_secondary' not in keys:
+            continue
+
+        if 'end_time_secondary' not in keys:
+            continue
+
         start_time_first = row_personal_time['start_time_first']
         end_time_first = row_personal_time['end_time_first']
         start_time_secondary = row_personal_time['start_time_secondary']
@@ -1120,11 +1166,21 @@ def export_result():
         if row_user_check_args_view1 is None:
             continue
 
+        keys = row_user_check_args_view1.keys()
+
+        if 'args' not in keys:
+            continue
+
         view1_args = row_user_check_args_view1['args']
 
         # user_check_args_view2
         row_user_check_args_view2 = collection_user_check_args_view2.find_one(keywords_regex)
         if row_user_check_args_view2 is None:
+            continue
+
+        keys = row_user_check_args_view2.keys()
+
+        if 'args' not in keys:
             continue
 
         view2_args = row_user_check_args_view2['args']
@@ -1134,6 +1190,53 @@ def export_result():
             question_class_first = collection_question_class_first.find_one(keywords_regex)
             if question_class_first is None:
                 continue
+
+            keys = question_class_first.keys()
+
+            if 'line1' not in keys:
+                continue
+            if 'line2' not in keys:
+                continue
+            if 'line3' not in keys:
+                continue
+            if 'line4' not in keys:
+                continue
+            if 'line5' not in keys:
+                continue
+            if 'line6' not in keys:
+                continue
+            if 'line7' not in keys:
+                continue
+            if 'line8' not in keys:
+                continue
+            if 'line9' not in keys:
+                continue
+            if 'line10' not in keys:
+                continue
+            if 'line11' not in keys:
+                continue
+            if 'line12' not in keys:
+                continue
+            if 'line13' not in keys:
+                continue
+            if 'line14' not in keys:
+                continue
+            if 'line15' not in keys:
+                continue
+
+            if 'mind' not in keys:
+                continue
+            if 'physical' not in keys:
+                continue
+            if 'time' not in keys:
+                continue
+            if 'satisfy' not in keys:
+                continue
+            if 'strive' not in keys:
+                continue
+            if 'frustration' not in keys:
+                continue
+
 
             view1_mind_times = 0
             view1_physical_times = 0
@@ -1235,6 +1338,52 @@ def export_result():
             if question_class_secondary is None:
                 continue
 
+            keys = question_class_secondary.keys()
+
+            if 'line1' not in keys:
+                continue
+            if 'line2' not in keys:
+                continue
+            if 'line3' not in keys:
+                continue
+            if 'line4' not in keys:
+                continue
+            if 'line5' not in keys:
+                continue
+            if 'line6' not in keys:
+                continue
+            if 'line7' not in keys:
+                continue
+            if 'line8' not in keys:
+                continue
+            if 'line9' not in keys:
+                continue
+            if 'line10' not in keys:
+                continue
+            if 'line11' not in keys:
+                continue
+            if 'line12' not in keys:
+                continue
+            if 'line13' not in keys:
+                continue
+            if 'line14' not in keys:
+                continue
+            if 'line15' not in keys:
+                continue
+
+            if 'mind' not in keys:
+                continue
+            if 'physical' not in keys:
+                continue
+            if 'time' not in keys:
+                continue
+            if 'satisfy' not in keys:
+                continue
+            if 'strive' not in keys:
+                continue
+            if 'frustration' not in keys:
+                continue
+
             view2_mind_times = 0
             view2_physical_times = 0
             view2_time_times = 0
@@ -1333,7 +1482,51 @@ def export_result():
             question_normal_first = collection_question_normal_first.find_one(keywords_regex)
             if question_normal_first is None:
                 continue
+            keys = question_normal_first.keys()
 
+            if 'line1' not in keys:
+                continue
+            if 'line2' not in keys:
+                continue
+            if 'line3' not in keys:
+                continue
+            if 'line4' not in keys:
+                continue
+            if 'line5' not in keys:
+                continue
+            if 'line6' not in keys:
+                continue
+            if 'line7' not in keys:
+                continue
+            if 'line8' not in keys:
+                continue
+            if 'line9' not in keys:
+                continue
+            if 'line10' not in keys:
+                continue
+            if 'line11' not in keys:
+                continue
+            if 'line12' not in keys:
+                continue
+            if 'line13' not in keys:
+                continue
+            if 'line14' not in keys:
+                continue
+            if 'line15' not in keys:
+                continue
+
+            if 'mind' not in keys:
+                continue
+            if 'physical' not in keys:
+                continue
+            if 'time' not in keys:
+                continue
+            if 'satisfy' not in keys:
+                continue
+            if 'strive' not in keys:
+                continue
+            if 'frustration' not in keys:
+                continue
             view1_mind_times = 0
             view1_physical_times = 0
             view1_time_times = 0
@@ -1428,7 +1621,51 @@ def export_result():
             question_normal_secondary = collection_question_normal_secondary.find_one(keywords_regex)
             if question_normal_secondary is None:
                 continue
+            keys = question_normal_secondary.keys()
 
+            if 'line1' not in keys:
+                continue
+            if 'line2' not in keys:
+                continue
+            if 'line3' not in keys:
+                continue
+            if 'line4' not in keys:
+                continue
+            if 'line5' not in keys:
+                continue
+            if 'line6' not in keys:
+                continue
+            if 'line7' not in keys:
+                continue
+            if 'line8' not in keys:
+                continue
+            if 'line9' not in keys:
+                continue
+            if 'line10' not in keys:
+                continue
+            if 'line11' not in keys:
+                continue
+            if 'line12' not in keys:
+                continue
+            if 'line13' not in keys:
+                continue
+            if 'line14' not in keys:
+                continue
+            if 'line15' not in keys:
+                continue
+
+            if 'mind' not in keys:
+                continue
+            if 'physical' not in keys:
+                continue
+            if 'time' not in keys:
+                continue
+            if 'satisfy' not in keys:
+                continue
+            if 'strive' not in keys:
+                continue
+            if 'frustration' not in keys:
+                continue
             view2_mind_times = 0
             view2_physical_times = 0
             view2_time_times = 0
@@ -1527,7 +1764,10 @@ def export_result():
         taskSelect = collection_taskSelect.find_one(keywords_regex)
         if taskSelect is None:
             continue
+        keys = taskSelect.keys()
 
+        if 'task_select' not in keys:
+            continue
         task_select = taskSelect['task_select']
 
 
