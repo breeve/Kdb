@@ -1051,6 +1051,7 @@ def export_result():
 
     i = 1
     for item in rows:
+        print(item.keys())
         user_id = item['user_id']
         search_class = item['search_class']
         search_cab = item['search_level']
