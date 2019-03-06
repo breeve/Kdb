@@ -126,6 +126,14 @@ def save_question(form, user_id, classifier):
     question['line15'] = line15
 
     question['user_id'] = user_id
+
+    mind = 15
+    physical = 25
+    time = 45
+    satisfy = 55
+    strive = 35
+    frustration = 75
+
     if form.get('mind'):
         mind        = form.get('mind')
     if form.get('physical'):
