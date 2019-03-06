@@ -172,8 +172,8 @@ def save_question(form, user_id, classifier):
 
 
 
-def save_personal_time_start(user_id):
-    start_time = time.localtime(time.time())
+def save_personal_time_start_first(user_id):
+    start_time = time.time()
     #print(str(user_id)+" start_time: "+str(start_time))
 
     client = pymongo.MongoClient(host='localhost', port=27017)
@@ -186,20 +186,20 @@ def save_personal_time_start(user_id):
 
     datax = {}
     datax['user_id'] = user_id
-    datax['start_time'] = start_time
+    datax['start_time_first'] = start_time
 
     if row :
-        datax['end_time'] = row['end_time']
+        datax['end_time_first'] = row['end_time_first']
         collection.update(row, datax)
     else :
-        datax['end_time'] = ''
+        datax['end_time_first'] = ''
         collection.insert_one(datax).inserted_id
 
     #print(datax)
 
 
-def save_personal_time_end(user_id):
-    end_time = time.localtime(time.time())
+def save_personal_time_end_first(user_id):
+    end_time = time.time()
     #print(str(user_id)+" end_time: "+str(end_time))
 
     client = pymongo.MongoClient(host='localhost', port=27017)
@@ -212,15 +212,66 @@ def save_personal_time_end(user_id):
 
     datax = {}
     datax['user_id'] = user_id
-    datax['end_time'] = end_time
+    datax['end_time_first'] = end_time
     if row :
-        datax['start_time'] = row['start_time']
+        datax['start_time_first'] = row['start_time_first']
         collection.update(row, datax)
     else :
-        datax['start_time'] = ''
+        datax['start_time_first'] = ''
         collection.insert_one(datax).inserted_id
 
     #print(datax)
+
+def save_personal_time_start_secondary(user_id):
+    start_time = time.time()
+    #print(str(user_id)+" start_time: "+str(start_time))
+
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.personalTime
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    row = collection.find_one(keywords_regex)
+
+    datax = {}
+    datax['user_id'] = user_id
+    datax['start_time_secondary'] = start_time
+
+    if row :
+        datax['end_time_secondary'] = row['end_time_secondary']
+        collection.update(row, datax)
+    else :
+        datax['end_time_secondary'] = ''
+        collection.insert_one(datax).inserted_id
+
+    #print(datax)
+
+
+def save_personal_time_end_secondary(user_id):
+    end_time = time.time()
+    #print(str(user_id)+" end_time: "+str(end_time))
+
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    K_db = client.K_db
+    collection = K_db.personalTime
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    row = collection.find_one(keywords_regex)
+
+    datax = {}
+    datax['user_id'] = user_id
+    datax['end_time_secondary'] = end_time
+    if row :
+        datax['start_time_secondary'] = row['start_time_secondary']
+        collection.update(row, datax)
+    else :
+        datax['start_time_secondary'] = ''
+        collection.insert_one(datax).inserted_id
+
+    #print(datax)
+
 
 def get_search_regex(key, keywords):
     keywords_regex = {}
@@ -681,7 +732,7 @@ def normal_view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     #print('normal_view_secondary_question start')
-    save_personal_time_end(user_id)
+    save_personal_time_end_secondary(user_id)
     #print('normal_view_secondary_question end')
     return render_template('normal_view_secondary_question.html',
         title = 'view_first_question',
@@ -714,7 +765,7 @@ def normal_search_key_secondary():
 def search_normal_secondary():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
-    #save_personal_time_start(user_id)
+    save_personal_time_start_secondary(user_id)
     return render_template('normal_search_secondary.html',
         name = "datax['name']",
         age = "datax['age']",
@@ -742,6 +793,7 @@ def normal_view_secondary():
 def normal_view_first_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    save_personal_time_end_first(user_id)
     return render_template('normal_view_first_question.html',
         title = 'view_first_question',
         total_articles = article_total_nums,
@@ -774,7 +826,7 @@ def search_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     #print("search_normal start")
-    save_personal_time_start(user_id)
+    save_personal_time_start_first(user_id)
     #print("search_normal end")
     return render_template('normal_search_first.html',
         name = "datax['name']",
@@ -867,8 +919,8 @@ def personalinfo():
         title = 'Personal Info',
         total_articles = article_total_nums)
 
-@app.route("/check_input", methods = ["POST"])
-def check_input():
+@app.route("/check_input_first", methods = ["POST"])
+def check_input_first():
     user_id = request.form.get('user_id')
     #print(user_id)
     check_args = request.form.get('check_args')
@@ -877,7 +929,34 @@ def check_input():
 
     client = pymongo.MongoClient(host='localhost', port=27017)
     kdb = client.K_db
-    collection = kdb.user_check_args
+    collection = kdb.user_check_args_view1
+
+    keywords_regex = {}
+    keywords_regex['user_id'] = user_id
+    row = collection.find_one(keywords_regex)
+
+    check_args = {}
+    check_args['user_id'] = user_id
+    check_args['args'] = args
+
+    if row :
+        collection.update(row, check_args)
+    else:
+        collection.insert_one(check_args).inserted_id
+
+    return 'ok'
+
+@app.route("/check_input_secondary", methods = ["POST"])
+def check_input_secondary():
+    user_id = request.form.get('user_id')
+    #print(user_id)
+    check_args = request.form.get('check_args')
+    args = [arg for arg in check_args.strip().split('breeve') if arg != '']
+    #print(args)
+
+    client = pymongo.MongoClient(host='localhost', port=27017)
+    kdb = client.K_db
+    collection = kdb.user_check_args_view1
 
     keywords_regex = {}
     keywords_regex['user_id'] = user_id
@@ -924,137 +1003,39 @@ def export_result():
     '''
 
 
+    user_id = 0
+
     sheet = wb.add_sheet("个人信息表")
     collection = K_db.personalinfo
+
+    collection_personalTime = K_db.personalTime
+
+    collection_question_class_first = K_db.question_class_first
+    collection_question_class_secondary = K_db.question_class_secondary
+    collection_question_normal_first = K_db.question_normal_first
+    collection_question_normal_secondary = K_db.question_normal_secondary
+
+    collection_user_check_args_view1 = K_db.user_check_args_view1
+    collection_user_check_args_view2 = K_db.user_check_args_view2
+    collection_taskSelect = K_db.taskSelect
+
     rows = collection.find()
 
-    value = ['用户id', '年龄', '性别', '教育背景', '检索频率', '检索经验', '使用过的数据库种类个数', '7点李克特量表']
+    value = [
+            '用户id', '搜索种类', '搜索经验高低', '任务难度选择',
+            '年龄', '性别', '学历', '检索频率', '检索经验', '使用过的数据库种类个数', '7点李克特量表',
 
-    for i in range(0, len(value)):
-        sheet.write(0, i, value[i])
+            '情景一文章', '情景一检索时间',
+            '情景一Mind选择次数','情景一Physical选择次数','情景一Time选择次数',
+            '情景一Eerformance选择次数','情景一Effort选择次数','情景一Frustration选择次数',
+            '情景一Mind分数', '情景一Physical分数', '情景一Time分数',
+            '情景一Eerformance分数', '情景一Effort分数', '情景一Frustration分数',
 
-    i = 1
-    for item in rows:
-        if item['user_id'] :
-            sheet.write(i, 0, str(item['user_id']))
-
-        if item['age'] :
-            sheet.write(i, 1, str(item['age']))
-
-        if item['sex'] :
-            sheet.write(i, 2, str(item['sex']))
-
-        if item['education'] :
-            sheet.write(i, 3, str(item['education']))
-
-        if item['search_rate'] :
-            sheet.write(i, 4, str(item['search_rate']))
-
-        if item['search_time'] :
-            sheet.write(i, 5, str(item['search_time']))
-
-        if item['search_kinds'] :
-            sheet.write(i, 6, str(item['search_kinds']))
-
-        if item['search_path'] :
-            sheet.write(i, 7, str(item['search_path']))
-
-
-        i += 1
-
-    '''
-    personalTime
-    {
-	"_id": ObjectId("5c7e7dba02f52b1c4e6f6443"),
-	"start_time": [2019, 3, 5, 8, 46, 34, 1, 64, 0],
-	"end_time": [2019, 3, 5, 8, 47, 26, 1, 64, 0],
-	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121"
-    }
-    '''
-
-    sheet = wb.add_sheet("搜索时间表")
-    collection = K_db.personalTime
-    rows = collection.find()
-
-    value = ['用户id', '开始时间', '结束时间']
-
-    for i in range(0, len(value)):
-        sheet.write(0, i, value[i])
-
-    i = 1
-    for item in rows:
-        print(item['user_id'])
-        print(item['start_time'])
-        print(item['end_time'])
-
-        if item['user_id']:
-            sheet.write(i, 0, str(item['user_id']))
-
-        if item['start_time']:
-            sheet.write(i, 1, str(item['start_time']))
-
-        if item['end_time']:
-            sheet.write(i, 2, str(item['end_time']))
-
-
-        i += 1
-
-    '''
-    question_class_first
-    {
-	"_id": ObjectId("5c7e7de002f52b1c4e6f6449"),
-	"line15": "strive",
-	"line1": "mind",
-	"line10": "satisfy",
-	"line5": "mind",
-	"line13": "satisfy",
-	"line3": "mind",
-	"line9": "physical",
-	"line14": "frustration",
-	"line4": "strive",
-	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121",
-	"line12": "frustration",
-	"line7": "physical",
-	"line8": "strive",
-	"line2": "time",
-	"line11": "time",
-	"line6": "time"
-    }
-
-    mind        = form.get('mind')
-    physical    = form.get('physical')
-    time        = form.get('time')
-    satisfy     = form.get('satisfy')
-    strive      = form.get('strive')
-    frustration = form.get('frustration')
-
-    '''
-    sheet = wb.add_sheet("分类搜索问卷一结果")
-    collection = K_db.question_class_first
-    rows = collection.find()
-
-    value = ['用户id',
-             '心智需求vs体力需求',
-             '心智需求vs时间需求',
-             '心智需求vs满足',
-             '心智需求vs努力',
-             '心智需求vs挫折感',
-             '体力需求vs时间需求',
-             '体力需求vs满足',
-             '体力需求vs努力',
-             '体力需求vs挫折感',
-             '时间需求vs满足',
-             '时间需求vs努力',
-             '时间需求vs挫折感',
-             '满足vs努力',
-             '满足vs挫折感',
-             '努力vs挫折感',
-             '心智需求',
-             '体力需求',
-             '时间需求',
-             '满足',
-             '努力',
-             '挫折感'
+            '情景二文章', '情景二检索时间',
+            '情景二Mind选择次数', '情景二Physical选择次数', '情景二Time选择次数',
+            '情景二Eerformance选择次数', '情景二Effort选择次数', '情景二Frustration选择次数',
+            '情景二Mind分数', '情景二Physical分数', '情景二Time分数',
+            '情景二Eerformance分数', '情景二Effort分数', '情景二Frustration分数'
              ]
 
     for i in range(0, len(value)):
@@ -1062,400 +1043,527 @@ def export_result():
 
     i = 1
     for item in rows:
-        sheet.write(i, 0, str(item['user_id']))
-
-        if item['line1']:
-            sheet.write(i, 1, str(item['line1']))
-
-        if item['line2']:
-            sheet.write(i, 2, str(item['line2']))
-
-        if item['line3']:
-            sheet.write(i, 3, str(item['line3']))
-
-        if item['line4']:
-            sheet.write(i, 4, str(item['line4']))
-
-        if item['line5']:
-            sheet.write(i, 5, str(item['line5']))
-
-        if item['line6']:
-            sheet.write(i, 6, str(item['line6']))
-        if item['line7']:
-            sheet.write(i, 7, str(item['line7']))
-        if item['line8']:
-            sheet.write(i, 8, str(item['line8']))
-        if item['line9']:
-            sheet.write(i, 9, str(item['line9']))
-
-        if item['line10']:
-            sheet.write(i, 10, str(item['line10']))
-        if item['line11']:
-            sheet.write(i, 11, str(item['line11']))
-        if item['line12']:
-            sheet.write(i, 12, str(item['line12']))
-
-        if item['line13']:
-            sheet.write(i, 13, str(item['line13']))
-        if item['line14']:
-            sheet.write(i, 14, str(item['line14']))
-
-        if item['line15']:
-            sheet.write(i, 15, str(item['line15']))
-
-        if item['mind']:
-            sheet.write(i, 16, str(item['mind']))
-
-        if item['physical']:
-            sheet.write(i, 17, str(item['physical']))
-
-        if item['time']:
-            sheet.write(i, 18, str(item['time']))
-
-        if item['satisfy']:
-            sheet.write(i, 19, str(item['satisfy']))
-
-        if item['strive']:
-            sheet.write(i, 20, str(item['strive']))
-
-        if item['frustration']:
-            sheet.write(i, 21, str(item['frustration']))
-
-
-        i += 1
-
-    '''
-    question_class_secondary
-    {
-	"_id": ObjectId("5c7e7e0802f52b1c4e6f644f"),
-	"line15": "frustration",
-	"line1": "physical",
-	"line10": "time",
-	"line5": "frustration",
-	"line13": "strive",
-	"line3": "satisfy",
-	"line9": "frustration",
-	"line14": "satisfy",
-	"line4": "mind",
-	"user_id": "0f73d29c-3f4d-11e9-8d39-13ce5e79c121",
-	"line12": "time",
-	"line7": "satisfy",
-	"line8": "physical",
-	"line2": "mind",
-	"line11": "strive",
-	"line6": "physical"
-    }
-    '''
-
-    sheet = wb.add_sheet("分类搜索问卷二结果")
-    collection = K_db.question_class_secondary
-    rows = collection.find()
-
-    value = ['用户id',
-             '心智需求vs体力需求',
-             '心智需求vs时间需求',
-             '心智需求vs满足',
-             '心智需求vs努力',
-             '心智需求vs挫折感',
-             '体力需求vs时间需求',
-             '体力需求vs满足',
-             '体力需求vs努力',
-             '体力需求vs挫折感',
-             '时间需求vs满足',
-             '时间需求vs努力',
-             '时间需求vs挫折感',
-             '满足vs努力',
-             '满足vs挫折感',
-             '努力vs挫折感',
-             '心智需求',
-             '体力需求',
-             '时间需求',
-             '满足',
-             '努力',
-             '挫折感'
-             ]
-
-    for i in range(0, len(value)):
-        sheet.write(0, i, value[i])
-
-    i = 1
-    for item in rows:
-        sheet.write(i, 0, str(item['user_id']))
-
-        if item['line1']:
-            sheet.write(i, 1, str(item['line1']))
-
-        if item['line2']:
-            sheet.write(i, 2, str(item['line2']))
-
-        if item['line3']:
-            sheet.write(i, 3, str(item['line3']))
-
-        if item['line4']:
-            sheet.write(i, 4, str(item['line4']))
-
-        if item['line5']:
-            sheet.write(i, 5, str(item['line5']))
-
-        if item['line6']:
-            sheet.write(i, 6, str(item['line6']))
-        if item['line7']:
-            sheet.write(i, 7, str(item['line7']))
-        if item['line8']:
-            sheet.write(i, 8, str(item['line8']))
-        if item['line9']:
-            sheet.write(i, 9, str(item['line9']))
-
-        if item['line10']:
-            sheet.write(i, 10, str(item['line10']))
-        if item['line11']:
-            sheet.write(i, 11, str(item['line11']))
-        if item['line12']:
-            sheet.write(i, 12, str(item['line12']))
-
-        if item['line13']:
-            sheet.write(i, 13, str(item['line13']))
-        if item['line14']:
-            sheet.write(i, 14, str(item['line14']))
-
-        if item['line15']:
-            sheet.write(i, 15, str(item['line15']))
-
-        if item['mind']:
-            sheet.write(i, 16, str(item['mind']))
-
-        if item['physical']:
-            sheet.write(i, 17, str(item['physical']))
-
-        if item['time']:
-            sheet.write(i, 18, str(item['time']))
-
-        if item['satisfy']:
-            sheet.write(i, 19, str(item['satisfy']))
-
-        if item['strive']:
-            sheet.write(i, 20, str(item['strive']))
-
-        if item['frustration']:
-            sheet.write(i, 21, str(item['frustration']))
-
-        i += 1
-
-
-    sheet = wb.add_sheet("普通搜索问卷一结果")
-    collection = K_db.question_normal_secondary
-    rows = collection.find()
-
-    value = ['用户id',
-             '心智需求vs体力需求',
-             '心智需求vs时间需求',
-             '心智需求vs满足',
-             '心智需求vs努力',
-             '心智需求vs挫折感',
-             '体力需求vs时间需求',
-             '体力需求vs满足',
-             '体力需求vs努力',
-             '体力需求vs挫折感',
-             '时间需求vs满足',
-             '时间需求vs努力',
-             '时间需求vs挫折感',
-             '满足vs努力',
-             '满足vs挫折感',
-             '努力vs挫折感',
-             '心智需求',
-             '体力需求',
-             '时间需求',
-             '满足',
-             '努力',
-             '挫折感'
-             ]
-
-    for i in range(0, len(value)):
-        sheet.write(0, i, value[i])
-
-    i = 1
-    for item in rows:
-        sheet.write(i, 0, str(item['user_id']))
-
-        if item['line1']:
-            sheet.write(i, 1, str(item['line1']))
-
-        if item['line2']:
-            sheet.write(i, 2, str(item['line2']))
-
-        if item['line3']:
-            sheet.write(i, 3, str(item['line3']))
-
-        if item['line4']:
-            sheet.write(i, 4, str(item['line4']))
-
-        if item['line5']:
-            sheet.write(i, 5, str(item['line5']))
-
-        if item['line6']:
-            sheet.write(i, 6, str(item['line6']))
-        if item['line7']:
-            sheet.write(i, 7, str(item['line7']))
-        if item['line8']:
-            sheet.write(i, 8, str(item['line8']))
-        if item['line9']:
-            sheet.write(i, 9, str(item['line9']))
-
-        if item['line10']:
-            sheet.write(i, 10, str(item['line10']))
-        if item['line11']:
-            sheet.write(i, 11, str(item['line11']))
-        if item['line12']:
-            sheet.write(i, 12, str(item['line12']))
-
-        if item['line13']:
-            sheet.write(i, 13, str(item['line13']))
-        if item['line14']:
-            sheet.write(i, 14, str(item['line14']))
-
-        if item['line15']:
-            sheet.write(i, 15, str(item['line15']))
-
-        if item['mind']:
-            sheet.write(i, 16, str(item['mind']))
-
-        if item['physical']:
-            sheet.write(i, 17, str(item['physical']))
-
-        if item['time']:
-            sheet.write(i, 18, str(item['time']))
-
-        if item['satisfy']:
-            sheet.write(i, 19, str(item['satisfy']))
-
-        if item['strive']:
-            sheet.write(i, 20, str(item['strive']))
-
-        if item['frustration']:
-            sheet.write(i, 21, str(item['frustration']))
-
-        i += 1
-
-    sheet = wb.add_sheet("普通搜索问卷二结果")
-    collection = K_db.question_normal_secondary
-    rows = collection.find()
-
-    value = ['用户id',
-             '心智需求vs体力需求',
-             '心智需求vs时间需求',
-             '心智需求vs满足',
-             '心智需求vs努力',
-             '心智需求vs挫折感',
-             '体力需求vs时间需求',
-             '体力需求vs满足',
-             '体力需求vs努力',
-             '体力需求vs挫折感',
-             '时间需求vs满足',
-             '时间需求vs努力',
-             '时间需求vs挫折感',
-             '满足vs努力',
-             '满足vs挫折感',
-             '努力vs挫折感',
-             '心智需求',
-             '体力需求',
-             '时间需求',
-             '满足',
-             '努力',
-             '挫折感'
-             ]
-
-    for i in range(0, len(value)):
-        sheet.write(0, i, value[i])
-
-    i = 1
-    for item in rows:
-        sheet.write(i, 0, str(item['user_id']))
-
-        if item['line1']:
-            sheet.write(i, 1, str(item['line1']))
-
-        if item['line2']:
-            sheet.write(i, 2, str(item['line2']))
-
-        if item['line3']:
-            sheet.write(i, 3, str(item['line3']))
-
-        if item['line4']:
-            sheet.write(i, 4, str(item['line4']))
-
-        if item['line5']:
-            sheet.write(i, 5, str(item['line5']))
-
-        if item['line6']:
-            sheet.write(i, 6, str(item['line6']))
-        if item['line7']:
-            sheet.write(i, 7, str(item['line7']))
-        if item['line8']:
-            sheet.write(i, 8, str(item['line8']))
-        if item['line9']:
-            sheet.write(i, 9, str(item['line9']))
-
-        if item['line10']:
-            sheet.write(i, 10, str(item['line10']))
-        if item['line11']:
-            sheet.write(i, 11, str(item['line11']))
-        if item['line12']:
-            sheet.write(i, 12, str(item['line12']))
-
-        if item['line13']:
-            sheet.write(i, 13, str(item['line13']))
-        if item['line14']:
-            sheet.write(i, 14, str(item['line14']))
-
-        if item['line15']:
-            sheet.write(i, 15, str(item['line15']))
-
-        if item['mind']:
-            sheet.write(i, 16, str(item['mind']))
-
-        if item['physical']:
-            sheet.write(i, 17, str(item['physical']))
-
-        if item['time']:
-            sheet.write(i, 18, str(item['time']))
-
-        if item['satisfy']:
-            sheet.write(i, 19, str(item['satisfy']))
-
-        if item['strive']:
-            sheet.write(i, 20, str(item['strive']))
-
-        if item['frustration']:
-            sheet.write(i, 21, str(item['frustration']))
-
-        i += 1
-
-
-
-    '''
-    user_check_args
-    {
-	"_id": ObjectId("5c7e7e8f02f52b0cdd7a281c"),
-	"args": ["情报学研究中理论应用的国际比较\n"],
-	"user_id": "79edcd6c-3f4d-11e9-8f84-cd6a8ac7ae3a"
-    }
-    '''
-
-    sheet = wb.add_sheet("文章选择表")
-    collection = K_db.user_check_args
-    rows = collection.find()
-
-    value = ['用户id', '有用的文章']
-
-    for i in range(0, len(value)):
-        sheet.write(0, i, value[i])
-
-    i = 1
-    for item in rows:
-        sheet.write(i, 0, str(item['user_id']))
-        if item['args']:
-            sheet.write(i, 1, str(item['args']))
-
+        user_id = item['user_id']
+        search_class = item['search_class']
+        search_cab = item['search_level']
+        task_select = 1
+
+        age = item['age']
+        sex = item['sex'] # 男1 女2
+        education = item['education']
+        search_rate = item['search_rate']
+        search_time = item['search_time']
+        search_kinds = item['search_kinds']
+        search_path = item['search_path']
+
+        view1_args = ''
+        view1_time = 0
+
+        view1_mind_times = 0
+        view1_physical_times = 0
+        view1_time_times = 0
+        view1_erformance_times = 0
+        view1_effort_times = 0
+        view1_frustration_times = 0
+
+        view1_mind_score = 0
+        view1_physical_score = 0
+        view1_time_score = 0
+        view1_erformance_score = 0
+        view1_effort_score = 0
+        view1_frustration_score = 0
+
+        view2_args = ''
+        view2_time = 0
+
+        view2_mind_times = 0
+        view2_physical_times = 0
+        view2_time_times = 0
+        view2_erformance_times = 0
+        view2_effort_times = 0
+        view2_frustration_times = 0
+
+        view2_mind_score = 0
+        view2_physical_score = 0
+        view2_time_score = 0
+        view2_erformance_score = 0
+        view2_effort_score = 0
+        view2_frustration_score = 0
+
+        keywords_regex = {}
+        keywords_regex['user_id'] = user_id
+
+        # personalTime
+        row_personal_time = collection_personalTime.find_one(keywords_regex)
+        if row_personal_time is None:
+            continue
+
+        start_time_first = item['start_time_first']
+        end_time_first = item['end_time_first']
+        start_time_secondary = item['start_time_secondary']
+        end_time_secondary = item['end_time_secondary']
+
+        view1_time = end_time_first - start_time_first
+        view2_time = end_time_secondary - start_time_secondary
+
+        # user_check_args_view1
+        row_user_check_args_view1 = collection_user_check_args_view1.find_one(keywords_regex)
+        if row_user_check_args_view1 is None:
+            continue
+
+        view1_args = row_user_check_args_view1['args']
+
+        # user_check_args_view2
+        row_user_check_args_view2 = collection_user_check_args_view2.find_one(keywords_regex)
+        if row_user_check_args_view2 is None:
+            continue
+
+        view2_args = row_user_check_args_view2['args']
+
+
+        # question_class_first
+        question_class_first = collection_question_class_first.find_one(keywords_regex)
+        if question_class_first is None:
+            continue
+
+        view1_mind_times = 0
+        view1_physical_times = 0
+        view1_time_times = 0
+        view1_erformance_times = 0
+        view1_effort_times = 0
+        view1_frustration_times = 0
+
+        if question_class_first['line1'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_physical_times += 1
+
+        if question_class_first['line2'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_time_times += 1
+
+        if question_class_first['line3'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_erformance_times += 1
+
+        if question_class_first['line4'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_class_first['line5'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_frustration_times += 1
+
+
+        if question_class_first['line6'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_time_times += 1
+
+        if question_class_first['line7'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_erformance_times += 1
+
+        if question_class_first['line8'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_class_first['line9'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_frustration_times += 1
+
+
+
+        if question_class_first['line10'] == 'time':
+            view1_time_times += 1
+        else:
+            view1_erformance_times += 1
+
+        if question_class_first['line11'] == 'time':
+            view1_time_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_class_first['line12'] == 'time':
+            view1_time_times += 1
+        else:
+            view1_frustration_times += 1
+
+
+        if question_class_first['line13'] == 'satisfy':
+            view1_erformance_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_class_first['line14'] == 'satisfy':
+            view1_erformance_times += 1
+        else:
+            view1_frustration_times += 1
+
+
+        if question_class_first['line15'] == 'strive':
+            view1_effort_times += 1
+        else:
+            view1_frustration_times += 1
+
+        view1_mind_score = question_class_first['mind']
+        view1_physical_score = question_class_first['physical']
+        view1_time_score = question_class_first['time']
+        view1_erformance_score = question_class_first['satisfy']
+        view1_effort_score = question_class_first['strive']
+        view1_frustration_score = question_class_first['frustration']
+
+
+        # question_class_secondary
+        question_class_secondary = collection_question_class_secondary.find_one(keywords_regex)
+        if question_class_secondary is None:
+            continue
+
+        view2_mind_times = 0
+        view2_physical_times = 0
+        view2_time_times = 0
+        view2_erformance_times = 0
+        view2_effort_times = 0
+        view2_frustration_times = 0
+
+        if question_class_secondary['line1'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_physical_times += 1
+
+        if question_class_secondary['line2'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_time_times += 1
+
+        if question_class_secondary['line3'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_erformance_times += 1
+
+        if question_class_secondary['line4'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_class_secondary['line5'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+        if question_class_secondary['line6'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_time_times += 1
+
+        if question_class_secondary['line7'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_erformance_times += 1
+
+        if question_class_secondary['line8'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_class_secondary['line9'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+
+        if question_class_secondary['line10'] == 'time':
+            view2_time_times += 1
+        else:
+            view2_erformance_times += 1
+
+        if question_class_secondary['line11'] == 'time':
+            view2_time_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_class_secondary['line12'] == 'time':
+            view2_time_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+        if question_class_secondary['line13'] == 'satisfy':
+            view2_erformance_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_class_secondary['line14'] == 'satisfy':
+            view2_erformance_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+        if question_class_secondary['line15'] == 'strive':
+            view2_effort_times += 1
+        else:
+            view2_frustration_times += 1
+
+        view2_mind_score = question_class_secondary['mind']
+        view2_physical_score = question_class_secondary['physical']
+        view2_time_score = question_class_secondary['time']
+        view2_erformance_score = question_class_secondary['satisfy']
+        view2_effort_score = question_class_secondary['strive']
+        view2_frustration_score = question_class_secondary['frustration']
+
+        # question_normal_first
+        question_normal_first = collection_question_normal_first.find_one(keywords_regex)
+        if question_normal_first is None:
+            continue
+
+        view1_mind_times = 0
+        view1_physical_times = 0
+        view1_time_times = 0
+        view1_erformance_times = 0
+        view1_effort_times = 0
+        view1_frustration_times = 0
+
+        if question_normal_first['line1'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_physical_times += 1
+
+        if question_normal_first['line2'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_time_times += 1
+
+        if question_normal_first['line3'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_erformance_times += 1
+
+        if question_normal_first['line4'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_normal_first['line5'] == 'mind':
+            view1_mind_times += 1
+        else:
+            view1_frustration_times += 1
+
+        if question_normal_first['line6'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_time_times += 1
+
+        if question_normal_first['line7'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_erformance_times += 1
+
+        if question_normal_first['line8'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_normal_first['line9'] == 'physical':
+            view1_physical_times += 1
+        else:
+            view1_frustration_times += 1
+
+        if question_normal_first['line10'] == 'time':
+            view1_time_times += 1
+        else:
+            view1_erformance_times += 1
+
+        if question_normal_first['line11'] == 'time':
+            view1_time_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_normal_first['line12'] == 'time':
+            view1_time_times += 1
+        else:
+            view1_frustration_times += 1
+
+        if question_normal_first['line13'] == 'satisfy':
+            view1_erformance_times += 1
+        else:
+            view1_effort_times += 1
+
+        if question_normal_first['line14'] == 'satisfy':
+            view1_erformance_times += 1
+        else:
+            view1_frustration_times += 1
+
+        if question_normal_first['line15'] == 'strive':
+            view1_effort_times += 1
+        else:
+            view1_frustration_times += 1
+
+        view1_mind_score = question_normal_first['mind']
+        view1_physical_score = question_normal_first['physical']
+        view1_time_score = question_normal_first['time']
+        view1_erformance_score = question_normal_first['satisfy']
+        view1_effort_score = question_normal_first['strive']
+        view1_frustration_score = question_normal_first['frustration']
+
+
+        # question_normal_secondary
+        question_normal_secondary = collection_question_normal_secondary.find_one(keywords_regex)
+        if question_normal_secondary is None:
+            continue
+
+        view2_mind_times = 0
+        view2_physical_times = 0
+        view2_time_times = 0
+        view2_erformance_times = 0
+        view2_effort_times = 0
+        view2_frustration_times = 0
+
+        if question_normal_secondary['line1'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_physical_times += 1
+
+        if question_normal_secondary['line2'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_time_times += 1
+
+        if question_normal_secondary['line3'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_erformance_times += 1
+
+        if question_normal_secondary['line4'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_normal_secondary['line5'] == 'mind':
+            view2_mind_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+        if question_normal_secondary['line6'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_time_times += 1
+
+        if question_normal_secondary['line7'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_erformance_times += 1
+
+        if question_normal_secondary['line8'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_normal_secondary['line9'] == 'physical':
+            view2_physical_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+
+        if question_normal_secondary['line10'] == 'time':
+            view2_time_times += 1
+        else:
+            view2_erformance_times += 1
+
+        if question_normal_secondary['line11'] == 'time':
+            view2_time_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_normal_secondary['line12'] == 'time':
+            view2_time_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+        if question_normal_secondary['line13'] == 'satisfy':
+            view2_erformance_times += 1
+        else:
+            view2_effort_times += 1
+
+        if question_normal_secondary['line14'] == 'satisfy':
+            view2_erformance_times += 1
+        else:
+            view2_frustration_times += 1
+
+
+        if question_normal_secondary['line15'] == 'strive':
+            view2_effort_times += 1
+        else:
+            view2_frustration_times += 1
+
+        view2_mind_score = question_normal_secondary['mind']
+        view2_physical_score = question_normal_secondary['physical']
+        view2_time_score = question_normal_secondary['time']
+        view2_erformance_score = question_normal_secondary['satisfy']
+        view2_effort_score = question_normal_secondary['strive']
+        view2_frustration_score = question_normal_secondary['frustration']
+
+
+
+        # taskSelect
+        taskSelect = collection_taskSelect.find_one(keywords_regex)
+        if taskSelect is None:
+            continue
+
+        task_select = taskSelect['task_select']
+
+
+        sheet.write(i, 0, user_id)
+        sheet.write(i, 1, search_class)
+        sheet.write(i, 2, search_cab)
+        sheet.write(i, 3, task_select)
+        sheet.write(i, 4, age)
+        sheet.write(i, 5, sex)
+        sheet.write(i, 6, education)
+        sheet.write(i, 7, search_rate)
+        sheet.write(i, 8, search_time)
+        sheet.write(i, 9, search_kinds)
+        sheet.write(i, 10, search_path)
+        sheet.write(i, 11, view1_args)
+        sheet.write(i, 12, view1_time)
+        sheet.write(i, 13, view1_mind_times)
+        sheet.write(i, 14, view1_physical_times)
+        sheet.write(i, 15, view1_time_times)
+        sheet.write(i, 16, view1_erformance_times)
+        sheet.write(i, 17, view1_effort_times)
+        sheet.write(i, 18, view1_frustration_times)
+        sheet.write(i, 19, view1_mind_score)
+        sheet.write(i, 20, view1_physical_score)
+        sheet.write(i, 21, view1_time_score)
+        sheet.write(i, 22, view1_erformance_score)
+        sheet.write(i, 23, view1_effort_score)
+        sheet.write(i, 24, view1_frustration_score)
+        sheet.write(i, 25, view2_args)
+        sheet.write(i, 26, view2_time)
+        sheet.write(i, 27, view2_mind_times)
+        sheet.write(i, 28, view2_physical_times)
+        sheet.write(i, 29, view2_time_times)
+        sheet.write(i, 30, view2_erformance_times)
+        sheet.write(i, 31, view2_effort_times)
+        sheet.write(i, 32, view2_frustration_times)
+        sheet.write(i, 33, view2_mind_score)
+        sheet.write(i, 34, view2_physical_score)
+        sheet.write(i, 35, view2_time_score)
+        sheet.write(i, 36, view2_erformance_score)
+        sheet.write(i, 37, view2_effort_score)
+        sheet.write(i, 38, view2_frustration_score)
+                       
         i += 1
 
     wb.save('/root/Kdb/flask/app/upload/2003.xls')
