@@ -1120,401 +1120,399 @@ def export_result():
 
         view2_args = row_user_check_args_view2['args']
 
+        if search_class == 1:
+            # question_class_first
+            question_class_first = collection_question_class_first.find_one(keywords_regex)
+            if question_class_first is None:
+                continue
 
-        # question_class_first
-        question_class_first = collection_question_class_first.find_one(keywords_regex)
-        if question_class_first is None:
-            continue
+            view1_mind_times = 0
+            view1_physical_times = 0
+            view1_time_times = 0
+            view1_erformance_times = 0
+            view1_effort_times = 0
+            view1_frustration_times = 0
 
-        view1_mind_times = 0
-        view1_physical_times = 0
-        view1_time_times = 0
-        view1_erformance_times = 0
-        view1_effort_times = 0
-        view1_frustration_times = 0
+            if question_class_first['line1'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_physical_times += 1
 
-        if question_class_first['line1'] == 'mind':
-            view1_mind_times += 1
+            if question_class_first['line2'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_time_times += 1
+
+            if question_class_first['line3'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_erformance_times += 1
+
+            if question_class_first['line4'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_class_first['line5'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_frustration_times += 1
+
+
+            if question_class_first['line6'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_time_times += 1
+
+            if question_class_first['line7'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_erformance_times += 1
+
+            if question_class_first['line8'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_class_first['line9'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_frustration_times += 1
+
+
+
+            if question_class_first['line10'] == 'time':
+                view1_time_times += 1
+            else:
+                view1_erformance_times += 1
+
+            if question_class_first['line11'] == 'time':
+                view1_time_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_class_first['line12'] == 'time':
+                view1_time_times += 1
+            else:
+                view1_frustration_times += 1
+
+
+            if question_class_first['line13'] == 'satisfy':
+                view1_erformance_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_class_first['line14'] == 'satisfy':
+                view1_erformance_times += 1
+            else:
+                view1_frustration_times += 1
+
+
+            if question_class_first['line15'] == 'strive':
+                view1_effort_times += 1
+            else:
+                view1_frustration_times += 1
+
+            view1_mind_score = question_class_first['mind']
+            view1_physical_score = question_class_first['physical']
+            view1_time_score = question_class_first['time']
+            view1_erformance_score = question_class_first['satisfy']
+            view1_effort_score = question_class_first['strive']
+            view1_frustration_score = question_class_first['frustration']
+
+
+            # question_class_secondary
+            question_class_secondary = collection_question_class_secondary.find_one(keywords_regex)
+            if question_class_secondary is None:
+                continue
+
+            view2_mind_times = 0
+            view2_physical_times = 0
+            view2_time_times = 0
+            view2_erformance_times = 0
+            view2_effort_times = 0
+            view2_frustration_times = 0
+
+            if question_class_secondary['line1'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_physical_times += 1
+
+            if question_class_secondary['line2'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_time_times += 1
+
+            if question_class_secondary['line3'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_erformance_times += 1
+
+            if question_class_secondary['line4'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_class_secondary['line5'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+            if question_class_secondary['line6'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_time_times += 1
+
+            if question_class_secondary['line7'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_erformance_times += 1
+
+            if question_class_secondary['line8'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_class_secondary['line9'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+
+            if question_class_secondary['line10'] == 'time':
+                view2_time_times += 1
+            else:
+                view2_erformance_times += 1
+
+            if question_class_secondary['line11'] == 'time':
+                view2_time_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_class_secondary['line12'] == 'time':
+                view2_time_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+            if question_class_secondary['line13'] == 'satisfy':
+                view2_erformance_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_class_secondary['line14'] == 'satisfy':
+                view2_erformance_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+            if question_class_secondary['line15'] == 'strive':
+                view2_effort_times += 1
+            else:
+                view2_frustration_times += 1
+
+            view2_mind_score = question_class_secondary['mind']
+            view2_physical_score = question_class_secondary['physical']
+            view2_time_score = question_class_secondary['time']
+            view2_erformance_score = question_class_secondary['satisfy']
+            view2_effort_score = question_class_secondary['strive']
+            view2_frustration_score = question_class_secondary['frustration']
         else:
-            view1_physical_times += 1
-
-        if question_class_first['line2'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_time_times += 1
-
-        if question_class_first['line3'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_erformance_times += 1
-
-        if question_class_first['line4'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_class_first['line5'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_frustration_times += 1
-
-
-        if question_class_first['line6'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_time_times += 1
-
-        if question_class_first['line7'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_erformance_times += 1
-
-        if question_class_first['line8'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_class_first['line9'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_frustration_times += 1
-
-
-
-        if question_class_first['line10'] == 'time':
-            view1_time_times += 1
-        else:
-            view1_erformance_times += 1
-
-        if question_class_first['line11'] == 'time':
-            view1_time_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_class_first['line12'] == 'time':
-            view1_time_times += 1
-        else:
-            view1_frustration_times += 1
-
-
-        if question_class_first['line13'] == 'satisfy':
-            view1_erformance_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_class_first['line14'] == 'satisfy':
-            view1_erformance_times += 1
-        else:
-            view1_frustration_times += 1
-
-
-        if question_class_first['line15'] == 'strive':
-            view1_effort_times += 1
-        else:
-            view1_frustration_times += 1
-
-        view1_mind_score = question_class_first['mind']
-        view1_physical_score = question_class_first['physical']
-        view1_time_score = question_class_first['time']
-        view1_erformance_score = question_class_first['satisfy']
-        view1_effort_score = question_class_first['strive']
-        view1_frustration_score = question_class_first['frustration']
-
-
-        # question_class_secondary
-        question_class_secondary = collection_question_class_secondary.find_one(keywords_regex)
-        if question_class_secondary is None:
-            continue
-
-        view2_mind_times = 0
-        view2_physical_times = 0
-        view2_time_times = 0
-        view2_erformance_times = 0
-        view2_effort_times = 0
-        view2_frustration_times = 0
-
-        if question_class_secondary['line1'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_physical_times += 1
-
-        if question_class_secondary['line2'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_time_times += 1
-
-        if question_class_secondary['line3'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_erformance_times += 1
-
-        if question_class_secondary['line4'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_class_secondary['line5'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-        if question_class_secondary['line6'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_time_times += 1
-
-        if question_class_secondary['line7'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_erformance_times += 1
-
-        if question_class_secondary['line8'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_class_secondary['line9'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-
-        if question_class_secondary['line10'] == 'time':
-            view2_time_times += 1
-        else:
-            view2_erformance_times += 1
-
-        if question_class_secondary['line11'] == 'time':
-            view2_time_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_class_secondary['line12'] == 'time':
-            view2_time_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-        if question_class_secondary['line13'] == 'satisfy':
-            view2_erformance_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_class_secondary['line14'] == 'satisfy':
-            view2_erformance_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-        if question_class_secondary['line15'] == 'strive':
-            view2_effort_times += 1
-        else:
-            view2_frustration_times += 1
-
-        view2_mind_score = question_class_secondary['mind']
-        view2_physical_score = question_class_secondary['physical']
-        view2_time_score = question_class_secondary['time']
-        view2_erformance_score = question_class_secondary['satisfy']
-        view2_effort_score = question_class_secondary['strive']
-        view2_frustration_score = question_class_secondary['frustration']
-
-        # question_normal_first
-        question_normal_first = collection_question_normal_first.find_one(keywords_regex)
-        if question_normal_first is None:
-            continue
-
-        view1_mind_times = 0
-        view1_physical_times = 0
-        view1_time_times = 0
-        view1_erformance_times = 0
-        view1_effort_times = 0
-        view1_frustration_times = 0
-
-        if question_normal_first['line1'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_physical_times += 1
-
-        if question_normal_first['line2'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_time_times += 1
-
-        if question_normal_first['line3'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_erformance_times += 1
-
-        if question_normal_first['line4'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_normal_first['line5'] == 'mind':
-            view1_mind_times += 1
-        else:
-            view1_frustration_times += 1
-
-        if question_normal_first['line6'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_time_times += 1
-
-        if question_normal_first['line7'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_erformance_times += 1
-
-        if question_normal_first['line8'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_normal_first['line9'] == 'physical':
-            view1_physical_times += 1
-        else:
-            view1_frustration_times += 1
-
-        if question_normal_first['line10'] == 'time':
-            view1_time_times += 1
-        else:
-            view1_erformance_times += 1
-
-        if question_normal_first['line11'] == 'time':
-            view1_time_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_normal_first['line12'] == 'time':
-            view1_time_times += 1
-        else:
-            view1_frustration_times += 1
-
-        if question_normal_first['line13'] == 'satisfy':
-            view1_erformance_times += 1
-        else:
-            view1_effort_times += 1
-
-        if question_normal_first['line14'] == 'satisfy':
-            view1_erformance_times += 1
-        else:
-            view1_frustration_times += 1
-
-        if question_normal_first['line15'] == 'strive':
-            view1_effort_times += 1
-        else:
-            view1_frustration_times += 1
-
-        view1_mind_score = question_normal_first['mind']
-        view1_physical_score = question_normal_first['physical']
-        view1_time_score = question_normal_first['time']
-        view1_erformance_score = question_normal_first['satisfy']
-        view1_effort_score = question_normal_first['strive']
-        view1_frustration_score = question_normal_first['frustration']
-
-
-        # question_normal_secondary
-        question_normal_secondary = collection_question_normal_secondary.find_one(keywords_regex)
-        if question_normal_secondary is None:
-            continue
-
-        view2_mind_times = 0
-        view2_physical_times = 0
-        view2_time_times = 0
-        view2_erformance_times = 0
-        view2_effort_times = 0
-        view2_frustration_times = 0
-
-        if question_normal_secondary['line1'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_physical_times += 1
-
-        if question_normal_secondary['line2'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_time_times += 1
-
-        if question_normal_secondary['line3'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_erformance_times += 1
-
-        if question_normal_secondary['line4'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_normal_secondary['line5'] == 'mind':
-            view2_mind_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-        if question_normal_secondary['line6'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_time_times += 1
-
-        if question_normal_secondary['line7'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_erformance_times += 1
-
-        if question_normal_secondary['line8'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_normal_secondary['line9'] == 'physical':
-            view2_physical_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-
-        if question_normal_secondary['line10'] == 'time':
-            view2_time_times += 1
-        else:
-            view2_erformance_times += 1
-
-        if question_normal_secondary['line11'] == 'time':
-            view2_time_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_normal_secondary['line12'] == 'time':
-            view2_time_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-        if question_normal_secondary['line13'] == 'satisfy':
-            view2_erformance_times += 1
-        else:
-            view2_effort_times += 1
-
-        if question_normal_secondary['line14'] == 'satisfy':
-            view2_erformance_times += 1
-        else:
-            view2_frustration_times += 1
-
-
-        if question_normal_secondary['line15'] == 'strive':
-            view2_effort_times += 1
-        else:
-            view2_frustration_times += 1
-
-        view2_mind_score = question_normal_secondary['mind']
-        view2_physical_score = question_normal_secondary['physical']
-        view2_time_score = question_normal_secondary['time']
-        view2_erformance_score = question_normal_secondary['satisfy']
-        view2_effort_score = question_normal_secondary['strive']
-        view2_frustration_score = question_normal_secondary['frustration']
-
-
+            # question_normal_first
+            question_normal_first = collection_question_normal_first.find_one(keywords_regex)
+            if question_normal_first is None:
+                continue
+
+            view1_mind_times = 0
+            view1_physical_times = 0
+            view1_time_times = 0
+            view1_erformance_times = 0
+            view1_effort_times = 0
+            view1_frustration_times = 0
+
+            if question_normal_first['line1'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_physical_times += 1
+
+            if question_normal_first['line2'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_time_times += 1
+
+            if question_normal_first['line3'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_erformance_times += 1
+
+            if question_normal_first['line4'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_normal_first['line5'] == 'mind':
+                view1_mind_times += 1
+            else:
+                view1_frustration_times += 1
+
+            if question_normal_first['line6'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_time_times += 1
+
+            if question_normal_first['line7'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_erformance_times += 1
+
+            if question_normal_first['line8'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_normal_first['line9'] == 'physical':
+                view1_physical_times += 1
+            else:
+                view1_frustration_times += 1
+
+            if question_normal_first['line10'] == 'time':
+                view1_time_times += 1
+            else:
+                view1_erformance_times += 1
+
+            if question_normal_first['line11'] == 'time':
+                view1_time_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_normal_first['line12'] == 'time':
+                view1_time_times += 1
+            else:
+                view1_frustration_times += 1
+
+            if question_normal_first['line13'] == 'satisfy':
+                view1_erformance_times += 1
+            else:
+                view1_effort_times += 1
+
+            if question_normal_first['line14'] == 'satisfy':
+                view1_erformance_times += 1
+            else:
+                view1_frustration_times += 1
+
+            if question_normal_first['line15'] == 'strive':
+                view1_effort_times += 1
+            else:
+                view1_frustration_times += 1
+
+            view1_mind_score = question_normal_first['mind']
+            view1_physical_score = question_normal_first['physical']
+            view1_time_score = question_normal_first['time']
+            view1_erformance_score = question_normal_first['satisfy']
+            view1_effort_score = question_normal_first['strive']
+            view1_frustration_score = question_normal_first['frustration']
+
+
+            # question_normal_secondary
+            question_normal_secondary = collection_question_normal_secondary.find_one(keywords_regex)
+            if question_normal_secondary is None:
+                continue
+
+            view2_mind_times = 0
+            view2_physical_times = 0
+            view2_time_times = 0
+            view2_erformance_times = 0
+            view2_effort_times = 0
+            view2_frustration_times = 0
+
+            if question_normal_secondary['line1'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_physical_times += 1
+
+            if question_normal_secondary['line2'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_time_times += 1
+
+            if question_normal_secondary['line3'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_erformance_times += 1
+
+            if question_normal_secondary['line4'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_normal_secondary['line5'] == 'mind':
+                view2_mind_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+            if question_normal_secondary['line6'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_time_times += 1
+
+            if question_normal_secondary['line7'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_erformance_times += 1
+
+            if question_normal_secondary['line8'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_normal_secondary['line9'] == 'physical':
+                view2_physical_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+
+            if question_normal_secondary['line10'] == 'time':
+                view2_time_times += 1
+            else:
+                view2_erformance_times += 1
+
+            if question_normal_secondary['line11'] == 'time':
+                view2_time_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_normal_secondary['line12'] == 'time':
+                view2_time_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+            if question_normal_secondary['line13'] == 'satisfy':
+                view2_erformance_times += 1
+            else:
+                view2_effort_times += 1
+
+            if question_normal_secondary['line14'] == 'satisfy':
+                view2_erformance_times += 1
+            else:
+                view2_frustration_times += 1
+
+
+            if question_normal_secondary['line15'] == 'strive':
+                view2_effort_times += 1
+            else:
+                view2_frustration_times += 1
+
+            view2_mind_score = question_normal_secondary['mind']
+            view2_physical_score = question_normal_secondary['physical']
+            view2_time_score = question_normal_secondary['time']
+            view2_erformance_score = question_normal_secondary['satisfy']
+            view2_effort_score = question_normal_secondary['strive']
+            view2_frustration_score = question_normal_secondary['frustration']
 
         # taskSelect
         taskSelect = collection_taskSelect.find_one(keywords_regex)
