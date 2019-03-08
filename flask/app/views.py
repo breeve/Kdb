@@ -217,8 +217,8 @@ def save_personal_time_end_first(user_id):
     datax['end_time_first'] = end_time
     if row :
         datax['start_time_first'] = row['start_time_first']
-        datax['start_time_secondary'] = row['start_time_secondary']
-        datax['end_time_secondary'] = row['end_time_secondary']
+        #datax['start_time_secondary'] = row['start_time_secondary']
+        #datax['end_time_secondary'] = row['end_time_secondary']
         collection.update(row, datax)
     else :
         datax['start_time_first'] = ''
