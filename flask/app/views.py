@@ -637,6 +637,7 @@ def search_normal_start_secondary():
     page_info.current_page = page_tmp['current']
 
     left_row = get_left_row(page_info)
+    save_personal_time_start_secondary(user_id)
 
     return render_template('search_normal_start_secondary.html',
                            title = "search normal start secondary",
@@ -674,6 +675,7 @@ def view_secondary():
 def view_first_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    save_personal_time_end_first(user_id)
     return render_template('view_first_question.html',
         title = 'view_first_question',
         total_articles = article_total_nums,
