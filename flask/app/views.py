@@ -1203,6 +1203,10 @@ def export_result():
         end_time_first = row_personal_time['end_time_first']
         start_time_secondary = row_personal_time['start_time_secondary']
         end_time_secondary = row_personal_time['end_time_secondary']
+        print(start_time_first)
+        print(end_time_first)
+        print(start_time_secondary)
+        print(end_time_secondary)
 
         if end_time_first > start_time_first:
             view1_time = end_time_first - start_time_first
