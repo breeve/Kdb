@@ -187,14 +187,23 @@ def save_personal_time_start_first(user_id):
     datax = {}
     datax['user_id'] = user_id
     datax['start_time_first'] = start_time
+    datax['end_time_first'] = 0
+    datax['start_time_secondary'] = 0
+    datax['end_time_secondary'] = 0
 
     if row :
-        datax['end_time_first'] = row['end_time_first']
-        datax['start_time_secondary'] = row['start_time_secondary']
-        datax['end_time_secondary'] = row['end_time_secondary']
+        keys = row.keys()
+        if 'end_time_first' in keys:
+            datax['end_time_first'] = row['end_time_first']
+
+        if 'start_time_secondary' in keys:
+            datax['start_time_secondary'] = row['start_time_secondary']
+
+        if 'end_time_secondary' in keys:
+            datax['end_time_secondary'] = row['end_time_secondary']
+
         collection.update(row, datax)
     else :
-        datax['end_time_first'] = ''
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -214,14 +223,23 @@ def save_personal_time_end_first(user_id):
 
     datax = {}
     datax['user_id'] = user_id
+    datax['start_time_first'] = 0
     datax['end_time_first'] = end_time
+    datax['start_time_secondary'] = 0
+    datax['end_time_secondary'] = 0
     if row :
-        datax['start_time_first'] = row['start_time_first']
-        #datax['start_time_secondary'] = row['start_time_secondary']
-        #datax['end_time_secondary'] = row['end_time_secondary']
+        keys = row.keys()
+        if 'start_time_first' in keys:
+            datax['start_time_first'] = row['start_time_first']
+
+        if 'start_time_secondary' in keys:
+            datax['start_time_secondary'] = row['start_time_secondary']
+
+        if 'end_time_secondary' in keys:
+            datax['end_time_secondary'] = row['end_time_secondary']
+
         collection.update(row, datax)
     else :
-        datax['start_time_first'] = ''
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -240,15 +258,24 @@ def save_personal_time_start_secondary(user_id):
 
     datax = {}
     datax['user_id'] = user_id
+    datax['start_time_first'] = 0
+    datax['end_time_first'] = 0
     datax['start_time_secondary'] = start_time
+    datax['end_time_secondary'] = 0
 
     if row :
-        datax['end_time_secondary'] = row['end_time_secondary']
-        datax['start_time_first'] = row['start_time_first']
-        datax['end_time_first'] = row['end_time_first']
+        keys = row.keys()
+        if 'end_time_secondary' in keys:
+            datax['end_time_secondary'] = row['end_time_secondary']
+
+        if 'start_time_first' in keys:
+            datax['start_time_first'] = row['start_time_first']
+
+        if 'end_time_first' in keys:
+            datax['end_time_first'] = row['end_time_first']
+
         collection.update(row, datax)
     else :
-        datax['end_time_secondary'] = ''
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -268,14 +295,25 @@ def save_personal_time_end_secondary(user_id):
 
     datax = {}
     datax['user_id'] = user_id
+    datax['start_time_first'] = 0
+    datax['end_time_first'] = 0
+    datax['start_time_secondary'] = 0
     datax['end_time_secondary'] = end_time
+
     if row :
-        datax['start_time_secondary'] = row['start_time_secondary']
-        datax['start_time_first'] = row['start_time_first']
-        datax['end_time_first'] = row['end_time_first']
+        keys = row.keys()
+
+        if 'start_time_secondary' in keys:
+            datax['start_time_secondary'] = row['start_time_secondary']
+
+        if 'start_time_first' in keys:
+            datax['start_time_first'] = row['start_time_first']
+
+        if 'end_time_first' in keys:
+            datax['end_time_first'] = row['end_time_first']
+            
         collection.update(row, datax)
     else :
-        datax['start_time_secondary'] = ''
         collection.insert_one(datax).inserted_id
 
     #print(datax)
