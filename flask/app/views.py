@@ -311,7 +311,7 @@ def save_personal_time_end_secondary(user_id):
 
         if 'end_time_first' in keys:
             datax['end_time_first'] = row['end_time_first']
-            
+
         collection.update(row, datax)
     else :
         collection.insert_one(datax).inserted_id
@@ -1122,8 +1122,9 @@ def export_result():
             continue
 
 
-        user_id = item['user_id']
+        user_id = str(item['user_id'])
         search_class = item['search_class']
+        print('search_class :' + str(search_class))
         search_cab = item['search_level']
         task_select = 1
 
@@ -1174,7 +1175,9 @@ def export_result():
 
         # personalTime
         row_personal_time = collection_personalTime.find_one(keywords_regex)
+        print(row_personal_time)
         if row_personal_time is None:
+            print('row_personal_time None')
             continue
 
         keys = row_personal_time.keys()
@@ -1201,7 +1204,9 @@ def export_result():
 
         # user_check_args_view1
         row_user_check_args_view1 = collection_user_check_args_view1.find_one(keywords_regex)
+        print(row_user_check_args_view1)
         if row_user_check_args_view1 is None:
+            print('row_user_check_args_view1 None')
             continue
 
         keys = row_user_check_args_view1.keys()
@@ -1213,7 +1218,9 @@ def export_result():
 
         # user_check_args_view2
         row_user_check_args_view2 = collection_user_check_args_view2.find_one(keywords_regex)
+        print(row_user_check_args_view2)
         if row_user_check_args_view2 is None:
+            print('row_user_check_args_view2 None')
             continue
 
         keys = row_user_check_args_view2.keys()
@@ -1226,7 +1233,9 @@ def export_result():
         if search_class == 1:
             # question_class_first
             question_class_first = collection_question_class_first.find_one(keywords_regex)
+            print(question_class_first)
             if question_class_first is None:
+                print('question_class_first is None')
                 continue
 
             keys = question_class_first.keys()
@@ -1373,7 +1382,9 @@ def export_result():
 
             # question_class_secondary
             question_class_secondary = collection_question_class_secondary.find_one(keywords_regex)
+            print(question_class_secondary)
             if question_class_secondary is None:
+                print('question_class_secondary is None')
                 continue
 
             keys = question_class_secondary.keys()
@@ -1518,7 +1529,9 @@ def export_result():
         else:
             # question_normal_first
             question_normal_first = collection_question_normal_first.find_one(keywords_regex)
+            print(question_normal_first)
             if question_normal_first is None:
+                print('question_normal_first is None')
                 continue
             keys = question_normal_first.keys()
 
@@ -1657,7 +1670,9 @@ def export_result():
 
             # question_normal_secondary
             question_normal_secondary = collection_question_normal_secondary.find_one(keywords_regex)
+            print(question_normal_secondary)
             if question_normal_secondary is None:
+                print('question_normal_secondary is None')
                 continue
             keys = question_normal_secondary.keys()
 
@@ -1800,7 +1815,9 @@ def export_result():
 
         # taskSelect
         taskSelect = collection_taskSelect.find_one(keywords_regex)
+        print(taskSelect)
         if taskSelect is None:
+            print('taskSelect is None')
             continue
         keys = taskSelect.keys()
 
