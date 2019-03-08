@@ -588,7 +588,7 @@ def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     #print('view_secondary_question start')
-    save_personal_time_end(user_id)
+    save_personal_time_end_secondary(user_id)
     #print('view_secondary_question end')
     return render_template('view_secondary_question.html',
         title = 'view_secondary_question',
@@ -748,7 +748,7 @@ def search_normal_start():
     #print(user_id)
 
     #print("search_normal_start start")
-    save_personal_time_start(user_id)
+    save_personal_time_start_first(user_id)
     #print("search_normal_start end")
 
     page_tmp = get_search_result(keywords, 1)
