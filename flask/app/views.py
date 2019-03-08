@@ -750,7 +750,6 @@ def search_normal_start():
     #print(user_id)
 
     #print("search_normal_start start")
-    save_personal_time_start_first(user_id)
     #print("search_normal_start end")
 
     page_tmp = get_search_result(keywords, 1)
@@ -874,7 +873,6 @@ def search_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
     #print("search_normal start")
-    save_personal_time_start_first(user_id)
     #print("search_normal end")
     return render_template('normal_search_first.html',
         name = "datax['name']",
@@ -948,7 +946,7 @@ def dispatch():
     #print(g_user_id)
 
     article_total_nums = 1000
-
+    save_personal_time_start_first(datax["user_id"])
     if g_search_class == 1:
         return render_template('view_first.html',
                                title='view_first',
