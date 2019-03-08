@@ -1207,28 +1207,26 @@ def export_result():
         print(row_user_check_args_view1)
         if row_user_check_args_view1 is None:
             print('row_user_check_args_view1 None')
-            continue
+        else:
+            keys = row_user_check_args_view1.keys()
 
-        keys = row_user_check_args_view1.keys()
+            if 'args' not in keys:
+                continue
 
-        if 'args' not in keys:
-            continue
-
-        view1_args = row_user_check_args_view1['args']
+            view1_args = row_user_check_args_view1['args']
 
         # user_check_args_view2
         row_user_check_args_view2 = collection_user_check_args_view2.find_one(keywords_regex)
         print(row_user_check_args_view2)
         if row_user_check_args_view2 is None:
             print('row_user_check_args_view2 None')
-            continue
+        else:
+            keys = row_user_check_args_view2.keys()
 
-        keys = row_user_check_args_view2.keys()
+            if 'args' not in keys:
+                continue
 
-        if 'args' not in keys:
-            continue
-
-        view2_args = row_user_check_args_view2['args']
+            view2_args = row_user_check_args_view2['args']
 
         if search_class == 1:
             # question_class_first
