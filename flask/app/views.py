@@ -1002,7 +1002,7 @@ def check_input_secondary():
 
     client = pymongo.MongoClient(host='localhost', port=27017)
     kdb = client.K_db
-    collection = kdb.user_check_args_view1
+    collection = kdb.user_check_args_view2
 
     keywords_regex = {}
     keywords_regex['user_id'] = user_id
