@@ -202,8 +202,10 @@ def save_personal_time_start_first(user_id):
         if 'end_time_secondary' in keys:
             datax['end_time_secondary'] = row['end_time_secondary']
 
+        print (datax)
         collection.update(row, datax)
     else :
+        print (datax)
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -237,9 +239,10 @@ def save_personal_time_end_first(user_id):
 
         if 'end_time_secondary' in keys:
             datax['end_time_secondary'] = row['end_time_secondary']
-
+        print (datax)
         collection.update(row, datax)
     else :
+        print (datax)
         collection.insert_one(datax).inserted_id
 
     save_personal_time_start_secondary(user_id)
@@ -275,8 +278,10 @@ def save_personal_time_start_secondary(user_id):
         if 'end_time_first' in keys:
             datax['end_time_first'] = row['end_time_first']
 
+        print (datax)
         collection.update(row, datax)
     else :
+        print (datax)
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -313,8 +318,10 @@ def save_personal_time_end_secondary(user_id):
         if 'end_time_first' in keys:
             datax['end_time_first'] = row['end_time_first']
 
+        print (datax)
         collection.update(row, datax)
     else :
+        print (datax)
         collection.insert_one(datax).inserted_id
 
     #print(datax)
