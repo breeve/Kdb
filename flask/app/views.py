@@ -173,6 +173,7 @@ def save_question(form, user_id, classifier):
 
 
 def save_personal_time_start_first(user_id):
+    user_id = str(user_id)
     start_time = time.time()
     #print(str(user_id)+" start_time: "+str(start_time))
 
@@ -212,6 +213,7 @@ def save_personal_time_start_first(user_id):
 
 
 def save_personal_time_end_first(user_id):
+    user_id = str(user_id)
     end_time = time.time()
     #print(str(user_id)+" end_time: "+str(end_time))
 
@@ -229,7 +231,7 @@ def save_personal_time_end_first(user_id):
     datax['end_time_first'] = end_time
     datax['start_time_secondary'] = 0
     datax['end_time_secondary'] = 0
-    if row :
+    if row is not None:
         keys = row.keys()
         if 'start_time_first' in keys:
             datax['start_time_first'] = row['start_time_first']
@@ -249,6 +251,7 @@ def save_personal_time_end_first(user_id):
     #print(datax)
 
 def save_personal_time_start_secondary(user_id):
+    user_id = str(user_id)
     start_time = time.time()
     #print(str(user_id)+" start_time: "+str(start_time))
 
@@ -267,7 +270,7 @@ def save_personal_time_start_secondary(user_id):
     datax['start_time_secondary'] = start_time
     datax['end_time_secondary'] = 0
 
-    if row :
+    if row is not None:
         keys = row.keys()
         if 'end_time_secondary' in keys:
             datax['end_time_secondary'] = row['end_time_secondary']
@@ -288,6 +291,7 @@ def save_personal_time_start_secondary(user_id):
 
 
 def save_personal_time_end_secondary(user_id):
+    user_id = str(user_id)
     end_time = time.time()
     #print(str(user_id)+" end_time: "+str(end_time))
 
