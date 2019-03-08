@@ -1201,8 +1201,15 @@ def export_result():
         start_time_secondary = row_personal_time['start_time_secondary']
         end_time_secondary = row_personal_time['end_time_secondary']
 
-        view1_time = end_time_first - start_time_first
-        view2_time = end_time_secondary - start_time_secondary
+        if end_time_first > start_time_first:
+            view1_time = end_time_first - start_time_first
+        else:
+            view1_time = start_time_first - end_time_first
+
+        if end_time_secondary > start_time_secondary:
+            view2_time = end_time_secondary - start_time_secondary
+        else:
+            view2_time = start_time_secondary - end_time_secondary
 
         # user_check_args_view1
         row_user_check_args_view1 = collection_user_check_args_view1.find_one(keywords_regex)
