@@ -1218,7 +1218,7 @@ def export_result():
         row_user_check_args_view1 = collection_user_check_args_view1.find_one(keywords_regex)
         #print(row_user_check_args_view1)
         if row_user_check_args_view1 is None:
-            #print('row_user_check_args_view1 None')
+            print('row_user_check_args_view1 None')
         else:
             keys = row_user_check_args_view1.keys()
 
@@ -1231,7 +1231,7 @@ def export_result():
         row_user_check_args_view2 = collection_user_check_args_view2.find_one(keywords_regex)
         #print(row_user_check_args_view2)
         if row_user_check_args_view2 is None:
-            #print('row_user_check_args_view2 None')
+            print('row_user_check_args_view2 None')
         else:
             keys = row_user_check_args_view2.keys()
 
