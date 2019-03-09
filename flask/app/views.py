@@ -100,7 +100,7 @@ def save_question(form, user_id, classifier):
         return
 
     keywords_regex = {}
-    keywords_regex['user_id'] = user_id
+    keywords_regex['user_id'] = str(user_id)
     row = collection.find_one(keywords_regex)
 
     question = {}
@@ -125,7 +125,7 @@ def save_question(form, user_id, classifier):
 
     question['line15'] = line15
 
-    question['user_id'] = user_id
+    question['user_id'] = str(user_id)
 
     mind = 15
     physical = 25
@@ -478,6 +478,7 @@ def save_personalinfo(datax):
     K_db = client.K_db
     collection = K_db.personalinfo
     datax["user_id"] = uuid.uuid1()
+    datax["user_id"] = str(datax["user_id"])
     global g_user_id
     g_user_id = datax["user_id"]
     #print(datax)
@@ -515,6 +516,7 @@ def search_item():
 @app.route("/search_normal_result_secondary")
 def search_normal_result_secondary():
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     keywords = request.args.get('keywords')
 
     page = int(request.args.get('page', 1))
@@ -543,6 +545,7 @@ def search_normal_result_secondary():
                            total_articles=page_info.total_page)
 
 def save_task_select(user_id, task_select):
+    user_id = str(user_id)
     client = pymongo.MongoClient(host='localhost', port=27017)
     K_db = client.K_db
     collection = K_db.taskSelect
@@ -564,6 +567,7 @@ def save_task_select(user_id, task_select):
 @app.route("/end_search", methods = ["POST", "GET", "PUSH"])
 def end_search():
     user_id = request.form.get('user_id')
+    user_id = str(user_id)
     task_select = request.form.get('task_select')
 
     save_task_select(user_id, task_select)
@@ -573,6 +577,7 @@ def end_search():
 def exit_view_first():
     article_total_nums = 1000
     user_id = request.form.get('user_id')
+    user_id = str(user_id)
 
     # save question class search view 2
     save_question(request.form, user_id, 2)
@@ -587,6 +592,7 @@ def exit_view_first():
 def exit_view_secondary():
     article_total_nums = 1000
     user_id = request.form.get('user_id')
+    user_id = str(user_id)
 
     # save question class search view 2
     save_question(request.form, user_id, 4)
@@ -601,6 +607,7 @@ def exit_view_secondary():
 def view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     #print('view_secondary_question start')
     #save_personal_time_end_secondary(user_id)
     #print('view_secondary_question end')
@@ -619,6 +626,7 @@ def search_key_secondary():
     key = request.args.get('keywords')
     page_tmp = get_search_result(key, page)
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
@@ -639,6 +647,7 @@ def search_key_secondary():
 @app.route("/search_normal_start_secondary", methods = ["POST", "GET", "PUSH"])
 def search_normal_start_secondary():
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     keywords = request.args.get('keywords')
     #print(keywords)
     #print(user_id)
@@ -665,6 +674,7 @@ def search_normal_start_secondary():
 def search_secondary():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     return render_template('search_secondary.html',
         title = 'view_secondary',
         total_articles = article_total_nums,
@@ -673,6 +683,7 @@ def search_secondary():
 @app.route("/view_secondary", methods = ["POST", "GET", "PUSH"])
 def view_secondary():
     user_id = request.form.get("user_id")
+    user_id = str(user_id)
     #print(user_id)
     article_total_nums = 1000
 
@@ -690,6 +701,7 @@ def view_secondary():
 def view_first_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     #save_personal_time_end_first(user_id)
     return render_template('view_first_question.html',
         title = 'view_first_question',
@@ -740,6 +752,7 @@ def search_key():
     key = request.args.get('keywords')
     page_tmp = get_search_result(key, page)
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
@@ -760,6 +773,7 @@ def search_key():
 @app.route("/search_normal_start", methods = ["POST", "GET", "PUSH"])
 def search_normal_start():
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     keywords = request.args.get('keywords')
     #print(keywords)
     #print(user_id)
@@ -793,6 +807,7 @@ def search_normal_start():
 def normal_view_secondary_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     #print('normal_view_secondary_question start')
     #save_personal_time_end_secondary(user_id)
     #print('normal_view_secondary_question end')
@@ -810,6 +825,7 @@ def normal_search_key_secondary():
     key = request.args.get('keywords')
     page_tmp = get_search_result(key, page)
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
@@ -827,6 +843,7 @@ def normal_search_key_secondary():
 def search_normal_secondary():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     #save_personal_time_start_secondary(user_id)
     return render_template('normal_search_secondary.html',
         name = "datax['name']",
@@ -838,6 +855,7 @@ def search_normal_secondary():
 @app.route("/normal_view_secondary", methods = ["POST", "GET", "PUSH"])
 def normal_view_secondary():
     user_id = request.form.get("user_id")
+    user_id = str(user_id)
     #print(user_id)
     article_total_nums = 1000
 
@@ -856,6 +874,7 @@ def normal_view_secondary():
 def normal_view_first_question():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     #save_personal_time_end_first(user_id)
     return render_template('normal_view_first_question.html',
         title = 'view_first_question',
@@ -871,6 +890,7 @@ def normal_search_key():
     key = request.args.get('keywords')
     page_tmp = get_search_result(key, page)
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
 
     page_info = getPageInfo()
     page_info.total_rows = page_tmp['rows']
@@ -888,6 +908,7 @@ def normal_search_key():
 def search_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     #print("search_normal start")
     #print("search_normal end")
     return render_template('normal_search_first.html',
@@ -901,6 +922,7 @@ def search_normal():
 def search():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     return render_template('search.html',
         name = "datax['name']",
         age = "datax['age']",
@@ -912,6 +934,7 @@ def search():
 def view_first_normal():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     return render_template('view_first_normal.html',
         title = 'view_first_normal',
         total_articles = article_total_nums,
@@ -921,6 +944,7 @@ def view_first_normal():
 def view_first():
     article_total_nums = 1000
     user_id = request.args.get('user_id')
+    user_id = str(user_id)
     return render_template('view_first.html',
         title = 'view_first',
         total_articles = article_total_nums,
@@ -984,6 +1008,7 @@ def personalinfo():
 @app.route("/check_input_first", methods = ["POST"])
 def check_input_first():
     user_id = request.form.get('user_id')
+    user_id = str(user_id)
     #print(user_id)
     check_args = request.form.get('check_args')
     args = [arg for arg in check_args.strip().split('breeve') if arg != '']
@@ -1011,6 +1036,7 @@ def check_input_first():
 @app.route("/check_input_secondary", methods = ["POST"])
 def check_input_secondary():
     user_id = request.form.get('user_id')
+    user_id = str(user_id)
     #print(user_id)
     check_args = request.form.get('check_args')
     args = [arg for arg in check_args.strip().split('breeve') if arg != '']
