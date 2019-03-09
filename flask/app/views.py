@@ -1169,6 +1169,9 @@ def export_result():
         if 'search_path' not in keys:
             continue
 
+        if 'professional' not in keys:
+            continue
+
 
         user_id = str(item['user_id'])
         search_class = item['search_class']
@@ -1178,6 +1181,7 @@ def export_result():
 
         age = item['age']
         sex = item['sex'] # 男1 女2
+        professional = item['professional']
         education = item['education']
         search_rate = item['search_rate']
         search_time = item['search_time']
@@ -1889,39 +1893,40 @@ def export_result():
         sheet.write(i, 3, task_select)
         sheet.write(i, 4, age)
         sheet.write(i, 5, sex)
-        sheet.write(i, 6, education)
-        sheet.write(i, 7, search_rate)
-        sheet.write(i, 8, search_time)
-        sheet.write(i, 9, search_kinds)
-        sheet.write(i, 10, search_path)
-        sheet.write(i, 11, view1_args)
-        sheet.write(i, 12, view1_time)
-        sheet.write(i, 13, view1_mind_times)
-        sheet.write(i, 14, view1_physical_times)
-        sheet.write(i, 15, view1_time_times)
-        sheet.write(i, 16, view1_erformance_times)
-        sheet.write(i, 17, view1_effort_times)
-        sheet.write(i, 18, view1_frustration_times)
-        sheet.write(i, 19, view1_mind_score)
-        sheet.write(i, 20, view1_physical_score)
-        sheet.write(i, 21, view1_time_score)
-        sheet.write(i, 22, view1_erformance_score)
-        sheet.write(i, 23, view1_effort_score)
-        sheet.write(i, 24, view1_frustration_score)
-        sheet.write(i, 25, view2_args)
-        sheet.write(i, 26, view2_time)
-        sheet.write(i, 27, view2_mind_times)
-        sheet.write(i, 28, view2_physical_times)
-        sheet.write(i, 29, view2_time_times)
-        sheet.write(i, 30, view2_erformance_times)
-        sheet.write(i, 31, view2_effort_times)
-        sheet.write(i, 32, view2_frustration_times)
-        sheet.write(i, 33, view2_mind_score)
-        sheet.write(i, 34, view2_physical_score)
-        sheet.write(i, 35, view2_time_score)
-        sheet.write(i, 36, view2_erformance_score)
-        sheet.write(i, 37, view2_effort_score)
-        sheet.write(i, 38, view2_frustration_score)
+        sheet.write(i, 6, professional)
+        sheet.write(i, 7, education)
+        sheet.write(i, 8, search_rate)
+        sheet.write(i, 9, search_time)
+        sheet.write(i, 10, search_kinds)
+        sheet.write(i, 11, search_path)
+        sheet.write(i, 12, view1_args)
+        sheet.write(i, 13, view1_time)
+        sheet.write(i, 14, view1_mind_times)
+        sheet.write(i, 15, view1_physical_times)
+        sheet.write(i, 16, view1_time_times)
+        sheet.write(i, 17, view1_erformance_times)
+        sheet.write(i, 18, view1_effort_times)
+        sheet.write(i, 19, view1_frustration_times)
+        sheet.write(i, 20, view1_mind_score)
+        sheet.write(i, 21, view1_physical_score)
+        sheet.write(i, 22, view1_time_score)
+        sheet.write(i, 23, view1_erformance_score)
+        sheet.write(i, 24, view1_effort_score)
+        sheet.write(i, 25, view1_frustration_score)
+        sheet.write(i, 26, view2_args)
+        sheet.write(i, 27, view2_time)
+        sheet.write(i, 28, view2_mind_times)
+        sheet.write(i, 29, view2_physical_times)
+        sheet.write(i, 30, view2_time_times)
+        sheet.write(i, 31, view2_erformance_times)
+        sheet.write(i, 32, view2_effort_times)
+        sheet.write(i, 33, view2_frustration_times)
+        sheet.write(i, 34, view2_mind_score)
+        sheet.write(i, 35, view2_physical_score)
+        sheet.write(i, 36, view2_time_score)
+        sheet.write(i, 37, view2_erformance_score)
+        sheet.write(i, 38, view2_effort_score)
+        sheet.write(i, 39, view2_frustration_score)
                        
         i += 1
 
