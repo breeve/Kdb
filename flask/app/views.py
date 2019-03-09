@@ -362,6 +362,7 @@ def get_search_result(keywords, page):
     '''
 
     total_page = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
+    print('total page ' + str(total_page))
     #total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
     #total_page += int(math.ceil(total_rows_key_word / (ROWS_PER_PAGE * 1.0)))
 
