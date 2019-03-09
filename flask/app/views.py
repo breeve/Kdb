@@ -203,10 +203,10 @@ def save_personal_time_start_first(user_id):
         if 'end_time_secondary' in keys:
             datax['end_time_secondary'] = row['end_time_secondary']
 
-        print (datax)
+        #print (datax)
         collection.update(row, datax)
     else :
-        print (datax)
+        #print (datax)
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -241,10 +241,10 @@ def save_personal_time_end_first(user_id):
 
         if 'end_time_secondary' in keys:
             datax['end_time_secondary'] = row['end_time_secondary']
-        print (datax)
+        #print (datax)
         collection.update(row, datax)
     else :
-        print (datax)
+        #print (datax)
         collection.insert_one(datax).inserted_id
 
     save_personal_time_start_secondary(user_id)
@@ -281,10 +281,10 @@ def save_personal_time_start_secondary(user_id):
         if 'end_time_first' in keys:
             datax['end_time_first'] = row['end_time_first']
 
-        print (datax)
+        #print (datax)
         collection.update(row, datax)
     else :
-        print (datax)
+        #print (datax)
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -322,10 +322,10 @@ def save_personal_time_end_secondary(user_id):
         if 'end_time_first' in keys:
             datax['end_time_first'] = row['end_time_first']
 
-        print (datax)
+        #print (datax)
         collection.update(row, datax)
     else :
-        print (datax)
+        #print (datax)
         collection.insert_one(datax).inserted_id
 
     #print(datax)
@@ -355,7 +355,7 @@ def get_search_result(keywords, page):
     #total_rows_title = collection.find(keywords_regex_title).count()
     #total_rows_key_word = collection.find(keywords_regex_key_word).count()
 
-    print(total_rows_summary)
+    #print(total_rows_summary)
     '''
     print(total_rows_title)
     print(total_rows_key_word)
@@ -363,7 +363,7 @@ def get_search_result(keywords, page):
 
     total_page = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
     total_page_ori = total_page
-    print('total page ' + str(total_page))
+    #print('total page ' + str(total_page))
     #total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
     #total_page += int(math.ceil(total_rows_key_word / (ROWS_PER_PAGE * 1.0)))
 
@@ -841,7 +841,7 @@ def normal_search_key_secondary():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
 
-    print(page_info.total_page)
+    #print(page_info.total_page)
 
     return render_template('normal_search_key_secondary.html',
         keywords=key,
