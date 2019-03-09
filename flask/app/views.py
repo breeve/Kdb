@@ -362,6 +362,7 @@ def get_search_result(keywords, page):
     '''
 
     total_page = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
+    total_page_ori = total_page
     print('total page ' + str(total_page))
     #total_page += int(math.ceil(total_rows_title / (ROWS_PER_PAGE * 1.0)))
     #total_page += int(math.ceil(total_rows_key_word / (ROWS_PER_PAGE * 1.0)))
@@ -411,7 +412,7 @@ def get_search_result(keywords, page):
 
     total_rows_summary = len(page_info['rows'])
     page_info['total_rows'] = total_rows_summary
-    page_info['total_page'] = int(math.ceil(total_rows_summary / (ROWS_PER_PAGE * 1.0)))
+    page_info['total_page'] = int(math.ceil(total_page_ori))
 
 
     client.close()
