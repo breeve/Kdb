@@ -840,6 +840,8 @@ def normal_search_key_secondary():
     page_info.total_page = page_tmp['total_page']
     page_info.current_page = page_tmp['current']
 
+    print(page_info)
+
     return render_template('normal_search_key_secondary.html',
         keywords=key,
         pages=page_info,
