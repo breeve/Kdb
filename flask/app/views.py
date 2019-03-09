@@ -15,7 +15,7 @@ from .page_info import pageInfo, searchNormalItem
 
 from .page_info import getPageInfo
 
-ROWS_PER_PAGE = 10
+ROWS_PER_PAGE = 5
 
 g_name = ""
 g_age  = 0
@@ -354,8 +354,9 @@ def get_search_result(keywords, page):
     total_rows_summary = collection.find(keywords_regex_summary).count()
     #total_rows_title = collection.find(keywords_regex_title).count()
     #total_rows_key_word = collection.find(keywords_regex_key_word).count()
-    '''
+
     print(total_rows_summary)
+    '''
     print(total_rows_title)
     print(total_rows_key_word)
     '''
