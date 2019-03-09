@@ -38,12 +38,16 @@
                 {% for item in page_info.total_rows %}
 
                 <label class="checkbox-inline col-sm-12  col-xs-12">
-                    <input type="checkbox" name="valid_title" value="{{item['Title-题名']}}"><h5><a href="search_item?SrcDatabase={{item['SrcDatabase-来源库']}}&Title={{item['Title-题名']}}&Author={{item['Author-作者']}}&Organ={{item['Organ-单位']}}&Source={{item['Source-文献来源']}}&Keyword={{item['Keyword-关键词']}}&Summary={{item['Summary-摘要']}}">{{item["Title-题名"]}}</a></h5>
+                    <input type="checkbox" name="valid_title" value="{{item['Title-题名']}}">
+                    <h5>
+                        {{item["Title-题名"]}}
+                    </h5>
                 </label>
 
                 <div>
                     <div>
-                        {{item["Summary-摘要"][:64]+'...'}}
+                        {{item["Keyword-关键词"]}}
+                        {{item["Summary-摘要"]}}
                     </div>
                 </div>
 
