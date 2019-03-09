@@ -442,7 +442,13 @@ def get_left_row(page_info):
             keys.append(key.split('\n')[0])
     # print(list(set(keys)))
 
-    return keys
+    keys_ret = []
+
+    for item in keys:
+        if item not in keys_ret:
+            keys_ret.append(item)
+
+    return keys_ret
 
 @app.route("/search_profession_result")
 def search_profession_result():
