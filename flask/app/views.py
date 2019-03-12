@@ -582,7 +582,7 @@ def end_search():
     task_select = request.form.get('task_select')
 
     save_task_select(user_id, task_select)
-    return redirect("/index")
+    return render_template('end.html')
 
 @app.route("/exit_view_first", methods = ["POST", "GET", "PUSH"])
 def exit_view_first():
