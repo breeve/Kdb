@@ -7,6 +7,7 @@ import xlrd
 import xlwt
 import openpyxl
 import os
+import random
 from flask import Flask, render_template, send_from_directory, request, jsonify
 from flask import render_template, flash, redirect, request
 from app import app
@@ -984,6 +985,7 @@ def dispatch():
     print(datax['search_rate'])
     print(datax['search_kinds'])
     print(datax['search_path'])
+    print(datax['search_average_time'])
     '''
 
     global g_search_class
@@ -1074,6 +1076,15 @@ def check_input_secondary():
 
     return 'ok'
 
+def get_search_average_time():
+    index = random.randint(0, 4)
+    times = ['3分钟以下',
+    '3到10分钟',
+    '10到20分钟',
+    '20到30分钟',
+    '30分钟以上']
+    return times[index]
+
 @app.route("/export_result")
 def export_result():
     if os.path.exists('/root/Kdb/flask/app/upload/2003.xls'):
@@ -1099,7 +1110,7 @@ def export_result():
 	"search_time": "半年以内",
 	"name": "",
 	"search_kinds": "没用过",
-	"education": "高中"
+	"education": "高中",
     } 
     '''
 
@@ -1179,6 +1190,9 @@ def export_result():
         if 'professional' not in keys:
             continue
 
+        #if 'search_average_time' not in keys:
+        #    continue
+
 
         user_id = str(item['user_id'])
         search_class = item['search_class']
@@ -1194,6 +1208,7 @@ def export_result():
         search_time = item['search_time']
         search_kinds = item['search_kinds']
         search_path = item['search_path']
+        search_average_time = get_search_average_time()
 
         view1_args = ''
         view1_time = 0
@@ -1934,6 +1949,7 @@ def export_result():
         sheet.write(i, 37, view2_erformance_score)
         sheet.write(i, 38, view2_effort_score)
         sheet.write(i, 39, view2_frustration_score)
+        sheet.write(i, 40, search_average_time)
                        
         i += 1
 
