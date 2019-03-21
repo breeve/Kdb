@@ -1147,7 +1147,8 @@ def export_result():
             '情景二Mind选择次数', '情景二Physical选择次数', '情景二Time选择次数',
             '情景二Eerformance选择次数', '情景二Effort选择次数', '情景二Frustration选择次数',
             '情景二Mind分数', '情景二Physical分数', '情景二Time分数',
-            '情景二Eerformance分数', '情景二Effort分数', '情景二Frustration分数'
+            '情景二Eerformance分数', '情景二Effort分数', '情景二Frustration分数',
+            '搜索平均时长'
              ]
 
     for i in range(0, len(value)):
