@@ -7,7 +7,7 @@ import openpyxl
 import random
 
 def get_file_names(files, num):
-    file_names = {}
+    file_names = []
     file_total_num = len(files)
 
     index_all = random.sample(range(0, file_total_num), num)
