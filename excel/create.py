@@ -485,8 +485,8 @@ def run(path):
         file_view1_fail = get_file_names(view1_fail_files, item[1])
         for row in file_view1_fail:
             file_view1_ok.append(row)
-        print(file_view1_ok)
-        #sheet.write(index, 0, file_view1_ok)
+        #print(file_view1_ok)
+        sheet.write(index, 0, file_view1_ok)
         index = index + 1
 
     '''
