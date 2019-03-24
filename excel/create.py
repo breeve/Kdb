@@ -486,9 +486,11 @@ def run(path):
         file_view1_ok = get_file_names(view1_ok_files, item[0])
         file_view1_fail = get_file_names(view1_fail_files, item[1])
         file_view1_ok.append(file_view1_fail)
-        sheet.write(index, 0, file_view1_ok)
+        print(file_view1_ok)
+        #sheet.write(index, 0, file_view1_ok)
         index = index + 1
 
+    '''
     index = 1
     for item in num_view2:
         file_view2_ok = get_file_names(view2_ok_files, item[0])
@@ -496,6 +498,8 @@ def run(path):
         file_view2_ok.append(file_view2_fail)
         sheet.write(index, 0, file_view2_ok)
         index = index + 1
+    '''
+
 
     wb.save(path)
 
