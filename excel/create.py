@@ -12,7 +12,7 @@ def get_file_names(files, num):
 
     index_all = random.sample(range(0, file_total_num), num)
     for index in index_all:
-        file_names.append(files[index])
+        file_names.append(files[index]+'\n')
 
     return file_names
 
