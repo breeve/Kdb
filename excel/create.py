@@ -483,7 +483,8 @@ def run(path):
     for item in num_view1:
         file_view1_ok = get_file_names(view1_ok_files, item[0])
         file_view1_fail = get_file_names(view1_fail_files, item[1])
-        file_view1_ok.append(file_view1_fail)
+        for row in file_view1_fail:
+            file_view1_ok.append(row)
         print(file_view1_ok)
         #sheet.write(index, 0, file_view1_ok)
         index = index + 1
